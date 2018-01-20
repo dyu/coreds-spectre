@@ -15,6 +15,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "coreds": "^0.10.2",
     "spectre.css": "^0.5.0"
   },
   "devDependencies": {
