@@ -1,4 +1,5 @@
 // Variables and mixins
+@import "variables";
 @import "node_modules/spectre.css/src/variables";
 @import "node_modules/spectre.css/src/mixins";
 
@@ -47,3 +48,6 @@
 // Utility classes
 @import "node_modules/spectre.css/src/animations";
 @import "node_modules/spectre.css/src/utilities";
+
+// custom
+@import "msg";
