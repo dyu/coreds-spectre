@@ -6,3 +6,11 @@ $error-bg-color: #F1D7D7 !default;
 $success-color: #52A954 !default;
 $error-color: #A95252 !default;
 $warning-color: #96904D !default;
+
+$body-copy-color: #333333 !default;
+$subtle-transparent-black: rgba(0, 0, 0, 0.03) !default;
+$transparent-black: rgba(0, 0, 0, 0.05) !default;
+$soft-gray: #D9D9D9 !default;
+$medium-gray: darken($soft-gray, 20%) !default;
+$hard-gray: darken($medium-gray, 20%) !default;
+$placeholder-color: #A9A9AB !default;

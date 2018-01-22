@@ -26,6 +26,47 @@ $list-float-distance: 1em !default;
 $list-left-float-margin: 0em $list-float-distance 0em 0em !default;
 $list-right-float-margin: 0em 0em 0em $list-float-distance !default;
 
+
+/*-------------------
+      Selection
+--------------------*/
+
+$list-header-font: $base-font-family !default;
+$list-text-color: $body-copy-color !default;
+$list-link-color: $primary-color !default; 
+$list-link-hover-color: darken($list-link-color, 10%) !default;
+
+$list-default-duration : 0.1s !default;
+$list-default-easing   : ease !default;
+
+$list-light-text-color: lighten($list-text-color, 10%) !default;
+$list-disabled-text-color: lighten($list-text-color, 20%) !default;
+$list-unselected-text-color: $list-light-text-color;
+// TODO
+$list-hovered-text-color: $list-text-color !default;
+$list-pressed-text-color: darken($list-text-color, 10%) !default;
+$list-selected-text-color: $list-text-color !default;
+
+/* Selection List */
+$list-selection-item-margin: 0em !default;
+$list-selection-item-border-radius: 0.5em !default;
+$list-selection-item-vertical-padding: 0.5em !default;
+$list-selection-item-horizontal-padding: 0.5em !default;
+$list-selection-transition:
+  $list-default-duration color $list-default-easing,
+  $list-default-duration padding-left $list-default-easing,
+  $list-default-duration background-color $list-default-easing !default;
+
+/* Selection List States */
+$list-selection-background: transparent !default;
+$list-selection-color: $list-unselected-text-color !default;
+$list-selection-hover-background: $subtle-transparent-black !default;
+$list-selection-hover-color: $list-hovered-text-color !default;
+$list-selection-down-background: $transparent-black !default;
+$list-selection-down-color: $list-pressed-text-color !default;
+$list-selection-active-background: $transparent-black !default;
+$list-selection-active-color: $list-selected-text-color !default;
+
 .ui.list {
   list-style-type: $list-style-type;
   margin: $list-margin;
@@ -180,57 +221,15 @@ $celledChildItemBorder: none;
   border-top-width: $dividedBorderWidth;
 }
 
-/*-------------------
-      Selection
---------------------*/
-
-$headerFont: $base-font-family;
-$textColor: $body-copy-color;
-$linkColor: $primary-color; 
-//$linkHoverColor      : darken(saturate($linkColor, 20), 15);
-$linkHoverColor: darken($linkColor, 10%);
-
-$defaultDuration : 0.1s;
-$defaultEasing   : ease;
-
-$lightTextColor: lighten($textColor, 10%);
-$disabledTextColor: lighten($textColor, 20%);
-$unselectedTextColor: $lightTextColor;
-// TODO
-$hoveredTextColor: $textColor;
-$pressedTextColor: darken($textColor, 10%);
-$selectedTextColor: $textColor;
-
-/* Selection List */
-$selectionListItemMargin: 0em;
-$selectionListItemBorderRadius: 0.5em;
-$selectionListItemVerticalPadding: 0.5em;
-$selectionListItemHorizontalPadding: 0.5em;
-$selectionListTransition:
-  $defaultDuration color $defaultEasing,
-  $defaultDuration padding-left $defaultEasing,
-  $defaultDuration background-color $defaultEasing
-;
-
-/* Selection List States */
-$selectionListBackground: transparent;
-$selectionListColor: $unselectedTextColor;
-$selectionListHoverBackground: $subtle-transparent-black;
-$selectionListHoverColor: $hoveredTextColor;
-$selectionListDownBackground: $transparent-black;
-$selectionListDownColor: $pressedTextColor;
-$selectionListActiveBackground: $transparent-black;
-$selectionListActiveColor: $selectedTextColor;
-
 .ui.selection.list .list > .item,
 .ui.selection.list > .item {
   cursor: default;
-  background: $selectionListBackground;
-  padding: $selectionListItemVerticalPadding $selectionListItemHorizontalPadding;
-  margin: $selectionListItemMargin;
-  color: $selectionListColor;
-  border-radius: $selectionListItemBorderRadius;
-  transition: $selectionListTransition;
+  background: $list-selection-background;
+  padding: $list-selection-item-vertical-padding $list-selection-item-horizontal-padding;
+  margin: $list-selection-item-margin;
+  color: $list-selection-color;
+  border-radius: $list-selection-item-border-radius;
+  transition: $list-selection-transition;
 }
 .ui.selection.list .list > .item:last-child,
 .ui.selection.list > .item:last-child {
@@ -238,18 +237,18 @@ $selectionListActiveColor: $selectedTextColor;
 }
 .ui.hover.list .list > .item:hover,
 .ui.hover.list > .item:hover {
-  background: $selectionListHoverBackground;
-  color: $selectionListHoverColor;
+  background: $list-selection-hover-background;
+  color: $list-selection-hover-color;
 }
 .ui.hover.list .list > .item:active,
 .ui.hover.list > .item:active {
-  background: $selectionListDownBackground;
-  color: $selectionListDownColor;
+  background: $list-selection-down-background;
+  color: $list-selection-down-color;
 }
 .ui.selection.list .list > .item.active,
 .ui.selection.list > .item.active {
-  background: $selectionListActiveBackground;
-  color: $selectionListActiveColor;
+  background: $list-selection-active-background;
+  color: $list-selection-active-color;
 }
 
 /* Celled / Divided Selection List */
