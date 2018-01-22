@@ -27,6 +27,26 @@
   font-size: $detail-form-fontsize;
 }
 
+.form-group {
+  > input[type="text"],
+  > input[type="password"],
+  > textarea {
+    border: $form-group-border-width solid $soft-gray;
+    border-radius: $form-group-border-radius;
+    line-height: $form-group-line-height;
+    padding: $form-group-padding;
+    appearance: none;
+    &::placeholder {
+        color: $hard-gray;
+        opacity: 1;
+    } 
+    &:focus {
+        border-color: $primary-color;
+        outline: none;
+    }
+  }
+}
+
 @import "node_modules/spectre.css/src/labels";
 @import "node_modules/spectre.css/src/codes";
 @import "node_modules/spectre.css/src/media";
