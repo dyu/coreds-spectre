@@ -13,10 +13,16 @@
 @import "node_modules/spectre.css/src/asian";
 //@import "node_modules/spectre.css/src/tables";
 @import "node_modules/spectre.css/src/buttons";
+.btn-outlined:hover, .btn-outlined:focus {
+  background: $bg-color-light;
+}
+
 @import "node_modules/spectre.css/src/forms";
 .form-group.has-error > div.form-input-hint + p {
   display: none;
 }
+.picker > select { @extend .form-select; }
+
 @import "node_modules/spectre.css/src/labels";
 @import "node_modules/spectre.css/src/codes";
 @import "node_modules/spectre.css/src/media";
