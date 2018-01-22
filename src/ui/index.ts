@@ -44,7 +44,7 @@ v-lsearch="{ pager: pager, fields: ['${fk}'] }"
 }
 
 export const suggest_controls = /**/`
-<div class="btn-group btn-group-block links">
+<div class="btn-group links">
   <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
       @click.prevent="pager.store.repaint((pager.page = 0))">
     <i class="icon angle-double-left"></i>
@@ -68,7 +68,7 @@ export const suggest_controls = /**/`
 `/**/
 
 export const pager_controls = /**/`
-<div class="btn-group btn-group-block links">
+<div class="btn-group links">
   <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 2 > pager.size"
       @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
     <i :class="(pager.state & ${PagerState.DESC}) ? 'icon desc-yes' : 'icon desc-no'"></i>
