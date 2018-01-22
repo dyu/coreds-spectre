@@ -133,7 +133,7 @@ function field_bool(pojo: string, fd: any, update: boolean, root: FormRoot, ffid
 <label class="form-switch">
   <input${ffid && ffid_attr(ffid, root.flags) || ''} type="checkbox" v-sval:${fd.t}="${pojo}['${fd._}']"
       @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})" />
-  <i></i> ${fd.$n}
+  <i class="form-icon"></i> ${fd.$n}
 </label>
 `/**/
 }
