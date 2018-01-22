@@ -47,6 +47,16 @@
   }
 }
 
+input.underline,
+.underline input[type="text"],
+.underline input[type="password"], {
+  outline: none;
+  border: none;
+  border-radius: 0;
+  padding-left: 0;
+  border-bottom: 1px solid $placeholder-color;
+}
+
 @import "node_modules/spectre.css/src/labels";
 @import "node_modules/spectre.css/src/codes";
 @import "node_modules/spectre.css/src/media";
