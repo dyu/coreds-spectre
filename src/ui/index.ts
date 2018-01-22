@@ -40,69 +40,61 @@ v-lsearch="{ pager: pager, fields: ['${fk}'] }"
 }
 
 export const suggest_controls = /**/`
-<ul class="ui horizontal list">
-  <li class="item">
-    <button class="stripped" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
-        @click.prevent="pager.store.repaint((pager.page = 0))">
-      <i class="icon angle-double-left"></i>
-    </button>
-  </li>
-  <li class="item">
-    <button class="stripped" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
-        @click.prevent="pager.store.pagePrevOrLoad(0)">
-      <b><i class="icon angle-left"></i></b>
-    </button>
-  </li>
-  <li class="item">
-    <button class="stripped" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
-        @click.prevent="pager.store.pageNextOrLoad(0)">
-      <b><i class="icon angle-right"></i></b>
-    </button>
-  <li class="item">
-    <button class="stripped" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
-        @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
-      <i class="icon angle-double-right"></i>
-    </button>
-  <li class="item" v-show="pager.size">
+<div class="btn-group btn-group-block">
+  <button class="btn btn-outlined btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
+      @click.prevent="pager.store.repaint((pager.page = 0))">
+    <i class="icon angle-double-left"></i>
+  </button>
+  <button class="btn btn-outlined btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
+      @click.prevent="pager.store.pagePrevOrLoad(0)">
+    <b><i class="icon angle-left"></i></b>
+  </button>
+  <button class="btn btn-outlined btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+      @click.prevent="pager.store.pageNextOrLoad(0)">
+    <b><i class="icon angle-right"></i></b>
+  </button>
+  <button class="btn btn-outlined btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
+      @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
+    <i class="icon angle-double-right"></i>
+  </button>
+  <button class="btn btn-link" v-show="pager.size" disabled>
     {{ pager.page_from }}{{ pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ') }}{{ pager.size }}
-  </li>
-</ul>
+  </button>
+</div>
 `/**/
 
 export const pager_controls = /**/`
-<ul class="ui horizontal list">
-  <li class="item buttons">
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 2 > pager.size"
-        @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
-      <i :class="(pager.state & ${PagerState.DESC}) ? 'icon desc-yes' : 'icon desc-no'"></i>
-    </button>
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
-        @click.prevent="pager.store.reload()">
-      <i class="icon cw"></i>
-    </button>
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
-        @click.prevent="pager.store.repaint((pager.page = 0))">
-      <i class="icon angle-double-left"></i>
-    </button>
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
-        @click.prevent="pager.store.pagePrevOrLoad(0)">
-      <b><i class="icon angle-left"></i></b>
-    </button>
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
-        @click.prevent="pager.store.pageNextOrLoad(0)">
-      <b><i class="icon angle-right"></i></b>
-    </button>
-    <button class="focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
-        @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
-      <i class="icon angle-double-right"></i>
-    </button>
-  </li>
-  <li class="item" v-show="pager.size">
+<div class="btn-group btn-group-block">
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 2 > pager.size"
+      @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
+    <i :class="(pager.state & ${PagerState.DESC}) ? 'icon desc-yes' : 'icon desc-no'"></i>
+  </button>
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+      @click.prevent="pager.store.reload()">
+    <i class="icon cw"></i>
+  </button>
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
+      @click.prevent="pager.store.repaint((pager.page = 0))">
+    <i class="icon angle-double-left"></i>
+  </button>
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
+      @click.prevent="pager.store.pagePrevOrLoad(0)">
+    <b><i class="icon angle-left"></i></b>
+  </button>
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+      @click.prevent="pager.store.pageNextOrLoad(0)">
+    <b><i class="icon angle-right"></i></b>
+  </button>
+  <button class="btn btn-sm btn-outlined focus" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
+      @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
+    <i class="icon angle-double-right"></i>
+  </button>
+  <button class="btn btn-link" v-show="pager.size" disabled>
     <div class="page-info">
     {{ pager.page_from }}{{ pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ') }}{{ pager.size }}
     </div>
-  </li>
-</ul>
+  </button>
+</div>
 `/**/
 
 export const pager_msg = /**/`
