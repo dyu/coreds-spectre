@@ -17,6 +17,10 @@
   background: $bg-color-light;
 }
 
+.btn-group.links > button:focus {
+  box-shadow: none;
+}
+
 @import "node_modules/spectre.css/src/forms";
 .form-group.has-error > div.form-input-hint + p {
   display: none;
@@ -55,6 +59,14 @@ input.underline,
   border-radius: 0;
   padding-left: 0;
   border-bottom: 1px solid $placeholder-color;
+  &[disabled],
+  &:disabled,
+  &.disabled {
+    cursor: default;
+    //opacity: .5;
+    pointer-events: none;
+    background: none;
+  }
 }
 
 @import "node_modules/spectre.css/src/labels";
