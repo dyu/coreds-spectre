@@ -24,10 +24,14 @@ export const pi_msg = /**/`
 export function dropdown_msg(hs: string) {
     return /**/`
 <div :class="'dropdown' + (!${hs}.msg ? '' : ' active')">
-  <div :class="'dropdown-menu pull-right mhalf msg status-' + (${hs}.state & ${PojoState.MASK_STATUS})">
-    <i class="icon close" @click.prevent="${hs}.msg = null"></i>
-    <span v-text="${hs}.msg"></span>
-  </div>
+  <ul class="menu transparent" v-show="${hs}.msg">
+    <li class="menu-item">
+      <div :class="'ui msg status-' + (${hs}.state & ${PojoState.MASK_STATUS})">
+        <i class="icon close" @click.prevent="${hs}.msg = null"></i>
+        <span v-text="${hs}.msg"></span>
+      </div>
+    </li>
+  </ul>
 </div>
     `/**/
 }
