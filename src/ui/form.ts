@@ -43,7 +43,7 @@ export function form(pojo: string, $d: any, ffid: string|null,
   ${body(pojo, $d, update, { pojo, ffid, flags })}
   ${content_slot === ContentSlot.BOTTOM && content || ''}
   ${msg(pojo, update)}
-  <button type="submit" class="btn${!placeholder && ' btn-primary' || ''}" @click.prevent="${pojo}$$">
+  <button type="submit" class="btn btn-${!placeholder ? 'primary' :'outlined'}" @click.prevent="${pojo}$$">
     ${update ? 'Update' : 'Submit'}
   </button>
 </form>
