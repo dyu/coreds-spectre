@@ -17,7 +17,7 @@
   background: $bg-color-light;
 }
 
-.btn-group.links > button:focus {
+.btn-group.links > button.btn-link:focus {
   box-shadow: none;
 }
 
