@@ -1,0 +1,12 @@
+import { Pager } from 'coreds/lib/types';
+export declare function dropdown_msg(pojo: any): JSX.Element;
+export declare function $item<T>(pojo: any, el: T): T;
+export declare function item_class(pojo: any): "d-none" | "item" | "item active";
+export declare function item_msg(pojo: any): JSX.Element;
+export declare function $pager<T>(pager: Pager, el: T): T;
+export declare function pager_controls(pager: Pager): JSX.Element;
+export declare function pager_msg(pager: Pager): JSX.Element;
+export declare function icon_timeago(pojo: any): JSX.Element;
+export declare function icon_update_ts(pojo: any, fk: string): JSX.Element;
+export declare function icon_toggle(pojo: any, fk: string, bit: number, icon_class: string, name?: string, cb?: Function): JSX.Element;
+export declare function icon_remove(pojo: any, fk: string, bit: number, icon_class?: string, name?: string, cb?: Function): JSX.Element;

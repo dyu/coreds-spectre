@@ -1,0 +1,15 @@
+export { ContentSlot } from './util';
+export { form } from './form';
+export { qform } from './qform';
+export declare const pi_attrs: string;
+export declare const pi_msg: string;
+export declare function dropdown_msg(hs: string): string;
+export declare function lsearch_attrs(fk: string): string;
+export declare const suggest_controls: string;
+export declare const pager_controls: string;
+export declare const pager_msg: string;
+export declare const icon_timeago: string;
+export declare function icon_update_ts(fk: string): string;
+export declare function icon_toggle(fk: string, bit: number, icon_class: string, name?: string): string;
+export declare function icon_remove(bit: number, icon_class?: string, name?: string): string;
+export declare const icon_remove_bit32: string;
