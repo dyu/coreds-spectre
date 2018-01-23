@@ -33,6 +33,10 @@ numeral@^1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/numeral/-/numeral-1.5.6.tgz#3831db968451b9cf6aff9bf95925f1ef8e37b33f"
 
+s-js@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/s-js/-/s-js-0.4.7.tgz#985d961e8a9a340c30b9fb66712222b09cb3074b"
+
 spectre.css@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/spectre.css/-/spectre.css-0.5.0.tgz#68fe0c5efd89eb468d49a79d8a94e634fa39d84e"

@@ -14,7 +14,8 @@
     "strictNullChecks": true,
     "noImplicitThis": true,
     "removeComments": false,
-    "outDir": "lib"
+    "outDir": "lib",
+    "jsx": "preserve"
   },
   "compileOnSave": false,
   "exclude": [
