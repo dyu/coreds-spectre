@@ -26,6 +26,15 @@ export function dropdown_msg(pojo) {
 </div>);
 }
 // ================================================== 
+// lsearch
+export function lsearch_disabled(pager) {
+    return 0 !== (pager.state & 8 /* LOADING */) || (!pager.size && !(pager.state & 256 /* LOCAL_SEARCH */));
+}
+export function lsearch_input(pager, placeholder, clazz) {
+    var cls = clazz || 'underline';
+    return <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)}/>;
+}
+// ================================================== 
 // item
 export function $item(pojo, el) {
     defp(el, 'pager_item', pojo);
