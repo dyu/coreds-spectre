@@ -83,6 +83,9 @@ div.content.right.floated {
   /*span {
     white-space: nowrap;
   }*/
+  > i.icon + small {
+    margin-left: 0.25em;
+  }
   > i.action {
     margin-right: 0;
   }
