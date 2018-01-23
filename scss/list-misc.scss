@@ -80,19 +80,18 @@ div.list-header {
 }
 
 div.content.right.floated {
-  /*span {
-    white-space: nowrap;
-  }*/
   > i.icon + small {
     margin-left: 0.25em;
   }
+  /*span {
+    white-space: nowrap;
+  }
   > i.action {
     margin-right: 0;
-  }
+  }*/
   > i.ok-circled,
   > i.cancel-circled {
     cursor: pointer;
-    margin-right: 0;
     margin-left: 0.75em;
   }
   small {
