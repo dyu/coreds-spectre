@@ -3,6 +3,7 @@ export declare function dropdown_msg(pojo: any): JSX.Element;
 export declare function $item<T>(pojo: any, el: T): T;
 export declare function item_class(pojo: any): "d-none" | "item" | "item active";
 export declare function item_msg(pojo: any): JSX.Element;
+export declare function item_detail(pojo: any, detail_id: string): JSX.Element;
 export declare function $pager<T>(pager: Pager, el: T): T;
 export declare function pager_controls(pager: Pager): JSX.Element;
 export declare function pager_msg(pager: Pager): JSX.Element;

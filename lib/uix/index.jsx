@@ -50,6 +50,15 @@ export function item_msg(pojo) {
   <span>{$any(pojo_.msg)}</span>
 </div>);
 }
+function $append_if(cond, el, parent) {
+    cond && parent.appendChild(el);
+    return cond;
+}
+export function item_detail(pojo, detail_id) {
+    var pojo_ = pojo['_'], parent, el;
+    return (<div ref={parent} class={$append_if(!!(pojo_.state & 16 /* UPDATE */), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
+</div>);
+}
 // ================================================== 
 // pager
 export function $pager(pager, el) {
