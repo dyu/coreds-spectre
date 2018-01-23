@@ -21,6 +21,7 @@
     "spectre.css": "^0.5.0"
   },
   "devDependencies": {
+    "coreds-ui": "^0.10.7",
     "typescript": "2.4.2"
   }
 }
