@@ -1,5 +1,5 @@
 import * as Surplus from 'surplus'; Surplus;
-import { Pager, PagerState, PojoListState, ItemSO } from 'coreds/lib/types'
+import { Pager, PagerState, PojoState, PojoListState, ItemSO } from 'coreds/lib/types'
 import { prettyDate } from 'coreds/lib/datetime_util'
 import { $any, defp } from 'coreds/lib/util'
 import { attachOptsTo } from 'coreds-ui/lib/_pager'
@@ -59,6 +59,22 @@ export function item_msg(pojo: any) {
 <div class={$any('ui msg status-' + (pojo_.state & PagerState.MASK_STATUS) + (!pojo_.msg ? ' d-none' : ''))}>
   <i class="close icon" onClick={fn}></i>
   <span>{$any(pojo_.msg)}</span>
+</div>
+    )
+}
+
+function $append_if(cond: boolean, el: any, parent: any): boolean {
+    cond && parent.appendChild(el)
+    return cond
+}
+
+export function item_detail(pojo: any, detail_id: string) {
+    let pojo_ = pojo['_'],
+        parent,
+        el
+    return (
+<div ref={parent}
+    class={$append_if(!!(pojo_.state & PojoState.UPDATE), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
 </div>
     )
 }
