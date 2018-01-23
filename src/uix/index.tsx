@@ -34,6 +34,18 @@ export function dropdown_msg(pojo: any) {
 }
 
 // ================================================== 
+// lsearch
+
+export function lsearch_disabled(pager: Pager) {
+    return 0 !== (pager.state & PagerState.LOADING) || (!pager.size && !(pager.state & PagerState.LOCAL_SEARCH))
+}
+
+export function lsearch_input(pager: Pager, placeholder: string, clazz?: string) {
+    let cls = clazz || 'underline'
+    return <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)} />
+}
+
+// ================================================== 
 // item
 
 export function $item<T>(pojo: any, el: T): T {
