@@ -1,11 +1,6 @@
 import { FieldType, PagerState, ChangeFlags } from 'coreds/lib/types'
 import { enum_options, option_empty, dpicker } from './form'
-//import { Flags } from 'coreds-ui/lib/_suggest'
-export const enum Flags {
-    UPDATE = 16,
-    CBFN_AFTER_SET = 32,
-    CBFN_ON_UNSET = 64
-}
+import { Flags } from 'coreds-ui/lib/_suggest'
 
 function field_enum(pojo: string, fd: any, display: string): string {
     return /**/`
