@@ -138,8 +138,8 @@ export const icon_remove_bit32 = icon_remove(32)
 // item
 
 export const item_attrs = /**/`
-v-defp:pager_item="pojo" v-show="(pojo._.lstate & ${PojoListState.INCLUDED})"
-:class="(pojo._.lstate & ${PojoListState.SELECTED}) ? 'item active' : 'item'"
+v-defp:pager_item="pojo"
+:class="!(pojo._.lstate & ${PojoListState.INCLUDED}) ? 'd-none' : (!(pojo._.lstate & ${PojoListState.SELECTED}) ? 'item' : 'item active')"
 `/**/
 
 export const item_msg = /**/`
