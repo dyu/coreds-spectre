@@ -10,9 +10,9 @@
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-0.0.16.tgz#a1c225b1266f64e4a3cdbe515a266f01b6e89df1"
 
-coreds-ui@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/coreds-ui/-/coreds-ui-1.0.0.tgz#2a363883dc94b3fe52b69f6f9baf69151543175c"
+coreds-ui@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/coreds-ui/-/coreds-ui-1.0.1.tgz#2a5dc88e7940953159b926c9c8885b573bf4f848"
   dependencies:
     "@types/hammerjs" "^2.0.32"
     coreds "^1.0.0"
