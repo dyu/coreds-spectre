@@ -130,7 +130,7 @@ export function pager_msg(pager) {
 // ================================================== 
 // icons
 export function icon_timeago(pojo) {
-    return (<div class="content right floated">
+    return (<div class="content right floated timeago">
   <i class="icon clock"></i>
   <small>{$apply(pojo['2'], prettyDate)}</small>
 </div>);
