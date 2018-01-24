@@ -1,4 +1,4 @@
-import { ContentSlot, FormFlags } from '../util'
+import { ContentSlot, FormFlags, enum_option, enum_options } from '../util'
 import { PojoState, FieldType } from 'coreds/lib/types'
 
 function msg_show(pojo: string): string {
@@ -126,29 +126,19 @@ function field_bool(pojo: string, fd: any, update: boolean, root: FormRoot, ffid
 <label class="form-switch">
   <input${ffid && ffid_attr(ffid, root.flags) || ''} type="checkbox" v-sval:${fd.t}="${pojo}['${fd._}']"
       @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})" />
-  <i class="form-icon"></i> ${fd.$n}
+  <i class="form-icon"></i>${fd.$n}
 </label>
 `/**/
 }
 
-export const option_empty = '<option value=""></option>'
-function enum_option(fd: any) {
-    return `<option value="">${fd.$n}${fd.m === 2 && ' *' || ''}</option>`
-}
-export function enum_options(arrayValue: any[], arrayDisplay: any[]): string {
-    let out = ''
-    for (var i = 0, len = arrayValue.length; i < len; i++) {
-        out += `<option value="${arrayValue[i]}">${arrayDisplay[i]}</option>`
-    }
-    return out
-}
+
 function field_enum(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
     return /**/`
 <select${ffid && ffid_attr(ffid, root.flags) || ''} v-sval:${fd.t}="${pojo}['${fd._}']"
     class="form-select${!update && ' resettable' || ''}"
     @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})">
     ${update ? '' : ((root.flags & FormFlags.PLACEHOLDER) && enum_option(fd) || '')}
-    ${enum_options(fd.v_fn(), fd.$v_fn())}
+    ${enum_options(fd)}
 </select>
 `/**/
 }

@@ -1,5 +1,6 @@
 import { FieldType, PagerState, ChangeFlags } from 'coreds/lib/types'
-import { enum_options, option_empty, dpicker } from './form'
+import { option_empty, options, enum_options } from '../util'
+import { dpicker } from './form'
 import { Flags } from 'coreds-ui/lib/_suggest'
 
 function field_enum(pojo: string, fd: any, display: string): string {
@@ -7,7 +8,7 @@ function field_enum(pojo: string, fd: any, display: string): string {
 <div class="fluid picker">
   <select :disable="${pojo}.disable_" v-sval:${fd.t}="${pojo}['${fd._}']"
       @change="qform.change($event, '${fd._}', ${pojo}, false, null, 0, ${pojo}$$)">
-    <option value="">${display}</option>${enum_options(fd.v_fn(), fd.$v_fn())}
+    <option value="">${display}</option>${enum_options(fd)}
   </select>
 </div>
 `/**/
@@ -148,7 +149,7 @@ export function qform(qd: any) {
 <div class="fluid picker">
   <select :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})" @change="qform.change($event)">
   ${option_empty}
-  ${enum_options(values, qd.display_array)}
+  ${options(values, qd.display_array)}
   </select>
 </div>
 <form class="ui form" onsubmit="return false;">
