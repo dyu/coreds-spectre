@@ -1,4 +1,4 @@
-export { ContentSlot } from './util';
+export { ContentSlot } from '../util';
 export { form } from './form';
 export { qform } from './qform';
 export declare function dropdown_msg(hs: string): string;
