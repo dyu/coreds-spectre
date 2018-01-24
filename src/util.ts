@@ -8,6 +8,9 @@ export const enum FormFlags {
     TOGGLE_FLAG32 = 32
 }
 
+// ================================================== 
+// options
+
 export const option_empty = '<option value=""></option>'
 
 export function options(arrayValue: any[], arrayDisplay: any[]): string {
@@ -25,6 +28,9 @@ export function enum_option(fd: any) {
 export function enum_options(fd: any) {
     return options(fd.v_fn(), fd.$v_fn())
 }
+
+// ================================================== 
+// form value formatting
 
 export function valTime(value) {
     return !value ? '' : formatTime(value)
