@@ -2,10 +2,25 @@ import * as Surplus from 'surplus';
 Surplus;
 import { prettyDate } from 'coreds/lib/datetime_util';
 import { $any, defp } from 'coreds/lib/util';
+import { toggleClass } from 'coreds-ui/lib/dom_util';
 import { attachOptsTo } from 'coreds-ui/lib/_pager';
 import { parseOpts } from 'coreds-ui/lib/_lsearch';
 import { $apply, msg } from './common';
 export { form } from './form';
+// ================================================== 
+// toggles
+export function $toggle0(e) {
+    toggleClass(e.target, 'active');
+}
+export function $toggle1(e) {
+    toggleClass(e.target.parentElement, 'active');
+}
+export function $toggle2(e) {
+    toggleClass(e.target.parentElement.parentElement, 'active');
+}
+export function $toggle3(e) {
+    toggleClass(e.target.parentElement.parentElement.parentElement, 'active');
+}
 // ================================================== 
 // dropdown
 export function dropdown_msg(hs, mask) {
