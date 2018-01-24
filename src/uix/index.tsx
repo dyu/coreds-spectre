@@ -46,52 +46,6 @@ export function lsearch_input(pager: Pager, placeholder: string, clazz?: string)
 }
 
 // ================================================== 
-// item
-
-export function $item<T>(pojo: any, el: T): T {
-    defp(el, 'pager_item', pojo)
-    return el
-}
-
-export function item_class(pojo: any) {
-    let pojo_ = pojo['_'] as ItemSO
-    if (!(pojo_.lstate & PojoListState.INCLUDED)) {
-        return 'd-none'
-    } else if (!(pojo_.lstate & PojoListState.SELECTED)) {
-        return 'item'
-    } else {
-        return 'item active'
-    }
-}
-
-export function item_msg(pojo: any) {
-    let pojo_ = pojo['_'] as ItemSO,
-        fn = $clearMsg.bind(pojo_)
-    return (
-<div class={$any('ui msg status-' + (pojo_.state & PagerState.MASK_STATUS) + (!pojo_.msg ? ' d-none' : ''))}>
-  <i class="close icon" onClick={fn}></i>
-  <span>{$any(pojo_.msg)}</span>
-</div>
-    )
-}
-
-function $append_if(cond: boolean, el: any, parent: any): boolean {
-    cond && parent.appendChild(el)
-    return cond
-}
-
-export function item_detail(pojo: any, detail_id: string) {
-    let pojo_ = pojo['_'],
-        parent,
-        el
-    return (
-<div ref={parent}
-    class={$append_if(!!(pojo_.state & PojoState.UPDATE), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
-</div>
-    )
-}
-
-// ================================================== 
 // pager
 
 export function $pager<T>(pager: Pager, el: T): T {
@@ -178,18 +132,18 @@ export function pager_msg(pager: Pager) {
 // ================================================== 
 // icons
 
-export function icon_timeago(pojo: any) {
+export function icon_timeago(pojo: any, wrapper_class?: string) {
     return (
-<div class="content right floated timeago">
+<div class={wrapper_class}>
   <i class="icon clock"></i>
   <small>{ $apply(pojo['2'], prettyDate) }</small>
 </div>
     )
 }
 
-export function icon_update_ts(pojo: any, fk: string) {
+export function icon_update_ts(pojo: any, fk: string, wrapper_class?: string) {
     return (
-<div class="content right floated">
+<div class={wrapper_class}>
   <i class="icon pencil"></i>
   <small>{ $apply(pojo[fk], prettyDate) }</small>
 </div>
@@ -212,8 +166,8 @@ function $trigger(this: ToggleOpts, e) {
     !(state & this.bit) && this.cb && this.cb(this.bit)
 }
 
-export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: string, name?: string, 
-        cb?: Function) {
+export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: string,
+        cb?: Function, name?: string, wrapper_class?: string) {
     if (bit < 32) throw 'Invalid bit: ' + bit
     let icon = `icon action ${icon_class}`,
         obj = pojo['_'],
@@ -227,7 +181,7 @@ export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: stri
         titleOff = `Mark ${name}?`
     }
     return (
-<div class="content right floated">
+<div class={wrapper_class}>
   <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} onClick={fn} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   <i class={$any('icon ok-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={trigger}></i>
   <i class={$any('icon cancel-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={fn}></i>
@@ -235,20 +189,84 @@ export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: stri
     )
 }
 
-export function icon_remove(pojo: any, fk: string, bit: number, icon_class?: string, name?: string,
-        cb?: Function) {
+export function icon_remove(pojo: any, fk: string, bit: number, icon_class: string, 
+        cb?: Function, name?: string, wrapper_class?: string) {
     if (bit < 32) throw 'Invalid bit: ' + bit
-    let icon = `icon action ${icon_class || 'trash empty'}`,
+    let icon = `icon action ${icon_class}`,
         obj = pojo['_'],
         opts = { obj, bit, cb },
         fn = $toggle.bind(opts),
         trigger = $trigger.bind(opts),
         title = name || 'Remove'
     return (
-<div class="content right floated">
+<div class={wrapper_class}>
   <i class={icon} onClick={fn} title={title}></i>
   <i class={$any('icon ok-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={trigger}></i>
   <i class={$any('icon cancel-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={fn}></i>
+</div>
+    )
+}
+
+// ================================================== 
+// item
+
+export function $item<T>(pojo: any, el: T): T {
+    defp(el, 'pager_item', pojo)
+    return el
+}
+
+export function item_class(pojo: any) {
+    let pojo_ = pojo['_'] as ItemSO
+    if (!(pojo_.lstate & PojoListState.INCLUDED)) {
+        return 'd-none'
+    } else if (!(pojo_.lstate & PojoListState.SELECTED)) {
+        return 'item'
+    } else {
+        return 'item active'
+    }
+}
+
+export function item_msg(pojo: any) {
+    let pojo_ = pojo['_'] as ItemSO,
+        fn = $clearMsg.bind(pojo_)
+    return (
+<div class={$any('ui msg status-' + (pojo_.state & PagerState.MASK_STATUS) + (!pojo_.msg ? ' d-none' : ''))}>
+  <i class="close icon" onClick={fn}></i>
+  <span>{$any(pojo_.msg)}</span>
+</div>
+    )
+}
+
+export function item_timeago(pojo: any) {
+    return icon_timeago(pojo, 'content right floated timeago')
+}
+
+export function item_update_ts(pojo: any, fk: string) {
+    return icon_update_ts(pojo, fk, 'content right floated')
+}
+
+export function item_toggle(pojo: any, fk: string, bit: number, icon_class: string,
+        cb?: Function, name?: string) {
+    return icon_toggle(pojo, fk, bit, icon_class, cb, name, 'content right floated')
+}
+
+export function item_remove(pojo: any, fk: string, bit: number, icon_class: string, 
+        cb?: Function, name?: string) {
+    return icon_remove(pojo, fk, bit, icon_class, cb, name, 'content right floated')
+}
+
+function $append_if(cond: boolean, el: any, parent: any): boolean {
+    cond && parent.appendChild(el)
+    return cond
+}
+
+export function item_detail(pojo: any, detail_id: string) {
+    let pojo_ = pojo['_'],
+        parent,
+        el
+    return (
+<div ref={parent}
+    class={$append_if(!!(pojo_.state & PojoState.UPDATE), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
 </div>
     )
 }
