@@ -4,24 +4,15 @@ import { prettyDate } from 'coreds/lib/datetime_util';
 import { $any, defp } from 'coreds/lib/util';
 import { attachOptsTo } from 'coreds-ui/lib/_pager';
 import { parseOpts } from 'coreds-ui/lib/_lsearch';
-function $apply(val, filter) {
-    return val && filter(val);
-}
-function $clearMsg(e) {
-    e.preventDefault();
-    this.msg = null;
-}
+import { $apply, msg } from './common';
 // ================================================== 
 // dropdown
 export function dropdown_msg(pojo) {
-    var pojo_ = pojo['_'], fn = $clearMsg.bind(pojo_);
+    var pojo_ = pojo['_'];
     return (<div class={$any('dropdown' + (pojo_.msg && ' active' || ''))}>
   <ul class={$any('menu transparent' + (!pojo_.msg ? ' d-none' : ''))}>
     <li class="menu-item">
-      <div class={$any('ui msg status-' + (pojo_.state & 7 /* MASK_STATUS */))}>
-        <i class="close icon" onClick={fn}></i>
-        <span>{$any(pojo_.msg)}</span>
-      </div>
+      ${msg(pojo_, 7 /* MASK_STATUS */)}
     </li>
   </ul>
 </div>);
@@ -87,13 +78,7 @@ export function pager_controls(pager) {
 </div>);
 }
 export function pager_msg(pager) {
-    var fn = $clearMsg.bind(pager);
-    return (<div class={$any(!pager.msg || !(pager.state & 7 /* MASK_STATUS */) ? 'd-none' : '')}>
-  <div class={$any('ui msg status-' + (pager.state & 7 /* MASK_STATUS */))}>
-    <i class="close icon" onClick={fn}></i>
-    <span>{$any(pager.msg)}</span>
-  </div>
-</div>);
+    return msg(pager, 7 /* MASK_STATUS */);
 }
 // ================================================== 
 // icons
@@ -160,11 +145,7 @@ export function item_class(pojo) {
     }
 }
 export function item_msg(pojo) {
-    var pojo_ = pojo['_'], fn = $clearMsg.bind(pojo_);
-    return (<div class={$any('ui msg status-' + (pojo_.state & 7 /* MASK_STATUS */) + (!pojo_.msg ? ' d-none' : ''))}>
-  <i class="close icon" onClick={fn}></i>
-  <span>{$any(pojo_.msg)}</span>
-</div>);
+    return msg(pojo['_'], 7 /* MASK_STATUS */);
 }
 export function item_timeago(pojo) {
     return icon_timeago(pojo, 'content right floated timeago');
