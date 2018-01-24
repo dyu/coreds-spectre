@@ -3,6 +3,7 @@ import { Pager, PagerState, PojoState, PojoListState, ItemSO } from 'coreds/lib/
 import { prettyDate } from 'coreds/lib/datetime_util'
 import { $any, defp } from 'coreds/lib/util'
 import { attachOptsTo } from 'coreds-ui/lib/_pager'
+import { parseOpts } from 'coreds-ui/lib/_lsearch'
 
 function $apply(val, filter) {
     return val && filter(val)
@@ -40,9 +41,14 @@ export function lsearch_disabled(pager: Pager) {
     return 0 !== (pager.state & PagerState.LOADING) || (!pager.size && !(pager.state & PagerState.LOCAL_SEARCH))
 }
 
-export function lsearch_input(pager: Pager, placeholder: string, clazz?: string) {
-    let cls = clazz || 'underline'
-    return <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)} />
+export function lsearch_input(pager: Pager, placeholder: string, fields: string[],
+        fn?: Function, clazz?: string) {
+    let cls = clazz === undefined ? 'underline' : clazz,
+        el = <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)} />
+    
+    parseOpts(null, pager, fields, fn, null, el)
+    
+    return el
 }
 
 // ================================================== 

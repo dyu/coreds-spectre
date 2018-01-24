@@ -3,6 +3,7 @@ Surplus;
 import { prettyDate } from 'coreds/lib/datetime_util';
 import { $any, defp } from 'coreds/lib/util';
 import { attachOptsTo } from 'coreds-ui/lib/_pager';
+import { parseOpts } from 'coreds-ui/lib/_lsearch';
 function $apply(val, filter) {
     return val && filter(val);
 }
@@ -30,9 +31,10 @@ export function dropdown_msg(pojo) {
 export function lsearch_disabled(pager) {
     return 0 !== (pager.state & 8 /* LOADING */) || (!pager.size && !(pager.state & 256 /* LOCAL_SEARCH */));
 }
-export function lsearch_input(pager, placeholder, clazz) {
-    var cls = clazz || 'underline';
-    return <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)}/>;
+export function lsearch_input(pager, placeholder, fields, fn, clazz) {
+    var cls = clazz === undefined ? 'underline' : clazz, el = <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)}/>;
+    parseOpts(null, pager, fields, fn, null, el);
+    return el;
 }
 // ================================================== 
 // pager

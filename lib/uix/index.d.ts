@@ -1,7 +1,7 @@
 import { Pager } from 'coreds/lib/types';
 export declare function dropdown_msg(pojo: any): JSX.Element;
 export declare function lsearch_disabled(pager: Pager): boolean;
-export declare function lsearch_input(pager: Pager, placeholder: string, clazz?: string): JSX.Element;
+export declare function lsearch_input(pager: Pager, placeholder: string, fields: string[], fn?: Function, clazz?: string): JSX.Element;
 export declare function $pager<T>(pager: Pager, el: T): T;
 export declare function pager_controls(pager: Pager): JSX.Element;
 export declare function pager_msg(pager: Pager): JSX.Element;
