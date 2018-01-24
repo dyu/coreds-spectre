@@ -9,13 +9,12 @@ import { $apply, msg } from './common'
 // ================================================== 
 // dropdown
 
-export function dropdown_msg(pojo: any) {
-    let pojo_ = pojo['_'] as HasState
+export function dropdown_msg(hs: HasState, mask: number) {
     return (
-<div class={$any('dropdown' + (pojo_.msg && ' active' || ''))}>
-  <ul class={$any('menu transparent' + (!pojo_.msg ? ' d-none' : ''))}>
+<div class={$any('dropdown' + (hs.msg && ' active' || ''))}>
+  <ul class="menu transparent">
     <li class="menu-item">
-      ${msg(pojo_, PagerState.MASK_STATUS)}
+      ${msg(hs, mask)}
     </li>
   </ul>
 </div>

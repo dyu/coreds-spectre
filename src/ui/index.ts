@@ -6,12 +6,12 @@ export { qform } from './qform'
 // ================================================== 
 // dropdown
 
-export function dropdown_msg(hs: string) {
+export function dropdown_msg(hs: string, mask: number) {
     return /**/`
 <div :class="'dropdown' + (!${hs}.msg ? '' : ' active')">
-  <ul class="menu transparent" v-show="${hs}.msg">
+  <ul class="menu transparent">
     <li class="menu-item">
-      <div :class="'ui msg status-' + (${hs}.state & ${PojoState.MASK_STATUS})">
+      <div :class="'ui msg status-' + (${hs}.state & ${mask}) + (!${hs}.msg ? ' d-none' : '')">
         <i class="icon close" @click.prevent="${hs}.msg = null"></i>
         <span v-text="${hs}.msg"></span>
       </div>
