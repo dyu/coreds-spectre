@@ -5,6 +5,7 @@ import { $any, defp } from 'coreds/lib/util';
 import { attachOptsTo } from 'coreds-ui/lib/_pager';
 import { parseOpts } from 'coreds-ui/lib/_lsearch';
 import { $apply, msg } from './common';
+export { form } from './form';
 // ================================================== 
 // dropdown
 export function dropdown_msg(hs, mask) {

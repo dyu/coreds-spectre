@@ -1,4 +1,5 @@
 import { Pager, HasState } from 'coreds/lib/types';
+export { form } from './form';
 export declare function dropdown_msg(hs: HasState, mask: number): JSX.Element;
 export declare function lsearch_disabled(pager: Pager): boolean;
 export declare function lsearch_input(pager: Pager, placeholder: string, fields: string[], fn?: Function, clazz?: string): JSX.Element;
