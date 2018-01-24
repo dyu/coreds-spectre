@@ -7,12 +7,11 @@ import { parseOpts } from 'coreds-ui/lib/_lsearch';
 import { $apply, msg } from './common';
 // ================================================== 
 // dropdown
-export function dropdown_msg(pojo) {
-    var pojo_ = pojo['_'];
-    return (<div class={$any('dropdown' + (pojo_.msg && ' active' || ''))}>
-  <ul class={$any('menu transparent' + (!pojo_.msg ? ' d-none' : ''))}>
+export function dropdown_msg(hs, mask) {
+    return (<div class={$any('dropdown' + (hs.msg && ' active' || ''))}>
+  <ul class="menu transparent">
     <li class="menu-item">
-      ${msg(pojo_, 7 /* MASK_STATUS */)}
+      ${msg(hs, mask)}
     </li>
   </ul>
 </div>);

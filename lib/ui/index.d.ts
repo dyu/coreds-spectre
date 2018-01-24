@@ -1,7 +1,7 @@
 export { ContentSlot } from '../util';
 export { form } from './form';
 export { qform } from './qform';
-export declare function dropdown_msg(hs: string): string;
+export declare function dropdown_msg(hs: string, mask: number): string;
 export declare function lsearch_attrs(fk: string): string;
 export declare const suggest_controls: string;
 export declare const pager_controls: string;
