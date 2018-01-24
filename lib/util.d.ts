@@ -1,11 +1,8 @@
-export declare const enum ContentSlot {
-    TOP = 0,
-    BOTTOM = 1,
-}
 export declare const enum FormFlags {
     PLACEHOLDER = 1,
     REF_AND_ID = 2,
     HORIZONTAL = 4,
+    SLOT_BOTTOM = 8,
     TOGGLE_FLAG32 = 32,
 }
 export declare const option_empty = "<option value=\"\"></option>";

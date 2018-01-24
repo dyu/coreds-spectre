@@ -33,15 +33,13 @@ function $onSubmit(e) {
     this(e);
     return false;
 }
-export function form(pojo, $d, fnSubmit, ffid, ffobj, content, content_slot, formFlags) {
-    var update = ffid === null, flags = formFlags || 0, placeholder = 0 !== (flags & 1 /* PLACEHOLDER */), horizontal = 0 !== (flags & 4 /* HORIZONTAL */), pojo_ = pojo['_'], keydown = $keydown.bind(pojo_), onSubmit = $onSubmit.bind(fnSubmit), btn_class = placeholder ? 'btn btn-outlined' : 'btn btn-primary', btn_text = update ? 'Update' : 'Submit', body_out = [], class_prefix = "ui form" + (horizontal && ' form-horizontal' || '') + (placeholder && ' placeholder' || '') + " status-";
-    if (content && content_slot === undefined)
-        content_slot = 0 /* TOP */;
+export function form(pojo, $d, fnSubmit, ffid, ffobj, formFlags, content) {
+    var update = ffid === null, flags = formFlags || 0, bottom = !!(flags & 8 /* SLOT_BOTTOM */), toggle32 = (flags & 32 /* TOGGLE_FLAG32 */), placeholder = 0 !== (flags & 1 /* PLACEHOLDER */), horizontal = 0 !== (flags & 4 /* HORIZONTAL */), pojo_ = pojo['_'], keydown = $keydown.bind(pojo_), onSubmit = $onSubmit.bind(fnSubmit), btn_class = placeholder ? 'btn btn-primary' : 'btn btn-outlined', btn_text = update ? 'Update' : 'Submit', body_out = [], class_prefix = "ui form" + (horizontal && ' form-horizontal' || '') + (placeholder && ' placeholder' || '') + " status-";
     body(pojo, $d, update, { pojo: pojo, ffid: ffid, ffobj: ffobj, flags: flags }, body_out);
-    var el = (<form class={$any(class_prefix + (pojo_.state & 7 /* MASK_STATUS */) + ((flags & 32 /* TOGGLE_FLAG32 */) && !(pojo_.state & 32) && 'd-none' || ''))}>
-  {content_slot === 0 /* TOP */ && content}
+    var el = (<form class={$any(class_prefix + (pojo_.state & 7 /* MASK_STATUS */) + (toggle32 && !(pojo_.state & 32) && 'd-none' || ''))}>
+  {!bottom && content}
   {body_out}
-  {content_slot === 1 /* BOTTOM */ && content}
+  {bottom && content}
   {msg(pojo, update)}
   <button type="submit" class={btn_class} onClick={onSubmit}>
     {btn_text}
