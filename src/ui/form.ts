@@ -1,12 +1,5 @@
-import { ContentSlot } from './util'
+import { ContentSlot, FormFlags } from '../util'
 import { PojoState, FieldType } from 'coreds/lib/types'
-
-export const enum FormFlags {
-    PLACEHOLDER = 1,
-    REF_AND_ID = 2,
-    HORIZONTAL = 4,
-    TOGGLE_FLAG32 = 32
-}
 
 function msg_show(pojo: string): string {
     return ` && (${pojo}._.state & ${PojoState.MASK_STATUS})`

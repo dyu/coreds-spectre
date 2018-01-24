@@ -1,5 +1,5 @@
 import { PagerState, PojoState, PojoListState } from 'coreds/lib/types'
-export { ContentSlot } from './util'
+export { ContentSlot } from '../util'
 export { form } from './form'
 export { qform } from './qform'
 
