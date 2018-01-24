@@ -180,7 +180,7 @@ export function pager_msg(pager: Pager) {
 
 export function icon_timeago(pojo: any) {
     return (
-<div class="content right floated">
+<div class="content right floated timeago">
   <i class="icon clock"></i>
   <small>{ $apply(pojo['2'], prettyDate) }</small>
 </div>

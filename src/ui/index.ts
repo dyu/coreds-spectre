@@ -3,23 +3,8 @@ export { ContentSlot } from './util'
 export { form } from './form'
 export { qform } from './qform'
 
-export const pi_attrs = /**/`
-v-defp:pager_item="pojo" v-show="(pojo._.lstate & ${PojoListState.INCLUDED})"
-:class="(pojo._.lstate & ${PojoListState.SELECTED}) ? 'item active' : 'item'"
-`/**/
-
-//export const pi_press_attrs = /**/`
-//v-defp:pager_item="pojo" v-show="(pojo._.lstate & ${PojoListState.INCLUDED})"
-//:class="(pojo._.lstate & ${PojoListState.SELECTED}) && (pojo._.state & ${PojoState.UPDATE}) ? 'item active' : 'item'"
-//`/**/
-
-export const pi_msg = /**/`
-<div style="clear:both"></div>
-<div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS})" v-show="pojo._.msg">
-  <i class="close icon" @click.prevent="pojo._.msg = null"></i>
-  <span v-text="pojo._.msg"></span>
-</div>
-`/**/
+// ================================================== 
+// dropdown
 
 export function dropdown_msg(hs: string) {
     return /**/`
@@ -36,12 +21,18 @@ export function dropdown_msg(hs: string) {
     `/**/
 }
 
+// ================================================== 
+// lsearch
+
 export function lsearch_attrs(fk: string) {
     return /**/`
 :disabled="0 !== (pager.state & ${PagerState.LOADING}) || (!pager.size && !(pager.state & ${PagerState.LOCAL_SEARCH}))"
 v-lsearch="{ pager: pager, fields: ['${fk}'] }"
     `/**/
 }
+
+// ================================================== 
+// suggest
 
 export const suggest_controls = /**/`
 <div class="btn-group links">
@@ -66,6 +57,9 @@ export const suggest_controls = /**/`
   </button>
 </div>
 `/**/
+
+// ================================================== 
+// pager
 
 export const pager_controls = /**/`
 <div class="btn-group links">
@@ -141,3 +135,34 @@ export function icon_remove(bit: number, icon_class?: string, name?: string): st
 }
 
 export const icon_remove_bit32 = icon_remove(32)
+
+// ================================================== 
+// item
+
+export const item_attrs = /**/`
+v-defp:pager_item="pojo" v-show="(pojo._.lstate & ${PojoListState.INCLUDED})"
+:class="(pojo._.lstate & ${PojoListState.SELECTED}) ? 'item active' : 'item'"
+`/**/
+
+export const item_msg = /**/`
+<div style="clear:both"></div>
+<div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS})" v-show="pojo._.msg">
+  <i class="close icon" @click.prevent="pojo._.msg = null"></i>
+  <span v-text="pojo._.msg"></span>
+</div>
+`/**/
+
+export function item_toggle(fk: string, bit: number, icon_class: string, name?: string): string {
+    return /**/`
+<div class="content right floated">
+  ${icon_toggle(fk, bit, icon_class, name)}
+</div>
+`/**/
+}
+
+export const item_timeago = /**/`
+<div class="content right floated timeago">
+  ${icon_timeago}
+</div>
+`/**/
+
