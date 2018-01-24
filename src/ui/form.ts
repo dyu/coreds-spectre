@@ -1,4 +1,4 @@
-import { ContentSlot, FormFlags, enum_option, enum_options } from '../util'
+import { FormFlags, enum_option, enum_options } from '../util'
 import { PojoState, FieldType } from 'coreds/lib/types'
 
 function msg_show(pojo: string): string {
@@ -20,21 +20,19 @@ export function toggle32(pojo: string) {
 }
 
 export function form(pojo: string, $d: any, ffid: string|null, 
-        content?: string, content_slot?: ContentSlot, formFlags?: FormFlags): string {
+        formFlags?: FormFlags, content?: string): string {
     let update = ffid === null,
         flags = formFlags || 0,
+        bottom = !!(flags & FormFlags.SLOT_BOTTOM),
         placeholder = 0 !== (flags & FormFlags.PLACEHOLDER),
         horizontal = 0 !== (flags & FormFlags.HORIZONTAL),
         class_prefix = `ui form${horizontal && ' form-horizontal' || ''}${placeholder && ' placeholder' || ''} status-`
     
-    if (content && content_slot === undefined)
-        content_slot = ContentSlot.TOP
-
     return /**/`
 <form v-clear="${pojo}._" :class="'${class_prefix}' + (${pojo}._.state & ${PojoState.MASK_STATUS})"${(flags & FormFlags.TOGGLE_FLAG32) && toggle32(pojo) || ''}>
-  ${content_slot === ContentSlot.TOP && content || ''}
+  ${!bottom && content || ''}
   ${body(pojo, $d, update, { pojo, ffid, flags })}
-  ${content_slot === ContentSlot.BOTTOM && content || ''}
+  ${bottom && content || ''}
   ${msg(pojo, update)}
   <button type="submit" class="btn btn-${placeholder ? 'primary' :'outlined'}" @click.prevent="${pojo}$$">
     ${update ? 'Update' : 'Submit'}

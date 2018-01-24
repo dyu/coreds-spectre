@@ -1,5 +1,5 @@
 import * as Surplus from 'surplus'; Surplus;
-import { ContentSlot, FormFlags, enum_option, enum_options, getFnVal } from '../util'
+import { FormFlags, enum_option, enum_options, getFnVal } from '../util'
 import { FieldType, HasState, PojoState, PojoSO } from 'coreds/lib/types'
 import { $any, defp } from 'coreds/lib/util'
 import { $change } from 'coreds/lib/form'
@@ -44,29 +44,28 @@ function $onSubmit(this: any, e) {
 }
 
 export function form(pojo: any, $d: any, fnSubmit: any, ffid: string | null, ffobj?: any,
-        content?: any, content_slot?: ContentSlot, formFlags?: FormFlags) {
+        formFlags?: FormFlags, content?: any) {
     let update = ffid === null,
         flags = formFlags || 0,
+        bottom = !!(flags & FormFlags.SLOT_BOTTOM),
+        toggle32 = (flags & FormFlags.TOGGLE_FLAG32),
         placeholder = 0 !== (flags & FormFlags.PLACEHOLDER),
         horizontal = 0 !== (flags & FormFlags.HORIZONTAL),
         pojo_ = pojo['_'] as HasState,
         keydown = $keydown.bind(pojo_),
         onSubmit = $onSubmit.bind(fnSubmit),
-        btn_class = placeholder ? 'btn btn-outlined' : 'btn btn-primary',
+        btn_class = placeholder ? 'btn btn-primary' : 'btn btn-outlined',
         btn_text = update ? 'Update' : 'Submit',
         body_out = [],
         class_prefix = `ui form${horizontal && ' form-horizontal' || ''}${placeholder && ' placeholder' || ''} status-`
     
-    if (content && content_slot === undefined)
-        content_slot = ContentSlot.TOP
-    
     body(pojo, $d, update, { pojo, ffid, ffobj, flags }, body_out)
     
     let el = (
-<form class={$any(class_prefix + (pojo_.state & PojoState.MASK_STATUS) + ((flags & FormFlags.TOGGLE_FLAG32) && !(pojo_.state & 32) && 'd-none' || ''))}>
-  {content_slot === ContentSlot.TOP && content}
+<form class={$any(class_prefix + (pojo_.state & PojoState.MASK_STATUS) + (toggle32 && !(pojo_.state & 32) && 'd-none' || ''))}>
+  {!bottom && content}
   {body_out}
-  {content_slot === ContentSlot.BOTTOM && content}
+  {bottom && content}
   {msg(pojo, update)}
   <button type="submit" class={btn_class} onClick={onSubmit}>
     {btn_text}
