@@ -6,6 +6,8 @@ import { attachOptsTo } from 'coreds-ui/lib/_pager'
 import { parseOpts } from 'coreds-ui/lib/_lsearch'
 import { $apply, msg } from './common'
 
+export { form } from './form'
+
 // ================================================== 
 // dropdown
 
