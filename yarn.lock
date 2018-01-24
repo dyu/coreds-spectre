@@ -10,17 +10,17 @@
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-0.0.16.tgz#a1c225b1266f64e4a3cdbe515a266f01b6e89df1"
 
-coreds-ui@^0.10.7:
-  version "0.10.7"
-  resolved "https://registry.yarnpkg.com/coreds-ui/-/coreds-ui-0.10.7.tgz#5b37d2bbd313093f91552ec79e17c1a8dc08631a"
+coreds-ui@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/coreds-ui/-/coreds-ui-1.0.0.tgz#2a363883dc94b3fe52b69f6f9baf69151543175c"
   dependencies:
     "@types/hammerjs" "^2.0.32"
+    coreds "^1.0.0"
     hammerjs "^2.0.8"
-    vuets "^0.10.0"
 
-coreds@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/coreds/-/coreds-0.10.2.tgz#f01687d9cfca98397a6beb3f8f3df840fea480b9"
+coreds@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/coreds/-/coreds-1.0.0.tgz#d96f934ec894fbf887500183088c97cc270d9249"
   dependencies:
     "@types/numeral" "0.0.16"
     numeral "^1.5.6"
@@ -48,7 +48,3 @@ surplus@^0.5.0-beta9:
 typescript@2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
-
-vuets@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/vuets/-/vuets-0.10.0.tgz#1fe27f221d45e17b419c6f01a3d7bdcc49edc835"
