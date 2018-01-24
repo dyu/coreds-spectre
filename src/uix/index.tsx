@@ -1,33 +1,21 @@
 import * as Surplus from 'surplus'; Surplus;
-import { Pager, PagerState, PojoState, PojoListState, ItemSO } from 'coreds/lib/types'
+import { Pager, PagerState, PojoState, PojoListState, ItemSO, HasState } from 'coreds/lib/types'
 import { prettyDate } from 'coreds/lib/datetime_util'
 import { $any, defp } from 'coreds/lib/util'
 import { attachOptsTo } from 'coreds-ui/lib/_pager'
 import { parseOpts } from 'coreds-ui/lib/_lsearch'
-
-function $apply(val, filter) {
-    return val && filter(val)
-}
-
-function $clearMsg(this: any, e) {
-    e.preventDefault()
-    this.msg = null
-}
+import { $apply, msg } from './common'
 
 // ================================================== 
 // dropdown
 
 export function dropdown_msg(pojo: any) {
-    let pojo_ = pojo['_'] as ItemSO,
-        fn = $clearMsg.bind(pojo_)
+    let pojo_ = pojo['_'] as HasState
     return (
 <div class={$any('dropdown' + (pojo_.msg && ' active' || ''))}>
   <ul class={$any('menu transparent' + (!pojo_.msg ? ' d-none' : ''))}>
     <li class="menu-item">
-      <div class={$any('ui msg status-' + (pojo_.state & PagerState.MASK_STATUS))}>
-        <i class="close icon" onClick={fn}></i>
-        <span>{$any(pojo_.msg)}</span>
-      </div>
+      ${msg(pojo_, PagerState.MASK_STATUS)}
     </li>
   </ul>
 </div>
@@ -124,15 +112,7 @@ export function pager_controls(pager: Pager) {
 }
 
 export function pager_msg(pager: Pager) {
-    let fn = $clearMsg.bind(pager)
-    return (
-<div class={$any(!pager.msg || !(pager.state & PagerState.MASK_STATUS) ? 'd-none' : '')}>
-  <div class={$any('ui msg status-' + (pager.state & PagerState.MASK_STATUS))}>
-    <i class="close icon" onClick={fn}></i>
-    <span>{$any(pager.msg)}</span>
-  </div>
-</div>
-    )
+    return msg(pager, PagerState.MASK_STATUS)
 }
 
 // ================================================== 
@@ -233,14 +213,7 @@ export function item_class(pojo: any) {
 }
 
 export function item_msg(pojo: any) {
-    let pojo_ = pojo['_'] as ItemSO,
-        fn = $clearMsg.bind(pojo_)
-    return (
-<div class={$any('ui msg status-' + (pojo_.state & PagerState.MASK_STATUS) + (!pojo_.msg ? ' d-none' : ''))}>
-  <i class="close icon" onClick={fn}></i>
-  <span>{$any(pojo_.msg)}</span>
-</div>
-    )
+    return msg(pojo['_'], PojoState.MASK_STATUS)
 }
 
 export function item_timeago(pojo: any) {

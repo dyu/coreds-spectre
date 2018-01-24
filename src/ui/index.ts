@@ -94,11 +94,9 @@ export const pager_controls = /**/`
 `/**/
 
 export const pager_msg = /**/`
-<div v-show="pager.msg && (pager.state & ${PagerState.MASK_STATUS})">
-  <div :class="'ui msg status-' + (pager.state & ${PagerState.MASK_STATUS})">
-    <i class="close icon" @click.prevent="pager.msg = null"></i>
-    <span v-text="pager.msg"></span>
-  </div>
+<div :class="'ui msg status-' + (pager.state & ${PagerState.MASK_STATUS}) + (!pager.msg ? ' d-none' : '')">
+  <i class="close icon" @click.prevent="pager.msg = null"></i>
+  <span v-text="pager.msg"></span>
 </div>
 `/**/
 
@@ -146,7 +144,7 @@ v-defp:pager_item="pojo" v-show="(pojo._.lstate & ${PojoListState.INCLUDED})"
 
 export const item_msg = /**/`
 <div style="clear:both"></div>
-<div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS})" v-show="pojo._.msg">
+<div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS}) + (!pojo._.msg ? ' d-none' : '')">
   <i class="close icon" @click.prevent="pojo._.msg = null"></i>
   <span v-text="pojo._.msg"></span>
 </div>
