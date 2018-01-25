@@ -31,7 +31,7 @@ export function form(pojo: string, $d: any, ffid: string|null,
     return /**/`
 <form v-clear="${pojo}._" :class="'${class_prefix}' + (${pojo}._.state & ${PojoState.MASK_STATUS})"${(flags & FormFlags.TOGGLE_FLAG32) && toggle32(pojo) || ''}>
   ${!bottom && content || ''}
-  ${body(pojo, $d, update, { pojo, ffid, flags })}
+  ${body(pojo, $d, { pojo, ffid, flags, update })}
   ${bottom && content || ''}
   ${msg(pojo, update)}
   <button type="submit" class="btn btn-${placeholder ? 'primary' :'outlined'}" @click.prevent="${pojo}$$">
@@ -45,22 +45,23 @@ interface FormRoot {
     pojo: string
     ffid: string|null
     flags: FormFlags
+    update: boolean
 }
 
-function body(pojo: string, $d: any, update: boolean, root: FormRoot): string {
+function body(pojo: string, $d: any, root: FormRoot): string {
     let out = '',
         array = $d.$fdf
 
     if ($d.$fmf) {
         for (let fk of $d.$fmf) {
-            out += body(`${pojo}['${fk}']`, $d[fk].d_fn(), update, root)
+            out += body(`${pojo}['${fk}']`, $d[fk].d_fn(), root)
         }
     }
 
     if (!array)
         return out
 
-    let mask = update ? 13 : 3, 
+    let mask = root.update ? 13 : 3, 
         ffid = root.ffid
 
     if (ffid && array.length)
@@ -71,7 +72,7 @@ function body(pojo: string, $d: any, update: boolean, root: FormRoot): string {
             fd = $d[fk]
         if (!fd.t || (fd.a & mask)) continue
 
-        out += `<div ${field_class(pojo, fd)}>${field_switch(pojo, fd, update, root, i, ffid)}</div>`
+        out += `<div ${field_class(pojo, fd)}>${field_switch(pojo, fd, root, i, ffid)}</div>`
         ffid = null
     }
 
@@ -86,7 +87,7 @@ function field_class(pojo: string, fd: any): string {
         return `:class="'${base}' + ((${pojo}._.vfbs & ${1 << (fd._ - 1)}) && ${pojo}._['${fd._}'] && ' has-error' || '')"`
 }
 
-function field_switch(pojo: string, fd: any, update: boolean, root: FormRoot, idx: number, ffid: any): string {
+function field_switch(pojo: string, fd: any, root: FormRoot, idx: number, ffid: any): string {
     let buf = '',
         t = fd.t
 
@@ -94,15 +95,15 @@ function field_switch(pojo: string, fd: any, update: boolean, root: FormRoot, id
         buf += `<label class="form-label">${fd.$n}${fd.m === 2 && ' *' || ''}</label>`
 
     if (t === FieldType.BOOL)
-        buf += field_bool(pojo, fd, update, root, ffid)
+        buf += field_bool(pojo, fd, root, ffid)
     else if (t === FieldType.ENUM)
-        buf += field_enum(pojo, fd, update, root, ffid)
+        buf += field_enum(pojo, fd, root, ffid)
     else if (t !== FieldType.STRING)
-        buf += field_num(pojo, fd, update, root, ffid)
+        buf += field_num(pojo, fd, root, ffid)
     else if (fd.ta)
-        buf += field_textarea(pojo, fd, update, root, ffid)
+        buf += field_textarea(pojo, fd, root, ffid)
     else
-        buf += field_default(pojo, fd, update, root, ffid)
+        buf += field_default(pojo, fd, root, ffid)
 
     return buf
 }
@@ -119,23 +120,23 @@ function placeholder(fd: any) {
     return ` placeholder="${fd.$n}${fd.m === 2 && ' *' || ''}"`
 }
 
-function field_bool(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
+function field_bool(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
 <label class="form-switch">
   <input${ffid && ffid_attr(ffid, root.flags) || ''} type="checkbox" v-sval:${fd.t}="${pojo}['${fd._}']"
-      @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})" />
+      @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})" />
   <i class="form-icon"></i>${fd.$n}
 </label>
 `/**/
 }
 
 
-function field_enum(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
+function field_enum(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
 <select${ffid && ffid_attr(ffid, root.flags) || ''} v-sval:${fd.t}="${pojo}['${fd._}']"
-    class="form-select${!update && ' resettable' || ''}"
-    @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})">
-    ${update ? '' : ((root.flags & FormFlags.PLACEHOLDER) && enum_option(fd) || '')}
+    class="form-select${!root.update && ' resettable' || ''}"
+    @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})">
+    ${root.update ? '' : ((root.flags & FormFlags.PLACEHOLDER) && enum_option(fd) || '')}
     ${enum_options(fd)}
 </select>
 `/**/
@@ -149,33 +150,33 @@ export const enum DPFlags {
 export function dpicker(pojo: string, field: number, update: boolean): string {
     return ` v-dpicker:${DPFlags.TRIGGER_CHANGE_ON_SELECT | (update ? DPFlags.UPDATE : 0)}="{ pojo: ${pojo}, field: '${field}' }"`
 }
-function field_num(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
+function field_num(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
-<input${ffid && ffid_attr(ffid, root.flags) || ''} type="text"${fd.o === 2 && dpicker(pojo, fd._, update) || ''}
+<input${ffid && ffid_attr(ffid, root.flags) || ''} type="text"${fd.o === 2 && dpicker(pojo, fd._, root.update) || ''}
     ${(root.flags & FormFlags.PLACEHOLDER) && placeholder(fd) || ''}
     v-sval:${!fd.o ? fd.t : (fd.t + ',' + fd.o)}="${pojo}['${fd._}']"
-    @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})" />
+    @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})" />
 <div class="form-input-hint" v-text="!(${pojo}._.vfbs & ${1 << (fd._ - 1)}) ? '' : ${pojo}._['${fd._}']"></div>
 ${fd.$h && help_text(fd.$h) || ''}
 `/**/
 }
 
-function field_textarea(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
+function field_textarea(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
 <textarea${ffid && ffid_attr(ffid, root.flags) || ''} v-sval:${fd.t}="${pojo}['${fd._}']"
     ${(root.flags & FormFlags.PLACEHOLDER) && placeholder(fd) || ''}
-    @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})"></textarea>
+    @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})"></textarea>
 <div class="form-input-hint" v-text="!(${pojo}._.vfbs & ${1 << (fd._ - 1)}) ? '' : ${pojo}._['${fd._}']"></div>
 ${fd.$h && help_text(fd.$h) || ''}
 `/**/
 }
 
-function field_default(pojo: string, fd: any, update: boolean, root: FormRoot, ffid: any): string {
+function field_default(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
 <input${ffid && ffid_attr(ffid, root.flags) || ''} type="${fd.pw ? 'password' : 'text'}"
     ${(root.flags & FormFlags.PLACEHOLDER) && placeholder(fd) || ''}
     v-sval:${fd.t}="${pojo}['${fd._}']"
-    @change="change($event, '${fd._}', ${pojo}, ${update}, ${root.pojo})" />
+    @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})" />
 <div class="form-input-hint" v-text="!(${pojo}._.vfbs & ${1 << (fd._ - 1)}) ? '' : ${pojo}._['${fd._}']"></div>
 ${fd.$h && help_text(fd.$h) || ''}
 `/**/

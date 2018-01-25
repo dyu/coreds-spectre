@@ -59,7 +59,7 @@ export function form(pojo: any, $d: any, fnSubmit: any, ffid: string | null, ffo
         body_out = [],
         class_prefix = `ui form${horizontal && ' form-horizontal' || ''}${placeholder && ' placeholder' || ''} status-`
     
-    body(pojo, $d, update, { pojo, ffid, ffobj, flags }, body_out)
+    body(pojo, $d, { pojo, ffid, ffobj, flags, update }, body_out)
     
     let el = (
 <form class={$any(class_prefix + (pojo_.state & PojoState.MASK_STATUS) + (toggle32 && !(pojo_.state & 32) && 'd-none' || ''))}>
@@ -84,21 +84,22 @@ interface FormRoot {
     ffid: string|null
     ffobj: any
     flags: FormFlags
+    update: boolean
 }
 
-function body(pojo: any, $d: any, update: boolean, root: FormRoot, out: any[]) {
+function body(pojo: any, $d: any, root: FormRoot, out: any[]) {
     let array = $d.$fdf
     
     if ($d.$fmf) {
         for (let fk of $d.$fmf) {
-            body(pojo[fk], $d[fk].d_fn(), update, root, out)
+            body(pojo[fk], $d[fk].d_fn(), root, out)
         }
     }
     
     if (!array)
         return
     
-    let mask = update ? 13 : 3, 
+    let mask = root.update ? 13 : 3, 
         ffid = root.ffid
 
     if (ffid && array.length)
@@ -109,7 +110,7 @@ function body(pojo: any, $d: any, update: boolean, root: FormRoot, out: any[]) {
             fd = $d[fk]
         if (!fd.t || (fd.a & mask)) continue
         
-        out.push(field_switch(pojo, fd, fk, update, root, i, ffid))
+        out.push(field_switch(pojo, fd, fk, root, i, ffid))
         
         ffid = null
     }
@@ -134,7 +135,7 @@ function field_class(pojo: any, fd: any, fk: string): string {
     return buf
 }
 
-function field_switch(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot, idx: number, ffid: any) {
+function field_switch(pojo: any, fd: any, fk: string, root: FormRoot, idx: number, ffid: any) {
     let t = fd.t,
         label,
         hint,
@@ -145,15 +146,15 @@ function field_switch(pojo: any, fd: any, fk: string, update: boolean, root: For
     }
     
     if (t === FieldType.BOOL)
-        el = field_bool(pojo, fd, fk, update, root, ffid)
+        el = field_bool(pojo, fd, fk, root, ffid)
     else if (t === FieldType.ENUM)
-        el = field_enum(pojo, fd, fk, update, root, ffid, label)
+        el = field_enum(pojo, fd, fk, root, ffid, label)
     else if (t !== FieldType.STRING)
-        el = field_num(pojo, fd, fk, update, root, ffid, label)
+        el = field_num(pojo, fd, fk, root, ffid, label)
     else if (fd.ta)
-        el = field_textarea(pojo, fd, fk, update, root, ffid, label)
+        el = field_textarea(pojo, fd, fk, root, ffid, label)
     else
-        el = field_default(pojo, fd, fk, update, root, ffid, label)
+        el = field_default(pojo, fd, fk, root, ffid, label)
     
     return el
 }
@@ -166,13 +167,13 @@ function setFF(el: any, ffid: any, ffobj: any) {
     }
 }
 
-function field_bool(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot,
+function field_bool(pojo: any, fd: any, fk: string, root: FormRoot,
         ffid: any) {
     let input
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   <label class="form-switch">
-    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)} />
+    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)} />
     <i class="form-icon"></i>{fd.$n}
   </label>
 </div>
@@ -186,19 +187,19 @@ function select_val(val) {
     return val ? val.toString() : ''
 }
 
-function field_enum(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot, 
+function field_enum(pojo: any, fd: any, fk: string, root: FormRoot, 
         ffid: any, label: any) {
-    let cls = `form-select${!update && ' resettable' || ''}`,
+    let cls = `form-select${!root.update && ' resettable' || ''}`,
         select
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   {label}
-  <select ref={select} class={cls} value={select_val(pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)}></select>
+  <select ref={select} class={cls} value={select_val(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)}></select>
 </div>
     )
     
     let buf = ''
-    if (!update && 0 !== (root.flags & FormFlags.PLACEHOLDER)) {
+    if (!root.update && 0 !== (root.flags & FormFlags.PLACEHOLDER)) {
         buf += enum_option(fd)
     }
     buf += enum_options(fd)
@@ -216,7 +217,7 @@ function help_text(str) {
     return <p class="form-input-hint">{str}</p>
 }
 
-function field_num(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot,
+function field_num(pojo: any, fd: any, fk: string, root: FormRoot,
         ffid: any, label: any) {
     let ph = !(root.flags & FormFlags.PLACEHOLDER) ? '' : placeholder(fd),
         pojo_ = pojo['_'] as PojoSO,
@@ -227,7 +228,7 @@ function field_num(pojo: any, fd: any, fk: string, update: boolean, root: FormRo
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   {label}
-  <input ref={input} type="text" placeholder={ph} value={fnVal(pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)} />
+  <input ref={input} type="text" placeholder={ph} value={fnVal(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)} />
   <div class="form-input-hint">{$any(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
 </div>
@@ -237,7 +238,7 @@ function field_num(pojo: any, fd: any, fk: string, update: boolean, root: FormRo
     return el
 }
 
-function field_textarea(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot,
+function field_textarea(pojo: any, fd: any, fk: string, root: FormRoot,
         ffid: any, label: any) {
     let ph = !(root.flags & FormFlags.PLACEHOLDER) ? '' : placeholder(fd),
         pojo_ = pojo['_'] as PojoSO,
@@ -247,7 +248,7 @@ function field_textarea(pojo: any, fd: any, fk: string, update: boolean, root: F
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   {label}
-  <textarea ref={ta} placeholder={ph} value={$any(pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)}>
+  <textarea ref={ta} placeholder={ph} value={$any(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)}>
   </textarea>
   <div class="form-input-hint">{$any(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
@@ -258,7 +259,7 @@ function field_textarea(pojo: any, fd: any, fk: string, update: boolean, root: F
     return el
 }
 
-function field_default(pojo: any, fd: any, fk: string, update: boolean, root: FormRoot,
+function field_default(pojo: any, fd: any, fk: string, root: FormRoot,
         ffid: any, label: any) {
     let ph = !(root.flags & FormFlags.PLACEHOLDER) ? '' : placeholder(fd),
         pojo_ = pojo['_'] as PojoSO,
@@ -269,7 +270,7 @@ function field_default(pojo: any, fd: any, fk: string, update: boolean, root: Fo
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   {label}
-  <input ref={input} type={typ} placeholder={ph} value={$any(pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)} />
+  <input ref={input} type={typ} placeholder={ph} value={$any(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)} />
   <div class="form-input-hint">{$any(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
 </div>
