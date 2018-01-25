@@ -113,7 +113,7 @@ function field_bool(pojo, fd, fk, update, root, ffid) {
     var input;
     var el = (<div class={field_class(pojo, fd, fk)}>
   <label class="form-switch">
-    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])}/>
+    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, update, root.pojo); }}/>
     <i class="form-icon"></i>{fd.$n}
   </label>
 </div>);
