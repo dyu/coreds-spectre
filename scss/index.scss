@@ -103,6 +103,12 @@ select.underline,
   }
 }
 
+select.underline,
+.underline select {
+  background-color: transparent !important;
+}
+
+
 @import "node_modules/spectre.css/src/labels";
 @import "node_modules/spectre.css/src/codes";
 @import "node_modules/spectre.css/src/media";
@@ -131,6 +137,10 @@ select.underline,
   > .menu-item {
     padding: 0;
   }
+}
+
+.menu-item.form {
+  padding: 0;
 }
 
 @import "node_modules/spectre.css/src/modals";
