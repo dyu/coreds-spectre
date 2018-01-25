@@ -115,7 +115,7 @@ function $toggle(e) {
 function $trigger(e) {
     var state = this.obj.state;
     this.obj.state = state ^ this.bit;
-    !(state & this.bit) && this.cb && this.cb(this.bit);
+    this.cb(this.bit);
 }
 export function icon_toggle(pojo, fk, bit, icon_class, cb, name, wrapper_class) {
     if (bit < 32)
