@@ -33,7 +33,7 @@ export function $toggle3(e) {
 
 export function $itoggle0(e) {
     let el = e.target
-    if (el.tagName === 'I')
+    if ('I' === el.tagName)
         el = el.parentElement
     
     toggleClass(el, 'active')
@@ -41,7 +41,7 @@ export function $itoggle0(e) {
 
 export function $itoggle1(e) {
     let el = e.target
-    if (el.tagName === 'I')
+    if ('I' === el.tagName)
         el = el.parentElement
     
     toggleClass(el.parentElement, 'active')
@@ -49,7 +49,7 @@ export function $itoggle1(e) {
 
 export function $itoggle2(e) {
     let el = e.target
-    if (el.tagName === 'I')
+    if ('I' === el.tagName)
         el = el.parentElement
     
     toggleClass(el.parentElement.parentElement, 'active')
@@ -57,7 +57,7 @@ export function $itoggle2(e) {
 
 export function $itoggle3(e) {
     let el = e.target
-    if (el.tagName === 'I')
+    if ('I' === el.tagName)
         el = el.parentElement
     
     toggleClass(el.parentElement.parentElement.parentElement, 'active')
