@@ -189,12 +189,11 @@ function select_val(val) {
 
 function field_enum(pojo: any, fd: any, fk: string, root: FormRoot, 
         ffid: any, label: any) {
-    let cls = `form-select${!root.update && ' resettable' || ''}`,
-        select
+    let select
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   {label}
-  <select ref={select} class={cls} value={select_val(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)}></select>
+  <select ref={select} class={$any(!root.update && !pojo[fk] ? 'empty' : '')} value={select_val(pojo[fk])} onChange={e => $change(e, fk, pojo, root.update, root.pojo)}></select>
 </div>
     )
     

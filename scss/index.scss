@@ -32,7 +32,10 @@ select {
 .form-group.has-error > div.form-input-hint + p {
   display: none;
 }
-.picker > select { @extend .form-select; }
+.picker > select,
+.form-group > select {
+  @extend .form-select;
+}
 
 .detail > form > .form-group {
   font-size: $detail-form-fontsize;
@@ -58,15 +61,8 @@ select {
   }
 }
 
-select.placeholder,
-form.placeholder select.resettable {
-  > option:first-child {
-    color: $placeholder-color;
-  }
-}
-
 form.placeholder select.empty,
-div.form-group.placeholder > select.empty {
+.form-group.placeholder > select.empty {
   color: $placeholder-color;
   > option {
     color: $body-font-color;
@@ -77,8 +73,10 @@ div.form-group.placeholder > select.empty {
 }
 
 input.underline,
+select.underline,
 .underline input[type="text"],
-.underline input[type="password"], {
+.underline input[type="password"],
+.underline select {
   outline: none;
   border: none;
   border-radius: 0;
@@ -92,6 +90,9 @@ input.underline,
     //opacity: .5;
     pointer-events: none;
     background: none;
+  }
+  &:focus {
+    box-shadow: none;
   }
 }
 

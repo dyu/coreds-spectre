@@ -134,7 +134,6 @@ function field_bool(pojo: string, fd: any, root: FormRoot, ffid: any): string {
 function field_enum(pojo: string, fd: any, root: FormRoot, ffid: any): string {
     return /**/`
 <select${ffid && ffid_attr(ffid, root.flags) || ''} v-sval:${fd.t}="${pojo}['${fd._}']"
-    class="form-select${!root.update && ' resettable' || ''}"
     @change="change($event, '${fd._}', ${pojo}, ${root.update}, ${root.pojo})">
     ${root.update ? '' : ((root.flags & FormFlags.PLACEHOLDER) && enum_option(fd) || '')}
     ${enum_options(fd)}
