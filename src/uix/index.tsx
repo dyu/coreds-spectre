@@ -160,7 +160,7 @@ export function icon_update_ts(pojo: any, fk: string, wrapper_class?: string) {
 interface ToggleOpts {
     obj: ItemSO
     bit: number
-    cb?: Function
+    cb: Function
 }
 
 function $toggle(this: ToggleOpts, e) {
@@ -170,11 +170,11 @@ function $toggle(this: ToggleOpts, e) {
 function $trigger(this: ToggleOpts, e) {
     let state = this.obj.state
     this.obj.state = state ^ this.bit
-    !(state & this.bit) && this.cb && this.cb(this.bit)
+    this.cb(this.bit)
 }
 
 export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: string,
-        cb?: Function, name?: string, wrapper_class?: string) {
+        cb: Function, name?: string, wrapper_class?: string) {
     if (bit < 32) throw 'Invalid bit: ' + bit
     let icon = `icon action ${icon_class}`,
         obj = pojo['_'],
@@ -246,12 +246,12 @@ export function item_update_ts(pojo: any, fk: string) {
 }
 
 export function item_toggle(pojo: any, fk: string, bit: number, icon_class: string,
-        cb?: Function, name?: string) {
+        cb: Function, name?: string) {
     return icon_toggle(pojo, fk, bit, icon_class, cb, name, 'content right floated')
 }
 
 export function item_remove(pojo: any, fk: string, bit: number, icon_class: string, 
-        cb?: Function, name?: string) {
+        cb: Function, name?: string) {
     return icon_remove(pojo, fk, bit, icon_class, cb, name, 'content right floated')
 }
 
