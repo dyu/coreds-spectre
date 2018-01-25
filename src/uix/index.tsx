@@ -29,6 +29,41 @@ export function $toggle3(e) {
 }
 
 // ================================================== 
+// icon toggles
+
+export function $itoggle0(e) {
+    let el = e.target
+    if (el.tagName === 'I')
+        el = el.parentElement
+    
+    toggleClass(el, 'active')
+}
+
+export function $itoggle1(e) {
+    let el = e.target
+    if (el.tagName === 'I')
+        el = el.parentElement
+    
+    toggleClass(el.parentElement, 'active')
+}
+
+export function $itoggle2(e) {
+    let el = e.target
+    if (el.tagName === 'I')
+        el = el.parentElement
+    
+    toggleClass(el.parentElement.parentElement, 'active')
+}
+
+export function $itoggle3(e) {
+    let el = e.target
+    if (el.tagName === 'I')
+        el = el.parentElement
+    
+    toggleClass(el.parentElement.parentElement.parentElement, 'active')
+}
+
+// ================================================== 
 // dropdown
 
 export function dropdown_msg(hs: HasState, mask: number) {
