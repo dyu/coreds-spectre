@@ -37,6 +37,12 @@ select {
   @extend .form-select;
 }
 
+.form-group > input[type="text"],
+.form-group > input[type="password"],
+.form-group > textarea {
+  @extend .form-input;
+}
+
 .detail > form > .form-group {
   font-size: $detail-form-fontsize;
 }
@@ -76,6 +82,7 @@ input.underline,
 select.underline,
 .underline input[type="text"],
 .underline input[type="password"],
+.underline textarea,
 .underline select {
   outline: none;
   border: none;
