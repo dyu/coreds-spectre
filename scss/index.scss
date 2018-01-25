@@ -43,8 +43,15 @@ select {
   @extend .form-input;
 }
 
-.detail > form > .form-group {
+.form-group > label.form-label {
+  padding-top: 0;
+}
+
+.detail .form-group {
   font-size: $detail-form-fontsize;
+  > label.form-label {
+    font-size: 0.8rem;
+  }
 }
 
 .form-group {
