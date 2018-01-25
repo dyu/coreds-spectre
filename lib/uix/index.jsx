@@ -22,6 +22,32 @@ export function $toggle3(e) {
     toggleClass(e.target.parentElement.parentElement.parentElement, 'active');
 }
 // ================================================== 
+// icon toggles
+export function $itoggle0(e) {
+    var el = e.target;
+    if (el.tagName === 'I')
+        el = el.parentElement;
+    toggleClass(el, 'active');
+}
+export function $itoggle1(e) {
+    var el = e.target;
+    if (el.tagName === 'I')
+        el = el.parentElement;
+    toggleClass(el.parentElement, 'active');
+}
+export function $itoggle2(e) {
+    var el = e.target;
+    if (el.tagName === 'I')
+        el = el.parentElement;
+    toggleClass(el.parentElement.parentElement, 'active');
+}
+export function $itoggle3(e) {
+    var el = e.target;
+    if (el.tagName === 'I')
+        el = el.parentElement;
+    toggleClass(el.parentElement.parentElement.parentElement, 'active');
+}
+// ================================================== 
 // dropdown
 export function dropdown_msg(hs, mask) {
     return (<div class={$any('dropdown' + (hs.msg && ' active' || ''))}>
