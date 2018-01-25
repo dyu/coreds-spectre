@@ -124,10 +124,10 @@ function select_val(val) {
     return val ? val.toString() : '';
 }
 function field_enum(pojo, fd, fk, root, ffid, label) {
-    var cls = "form-select" + (!root.update && ' resettable' || ''), select;
+    var select;
     var el = (<div class={field_class(pojo, fd, fk)}>
   {label}
-  <select ref={select} class={cls} value={select_val(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}></select>
+  <select ref={select} class={$any(!root.update && !pojo[fk] ? 'empty' : '')} value={select_val(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}></select>
 </div>);
     var buf = '';
     if (!root.update && 0 !== (root.flags & 1 /* PLACEHOLDER */)) {
