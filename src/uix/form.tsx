@@ -172,7 +172,7 @@ function field_bool(pojo: any, fd: any, fk: string, update: boolean, root: FormR
     let el = (
 <div class={field_class(pojo, fd, fk)}>
   <label class="form-switch">
-    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])} />
+    <input ref={input} type="checkbox" checked={$any(!!pojo[fk])} onChange={e => $change(e, fk, pojo, update, root.pojo)} />
     <i class="form-icon"></i>{fd.$n}
   </label>
 </div>
