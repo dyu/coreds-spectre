@@ -71,7 +71,7 @@ export function dropdown_msg(hs: HasState, mask: number) {
 <div class={$any('dropdown' + (hs.msg && ' active' || ''))}>
   <ul class="menu transparent">
     <li class="menu-item">
-      ${msg(hs, mask)}
+      {msg(hs, mask)}
     </li>
   </ul>
 </div>
