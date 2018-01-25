@@ -133,8 +133,21 @@ select.underline,
 //@import "node_modules/spectre.css/src/bars";
 @import "node_modules/spectre.css/src/cards";
 @import "node_modules/spectre.css/src/chips";
-@import "node_modules/spectre.css/src/dropdowns";
 //@import "node_modules/spectre.css/src/empty";
+@import "node_modules/spectre.css/src/dropdowns";
+.dropdown.icons {
+  margin-left: -0.55em;
+  padding-left: 0.55em;
+  > .menu {
+    margin-top: 0.85em;
+  }
+}
+
+div.right > .dropdown.icons {
+  margin-left: -0.75em;
+  padding-left: 0.75em;
+}
+
 @import "node_modules/spectre.css/src/menus";
 .menu.transparent {
   background: transparent;
