@@ -58,6 +58,24 @@ select {
   }
 }
 
+select.placeholder,
+form.placeholder select.resettable {
+  > option:first-child {
+    color: $placeholder-color;
+  }
+}
+
+form.placeholder select.empty,
+div.form-group.placeholder > select.empty {
+  color: $placeholder-color;
+  > option {
+    color: $body-font-color;
+  }
+  > option:first-child {
+    color: $placeholder-color;
+  }
+}
+
 input.underline,
 .underline input[type="text"],
 .underline input[type="password"], {
@@ -65,6 +83,7 @@ input.underline,
   border: none;
   border-radius: 0;
   padding-left: 0;
+  background: transparent;
   border-bottom: 1px solid $placeholder-color;
   &[disabled],
   &:disabled,
@@ -120,6 +139,9 @@ input.underline,
 // Utility classes
 @import "node_modules/spectre.css/src/animations";
 @import "node_modules/spectre.css/src/utilities";
+.bg-transparent {
+  background: transparent;
+}
 
 // custom
 @import "msg";
