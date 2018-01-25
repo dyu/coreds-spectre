@@ -139,7 +139,8 @@ select.underline,
   }
 }
 
-.menu-item.form {
+.menu-item.form,
+.menu.form > .menu-item {
   padding: 0;
 }
 
