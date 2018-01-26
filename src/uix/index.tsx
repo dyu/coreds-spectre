@@ -160,7 +160,7 @@ export function pager_controls(pager: Pager) {
       disabled={$any(0 !== (pager.state & PagerState.LOADING) || 0 === pager.size || pager.page_count === pager.page)}>
     <i class="icon angle-double-right"></i>
   </button>
-  <button class={$any('btn btn-link btn-sm' + (!pager.size ? ' d-none' : ''))} disabled>
+  <button class={$any(!pager.size ? 'd-none' : 'btn btn-link btn-sm')} disabled>
     {$any('' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size)}
   </button>
 </div>
