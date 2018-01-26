@@ -250,7 +250,7 @@ export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   </span>
   <ul class="menu transparent">
-    <li class={$any('menu-item' + (!(bit & hs.state) ? ' d-none' : ''))}>
+    <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
       <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
