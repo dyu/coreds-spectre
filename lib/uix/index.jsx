@@ -136,41 +136,40 @@ export function icon_update_ts(pojo, fk, wrapper_class) {
 </div>);
 }
 function $toggle(e) {
-    this.obj.state ^= this.bit;
+    this.hs.state ^= this.bit;
 }
 function $trigger(e) {
-    var state = this.obj.state;
-    this.obj.state = state ^ this.bit;
+    this.hs.state ^= this.bit;
     this.cb(this.bit);
 }
 export function icon_toggle(pojo, fk, bit, icon_class, cb, name, wrapper_class) {
     if (bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, obj = pojo['_'], opts = { obj: obj, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
     if (name) {
         titleOn = "" + name;
         titleOff = "Mark " + name + "?";
     }
     return (<div class={wrapper_class}>
   <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} onClick={fn} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
-  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
-  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
+  <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
+  <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>);
 }
 export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
     if (bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, obj = pojo['_'], opts = { obj: obj, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
     if (name) {
         titleOn = "" + name;
         titleOff = "Mark " + name + "?";
     }
-    return (<div class={$any('dropdown icons' + ((bit & obj.state) ? ' active' : ''))}>
+    return (<div class={$any('dropdown icons' + ((bit & hs.state) ? ' active' : ''))}>
   <span class="dropdown-toggle c-hand" onClick={fn}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   </span>
   <ul class="menu transparent">
-    <li class={$any('menu-item' + (!(bit & obj.state) ? ' d-none' : ''))}>
+    <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
       <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
@@ -179,11 +178,11 @@ export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
 export function icon_remove(pojo, fk, bit, icon_class, cb, name, wrapper_class) {
     if (bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, obj = pojo['_'], opts = { obj: obj, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), title = name || 'Remove';
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), title = name || 'Remove';
     return (<div class={wrapper_class}>
   <i class={icon} onClick={fn} title={title}></i>
-  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
-  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
+  <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
+  <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>);
 }
 // ================================================== 
