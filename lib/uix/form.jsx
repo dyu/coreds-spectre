@@ -17,13 +17,13 @@ function $keydown(e) {
         this.msg = '';
     }
 }
-function msg_class(state, msg) {
+function msg_class(hs, update) {
     var flag;
-    return !msg || !(flag = (7 /* MASK_STATUS */ & state)) ? 'd-none' : ('ui msg status-' + flag);
+    return !hs.msg || (update && !(flag = (7 /* MASK_STATUS */ & hs.state))) ? 'd-none' : ('ui msg status-' + flag);
 }
 export function msg(pojo, update) {
     var pojo_ = pojo['_'], fn = $clearMsg.bind(pojo_);
-    return (<div class={msg_class(pojo_.state, pojo_.msg)}>
+    return (<div class={msg_class(pojo_, update)}>
   <i class="close icon" onClick={fn}></i>
   <span>{$any(pojo_.msg)}</span>
 </div>);
