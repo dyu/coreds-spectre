@@ -61,7 +61,7 @@ export function dropdown_msg(hs, mask) {
 // ================================================== 
 // lsearch
 export function lsearch_disabled(pager) {
-    return 0 !== (pager.state & 8 /* LOADING */) || (!pager.size && !(pager.state & 256 /* LOCAL_SEARCH */));
+    return 0 !== (8 /* LOADING */ & pager.state) || (!pager.size && !(256 /* LOCAL_SEARCH */ & pager.state));
 }
 export function lsearch_input(pager, placeholder, fields, fn, clazz) {
     var cls = clazz === undefined ? 'underline' : clazz, el = <input type="text" class={cls} placeholder={placeholder} disabled={lsearch_disabled(pager)}/>;
@@ -95,22 +95,22 @@ function $nextOrLoad() {
 export function pager_controls(pager) {
     var sort = $sort.bind(pager), reload = $reload.bind(pager), gotoFirst = $gotoFirst.bind(pager), gotoLast = $gotoLast.bind(pager), prevOrLoad = $prevOrLoad.bind(pager), nextOrLoad = $nextOrLoad.bind(pager);
     return (<div class="btn-group links">
-  <button class="btn btn-link btn-sm" onClick={sort} disabled={$any(0 !== (pager.state & 8 /* LOADING */) || 2 > pager.size)}>
-    <i class={$any((pager.state & 16 /* DESC */) ? 'icon desc-yes' : 'icon desc-no')}></i>
+  <button class="btn btn-link btn-sm" onClick={sort} disabled={$any(0 !== (8 /* LOADING */ & pager.state) || 2 > pager.size)}>
+    <i class={$any((16 /* DESC */ & pager.state) ? 'icon desc-yes' : 'icon desc-no')}></i>
   </button>
-  <button class="btn btn-link btn-sm" onClick={reload} disabled={$any(0 !== (pager.state & 264 /* MASK_RPC_DISABLE */) || 0 === pager.size)}>
+  <button class="btn btn-link btn-sm" onClick={reload} disabled={$any(0 !== (264 /* MASK_RPC_DISABLE */ & pager.state) || 0 === pager.size)}>
     <i class="icon cw"></i>
   </button>
-  <button class="btn btn-link btn-sm" onClick={gotoFirst} disabled={$any(0 !== (pager.state & 8 /* LOADING */) || 0 === pager.page)}>
+  <button class="btn btn-link btn-sm" onClick={gotoFirst} disabled={$any(0 !== (8 /* LOADING */ & pager.state) || 0 === pager.page)}>
     <i class="icon angle-double-left"></i>
   </button>
-  <button class="btn btn-link btn-sm" onClick={prevOrLoad} disabled={$any(0 !== (pager.state & 264 /* MASK_RPC_DISABLE */))}>
+  <button class="btn btn-link btn-sm" onClick={prevOrLoad} disabled={$any(0 !== (264 /* MASK_RPC_DISABLE */ & pager.state))}>
     <i class="icon angle-left"></i>
   </button>
-  <button class="btn btn-link btn-sm" onClick={nextOrLoad} disabled={$any(0 !== (pager.state & 264 /* MASK_RPC_DISABLE */) || 0 === pager.size)}>
+  <button class="btn btn-link btn-sm" onClick={nextOrLoad} disabled={$any(0 !== (264 /* MASK_RPC_DISABLE */ & pager.state) || 0 === pager.size)}>
     <i class="icon angle-right"></i>
   </button>
-  <button class="btn btn-link btn-sm" onClick={gotoLast} disabled={$any(0 !== (pager.state & 8 /* LOADING */) || 0 === pager.size || pager.page_count === pager.page)}>
+  <button class="btn btn-link btn-sm" onClick={gotoLast} disabled={$any(0 !== (8 /* LOADING */ & pager.state) || 0 === pager.size || pager.page_count === pager.page)}>
     <i class="icon angle-double-right"></i>
   </button>
   <button class={$any(!pager.size ? 'd-none' : 'btn btn-link btn-sm')} disabled>
@@ -165,12 +165,12 @@ export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
         titleOn = "" + name;
         titleOff = "Mark " + name + "?";
     }
-    return (<div class={$any('dropdown icons' + ((obj.state & bit) ? ' active' : ''))}>
+    return (<div class={$any('dropdown icons' + ((bit & obj.state) ? ' active' : ''))}>
   <span class="dropdown-toggle c-hand" onClick={fn}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   </span>
   <ul class="menu transparent">
-    <li class={$any('menu-item' + (!(obj.state & bit) ? ' d-none' : ''))}>
+    <li class={$any('menu-item' + (!(bit & obj.state) ? ' d-none' : ''))}>
       <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
@@ -194,10 +194,10 @@ export function $item(pojo, el) {
 }
 export function item_class(pojo) {
     var pojo_ = pojo['_'];
-    if (!(pojo_.lstate & 1 /* INCLUDED */)) {
+    if (!(1 /* INCLUDED */ & pojo_.lstate)) {
         return 'd-none';
     }
-    else if (!(pojo_.lstate & 2 /* SELECTED */)) {
+    else if (!(2 /* SELECTED */ & pojo_.lstate)) {
         return 'item';
     }
     else {
@@ -233,7 +233,7 @@ function $append_if(cond, el, parent) {
 }
 export function item_detail(pojo, detail_id) {
     var pojo_ = pojo['_'], parent, el;
-    return (<div ref={parent} class={$append_if(!!(pojo_.state & 16 /* UPDATE */), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
+    return (<div ref={parent} class={$append_if(!!(16 /* UPDATE */ & pojo_.state), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
 </div>);
 }
 //# sourceMappingURL=index.jsx.map

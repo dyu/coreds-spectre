@@ -19,7 +19,7 @@ function $keydown(e) {
 }
 function msg_class(state, msg) {
     var flag;
-    return !msg || !(flag = (state & 7 /* MASK_STATUS */)) ? 'd-none' : ('ui msg status-' + flag);
+    return !msg || !(flag = (7 /* MASK_STATUS */ & state)) ? 'd-none' : ('ui msg status-' + flag);
 }
 export function msg(pojo, update) {
     var pojo_ = pojo['_'], fn = $clearMsg.bind(pojo_);
@@ -36,7 +36,7 @@ function $onSubmit(e) {
 export function form(pojo, $d, fnSubmit, ffid, ffobj, formFlags, content) {
     var update = ffid === null, flags = formFlags || 0, bottom = !!(flags & 8 /* SLOT_BOTTOM */), toggle32 = (flags & 32 /* TOGGLE_FLAG32 */), placeholder = 0 !== (flags & 1 /* PLACEHOLDER */), horizontal = 0 !== (flags & 4 /* HORIZONTAL */), pojo_ = pojo['_'], keydown = $keydown.bind(pojo_), onSubmit = $onSubmit.bind(fnSubmit), btn_class = placeholder ? 'btn btn-primary' : 'btn btn-outlined', btn_text = update ? 'Update' : 'Submit', body_out = [], class_prefix = "ui form" + (horizontal && ' form-horizontal' || '') + (placeholder && ' placeholder' || '') + " status-";
     body(pojo, $d, { pojo: pojo, ffid: ffid, ffobj: ffobj, flags: flags, update: update }, body_out);
-    var el = (<form class={$any(class_prefix + (pojo_.state & 7 /* MASK_STATUS */) + (toggle32 && !(pojo_.state & 32) && 'd-none' || ''))}>
+    var el = (<form class={$any(class_prefix + (7 /* MASK_STATUS */ & pojo_.state) + (toggle32 && !(32 & pojo_.state) && 'd-none' || ''))}>
   {!bottom && content}
   {body_out}
   {bottom && content}

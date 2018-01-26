@@ -10,7 +10,7 @@ export function $clearMsg(e) {
 }
 export function msg(hs, mask) {
     var fn = $clearMsg.bind(hs);
-    return (<div class={$any('ui msg status-' + (hs.state & mask) + (!hs.msg ? ' d-none' : ''))}>
+    return (<div class={$any('ui msg status-' + (mask & hs.state) + (!hs.msg ? ' d-none' : ''))}>
   <i class="close icon" onClick={fn}></i>
   <span>{$any(hs.msg)}</span>
 </div>);
