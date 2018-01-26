@@ -2,12 +2,12 @@ import { FormFlags, enum_option, enum_options } from '../util'
 import { PojoState, FieldType } from 'coreds/lib/types'
 
 function msg_show(pojo: string): string {
-    return ` && (${pojo}._.state & ${PojoState.MASK_STATUS})`
+    return ` && (${PojoState.MASK_STATUS} & ${pojo}._.state)`
 }
 
 export function msg(pojo: string, update: boolean): string {
     return /**/`
-<div :class="'ui msg status-' + (${pojo}._.state & ${PojoState.MASK_STATUS})"
+<div :class="'ui msg status-' + (${PojoState.MASK_STATUS} & ${pojo}._.state)"
     v-show="${pojo}._.msg${update && msg_show(pojo) || ''}">
   <i class="icon close" @click.prevent="${pojo}._.msg = null"></i>
   <span v-text="${pojo}._.msg"></span>
@@ -16,7 +16,7 @@ export function msg(pojo: string, update: boolean): string {
 }
 
 export function toggle32(pojo: string) {
-    return ` v-show="(${pojo}._.state & 32)"`
+    return ` v-show="(32 & ${pojo}._.state)"`
 }
 
 export function form(pojo: string, $d: any, ffid: string|null, 
@@ -29,7 +29,7 @@ export function form(pojo: string, $d: any, ffid: string|null,
         class_prefix = `ui form${horizontal && ' form-horizontal' || ''}${placeholder && ' placeholder' || ''} status-`
     
     return /**/`
-<form v-clear="${pojo}._" :class="'${class_prefix}' + (${pojo}._.state & ${PojoState.MASK_STATUS})"${(flags & FormFlags.TOGGLE_FLAG32) && toggle32(pojo) || ''}>
+<form v-clear="${pojo}._" :class="'${class_prefix}' + (${PojoState.MASK_STATUS} & ${pojo}._.state)"${(flags & FormFlags.TOGGLE_FLAG32) && toggle32(pojo) || ''}>
   ${!bottom && content || ''}
   ${body(pojo, $d, { pojo, ffid, flags, update })}
   ${bottom && content || ''}

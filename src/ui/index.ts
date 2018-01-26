@@ -10,7 +10,7 @@ export function dropdown_msg(hs: string, mask: number) {
 <div :class="'dropdown' + (!${hs}.msg ? '' : ' active')">
   <ul class="menu transparent">
     <li class="menu-item">
-      <div :class="'ui msg status-' + (${hs}.state & ${mask}) + (!${hs}.msg ? ' d-none' : '')">
+      <div :class="'ui msg status-' + (${mask} & ${hs}.state) + (!${hs}.msg ? ' d-none' : '')">
         <i class="icon close" @click.prevent="${hs}.msg = null"></i>
         <span v-text="${hs}.msg"></span>
       </div>
@@ -25,7 +25,7 @@ export function dropdown_msg(hs: string, mask: number) {
 
 export function lsearch_attrs(fk: string) {
     return /**/`
-:disabled="0 !== (pager.state & ${PagerState.LOADING}) || (!pager.size && !(pager.state & ${PagerState.LOCAL_SEARCH}))"
+:disabled="0 !== (${PagerState.LOADING} & pager.state) || (!pager.size && !(${PagerState.LOCAL_SEARCH} & pager.state))"
 v-lsearch="{ pager: pager, fields: ['${fk}'] }"
     `/**/
 }
@@ -35,19 +35,19 @@ v-lsearch="{ pager: pager, fields: ['${fk}'] }"
 
 export const suggest_controls = /**/`
 <div class="btn-group links">
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.page"
       @click.prevent="pager.store.repaint((pager.page = 0))">
     <i class="icon angle-double-left"></i>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state)"
       @click.prevent="pager.store.pagePrevOrLoad(0)">
     <b><i class="icon angle-left"></i></b>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state) || 0 === pager.size"
       @click.prevent="pager.store.pageNextOrLoad(0)">
     <b><i class="icon angle-right"></i></b>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.size || pager.page_count === pager.page"
       @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
     <i class="icon angle-double-right"></i>
   </button>
@@ -62,27 +62,27 @@ export const suggest_controls = /**/`
 
 export const pager_controls = /**/`
 <div class="btn-group links">
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 2 > pager.size"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 2 > pager.size"
       @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
-    <i :class="(pager.state & ${PagerState.DESC}) ? 'icon desc-yes' : 'icon desc-no'"></i>
+    <i :class="(${PagerState.DESC} & pager.state) ? 'icon desc-yes' : 'icon desc-no'"></i>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state) || 0 === pager.size"
       @click.prevent="pager.store.reload()">
     <i class="icon cw"></i>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.page"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.page"
       @click.prevent="pager.store.repaint((pager.page = 0))">
     <i class="icon angle-double-left"></i>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state)"
       @click.prevent="pager.store.pagePrevOrLoad(0)">
     <b><i class="icon angle-left"></i></b>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE}) || 0 === pager.size"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state) || 0 === pager.size"
       @click.prevent="pager.store.pageNextOrLoad(0)">
     <b><i class="icon angle-right"></i></b>
   </button>
-  <button class="btn btn-link btn-sm" :disabled="0 !== (pager.state & ${PagerState.LOADING}) || 0 === pager.size || pager.page_count === pager.page"
+  <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.size || pager.page_count === pager.page"
       @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
     <i class="icon angle-double-right"></i>
   </button>
@@ -93,7 +93,7 @@ export const pager_controls = /**/`
 `/**/
 
 export const pager_msg = /**/`
-<div :class="'ui msg status-' + (pager.state & ${PagerState.MASK_STATUS}) + (!pager.msg ? ' d-none' : '')">
+<div :class="'ui msg status-' + (${PagerState.MASK_STATUS} & pager.state) + (!pager.msg ? ' d-none' : '')">
   <i class="close icon" @click.prevent="pager.msg = null"></i>
   <span v-text="pager.msg"></span>
 </div>
@@ -138,11 +138,11 @@ export const icon_remove_bit32 = icon_remove(32)
 
 export const item_attrs = /**/`
 v-defp:pager_item="pojo"
-:class="!(pojo._.lstate & ${PojoListState.INCLUDED}) ? 'd-none' : (!(pojo._.lstate & ${PojoListState.SELECTED}) ? 'item' : 'item active')"
+:class="!(${PojoListState.INCLUDED} & pojo._.lstate) ? 'd-none' : (!(${PojoListState.SELECTED} & pojo._.lstate) ? 'item' : 'item active')"
 `/**/
 
 export const item_msg = /**/`
-<div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS}) + (!pojo._.msg ? ' d-none' : '')">
+<div :class="'ui msg status-' + (${PojoState.MASK_STATUS} & pojo._.state) + (!pojo._.msg ? ' d-none' : '')">
   <i class="close icon" @click.prevent="pojo._.msg = null"></i>
   <span v-text="pojo._.msg"></span>
 </div>

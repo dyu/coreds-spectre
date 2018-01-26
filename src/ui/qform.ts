@@ -147,7 +147,7 @@ export function qform(qd: any) {
     let values = qd.value_array
     return /**/`
 <div class="fluid picker">
-  <select :disabled="0 !== (pager.state & ${PagerState.MASK_RPC_DISABLE})" @change="qform.change($event)">
+  <select :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state)" @change="qform.change($event)">
   ${option_empty}
   ${options(values, qd.display_array)}
   </select>
