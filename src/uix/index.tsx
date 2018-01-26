@@ -324,12 +324,14 @@ export function item_msg_dd(pojo: any) {
     return dropdown_msg(pojo['_'], PojoState.MASK_STATUS)
 }
 
+// icons
+
 export function item_timeago(pojo: any) {
     return icon_timeago(pojo, 'content right floated timeago')
 }
 
 export function item_update_ts(pojo: any, fk: string) {
-    return icon_update_ts(pojo, fk, 'content right floated')
+    return icon_update_ts(pojo, fk, 'content right floated timeago')
 }
 
 export function item_toggle(pojo: any, fk: string, bit: number, icon_class: string,
@@ -372,6 +374,8 @@ function $append_if(cond: boolean, el: any, parent: any): boolean {
     cond && parent.appendChild(el)
     return cond
 }
+
+// detail
 
 export function item_detail(pojo: any, detail_id: string) {
     let pojo_ = pojo['_'] as HasState,

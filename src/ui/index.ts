@@ -102,13 +102,21 @@ export const pager_msg = /**/`
 // ================================================== 
 // icons
 
-export const icon_timeago = /**/`
-<i class="icon clock"></i><small>{{ pojo['2'] | prettydate }}</small>
-`/**/
-
-export function icon_update_ts(fk: string) {
+export function icon_timeago(wrapper_class?: string) {
+    let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
     return /**/`
-<i class="icon pencil"></i><small>{{ pojo['${fk}'] | prettydate }}</small>
+<div${attrs}>
+  <i class="icon clock"></i><small>{{ pojo['2'] | prettydate }}</small>
+</div>
+    `/**/
+}
+
+export function icon_update_ts(fk: string, wrapper_class?: string) {
+    let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
+    return /**/`
+<div${attrs}>
+  <i class="icon pencil"></i><small>{{ pojo['${fk}'] | prettydate }}</small>
+</div>
     `/**/
 }
 
@@ -191,6 +199,14 @@ export const item_msg = /**/`
 
 export const item_msg_dd = dropdown_msg('pojo._', PojoState.MASK_STATUS)
 
+// icons
+
+export const item_timeago = icon_timeago('content right floated timeago')
+
+export function item_update_ts(fk: string) {
+    return icon_update_ts(fk, 'content right floated timeago')
+}
+
 export function item_toggle(fk: string, bit: number, icon_class: string, name?: string): string {
     return icon_toggle(fk, bit, icon_class, name, 'content right floated')
 }
@@ -218,11 +234,7 @@ export function item_action_dd(bit: number, icon_class: string, name?: string): 
 export const item_remove32 = item_action(32, 'trash empty', 'Remove')
 export const item_remove32_dd = item_action_dd(32, 'trash empty', 'Remove')
 
-export const item_timeago = /**/`
-<div class="content right floated timeago">
-  ${icon_timeago}
-</div>
-`/**/
+// detail
 
 export function item_detail(detail_id: string) {
     return /**/`
