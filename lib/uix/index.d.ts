@@ -22,6 +22,7 @@ export declare function icon_remove(pojo: any, fk: string, bit: number, icon_cla
 export declare function $item<T>(pojo: any, el: T): T;
 export declare function item_class(pojo: any): "d-none" | "item" | "item active";
 export declare function item_msg(pojo: any): JSX.Element;
+export declare function item_msg_dd(pojo: any): JSX.Element;
 export declare function item_timeago(pojo: any): JSX.Element;
 export declare function item_update_ts(pojo: any, fk: string): JSX.Element;
 export declare function item_toggle(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;

@@ -207,6 +207,9 @@ export function item_class(pojo) {
 export function item_msg(pojo) {
     return msg(pojo['_'], 7 /* MASK_STATUS */);
 }
+export function item_msg_dd(pojo) {
+    return dropdown_msg(pojo['_'], 7 /* MASK_STATUS */);
+}
 export function item_timeago(pojo) {
     return icon_timeago(pojo, 'content right floated timeago');
 }
