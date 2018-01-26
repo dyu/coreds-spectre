@@ -165,6 +165,14 @@ div.right > .dropdown.icons {
   padding: 0;
 }
 
+.dropdown > .menu.form {
+  max-height: 100vh;
+}
+
+form.ui > div.ui.msg {
+  animation: slide-down .15s ease 1;  
+}
+
 @import "node_modules/spectre.css/src/modals";
 @import "node_modules/spectre.css/src/navs";
 //@import "node_modules/spectre.css/src/pagination";
