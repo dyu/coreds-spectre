@@ -112,26 +112,51 @@ export function icon_update_ts(fk: string) {
     `/**/
 }
 
-export function icon_toggle(fk: string, bit: number, icon_class: string, name?: string): string {
+export function icon_toggle(fk: string, bit: number, icon_class: string,
+        name?: string, wrapper_class?: string): string {
+    if (bit < 32) throw 'Invalid bit: ' + bit
+    let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
+    let suffix = !name ? '' : ` :title="pojo['${fk}'] ? '${name}' : 'Mark ${name}?'"`
+    return /**/`
+<div${attrs}>
+  <i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')" @click.prevent="(pojo._.state ^= ${bit})"${suffix}></i>
+  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"></i>
+  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
+</div>
+`/**/
+}
+
+export function icon_toggle_dd(fk: string, bit: number, icon_class: string, name?: string): string {
     if (bit < 32) throw 'Invalid bit: ' + bit
     let suffix = !name ? '' : ` :title="pojo['${fk}'] ? '${name}' : 'Mark ${name}?'"`
     return /**/`
-<i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')" @click.prevent="(pojo._.state ^= ${bit})"${suffix}></i>
-<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"></i>
-<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
+<div :class="'dropdown icons' + ((${bit} & pojo._.state) ? ' active' : '')">
+  <span class="dropdown-toggle c-hand" @click.prevent="(pojo._.state ^= ${bit})">
+    <i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')"${suffix}></i>
+  </span>
+  <ul class="menu transparent">
+    <li :class="!(${bit} & pojo._.state) ? 'd-none' : 'menu-item'">
+      <button class="btn circle text-right" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"><i class="icon ok"></i></button>
+    </li>
+  </ul>
+</div>
 `/**/
 }
 
-export function icon_remove(bit: number, icon_class?: string, name?: string): string {
+export function icon_remove(bit: number, icon_class: string,
+        name?: string, wrapper_class?: string): string {
     if (bit < 32) throw 'Invalid bit: ' + bit
+    let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
     return /**/`
-<i class="icon action ${icon_class || 'trash empty'}" @click.prevent="(pojo._.state ^= ${bit})" title="${name || 'Remove'}?'"></i>
-<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
-<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
+<div${attrs}">
+  <i class="icon action ${icon_class}" @click.prevent="(pojo._.state ^= ${bit})" title="${name || 'Remove'}?'"></i>
+  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
+  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
+</div>
 `/**/
 }
 
-export const icon_remove_bit32 = icon_remove(32)
+export const icon_remove_bit32 = icon_remove(32, 'trash empty')
 
 // ================================================== 
 // item
@@ -151,11 +176,19 @@ export const item_msg = /**/`
 export const item_msg_dd = dropdown_msg('pojo._', PojoState.MASK_STATUS)
 
 export function item_toggle(fk: string, bit: number, icon_class: string, name?: string): string {
+    return icon_toggle(fk, bit, icon_class, name, 'content right floated')
+}
+
+export function item_toggle_dd(fk: string, bit: number, icon_class: string, name?: string): string {
     return /**/`
 <div class="content right floated">
-  ${icon_toggle(fk, bit, icon_class, name)}
+  ${icon_toggle_dd(fk, bit, icon_class, name)}
 </div>
-`/**/
+    `/**/
+}
+
+export function item_remove(bit: number, icon_class: string, name?: string): string {
+    return icon_remove(bit, icon_class, name, 'content right floated')
 }
 
 export const item_timeago = /**/`
