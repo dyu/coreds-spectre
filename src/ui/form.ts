@@ -5,7 +5,7 @@ function msg_show(pojo: string): string {
     return ` && (${PojoState.MASK_STATUS} & ${pojo}._.state)`
 }
 
-export function msg(pojo: string, update: boolean): string {
+function msg(pojo: string, update: boolean): string {
     return /**/`
 <div :class="'ui msg status-' + (${PojoState.MASK_STATUS} & ${pojo}._.state)"
     v-show="${pojo}._.msg${update && msg_show(pojo) || ''}">
