@@ -170,7 +170,7 @@ export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
   </span>
   <ul class="menu transparent">
     <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
-      <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
+      <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>);
@@ -195,7 +195,7 @@ export function icon_action_dd(pojo, bit, icon_class, cb, name) {
   </span>
   <ul class="menu transparent">
     <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
-      <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
+      <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>);
