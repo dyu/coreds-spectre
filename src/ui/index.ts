@@ -164,3 +164,9 @@ export const item_timeago = /**/`
 </div>
 `/**/
 
+export function item_detail(detail_id: string) {
+    return /**/`
+<div :class="!(${PojoState.UPDATE} & pojo._.state) ? 'd-none' : ''" v-append:${detail_id}="${PojoState.UPDATE} & pojo._.state"></div>
+    `/**/
+}
+
