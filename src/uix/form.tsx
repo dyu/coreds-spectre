@@ -21,16 +21,16 @@ function $keydown(this: any, e) {
     }
 }
 
-function msg_class(state: number, msg: string) {
+function msg_class(hs: HasState, update: boolean) {
     let flag
-    return !msg || !(flag = (PojoState.MASK_STATUS & state)) ? 'd-none' : ('ui msg status-' + flag)
+    return !hs.msg || (update && !(flag = (PojoState.MASK_STATUS & hs.state))) ? 'd-none' : ('ui msg status-' + flag)
 }
 
 export function msg(pojo: any, update: boolean) {
     let pojo_ = pojo['_'] as HasState,
         fn = $clearMsg.bind(pojo_)
     return (
-<div class={msg_class(pojo_.state, pojo_.msg)}>
+<div class={msg_class(pojo_, update)}>
   <i class="close icon" onClick={fn}></i>
   <span>{$any(pojo_.msg)}</span>
 </div>
