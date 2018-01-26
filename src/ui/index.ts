@@ -144,7 +144,7 @@ export function icon_toggle_dd(fk: string, bit: number, icon_class: string, name
   </span>
   <ul class="menu transparent">
     <li :class="!(${bit} & pojo._.state) ? 'd-none' : 'menu-item'">
-      <button class="btn circle text-right" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"><i class="icon ok"></i></button>
+      <button class="btn circle" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
@@ -175,7 +175,7 @@ export function icon_action_dd(bit: number, icon_class: string, name?: string): 
   </span>
   <ul class="menu transparent">
     <li :class="!(${bit} & pojo._.state) ? 'd-none' : 'menu-item'">
-      <button class="btn circle text-right" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('action', ${bit})"><i class="icon ok"></i></button>
+      <button class="btn circle" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('action', ${bit})"><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
