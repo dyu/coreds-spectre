@@ -142,12 +142,13 @@ v-defp:pager_item="pojo"
 `/**/
 
 export const item_msg = /**/`
-<div style="clear:both"></div>
 <div :class="'ui msg status-' + (pojo._.state & ${PojoState.MASK_STATUS}) + (!pojo._.msg ? ' d-none' : '')">
   <i class="close icon" @click.prevent="pojo._.msg = null"></i>
   <span v-text="pojo._.msg"></span>
 </div>
 `/**/
+
+export const item_msg_dd = dropdown_msg('pojo._', PojoState.MASK_STATUS)
 
 export function item_toggle(fk: string, bit: number, icon_class: string, name?: string): string {
     return /**/`

@@ -300,6 +300,10 @@ export function item_msg(pojo: any) {
     return msg(pojo['_'], PojoState.MASK_STATUS)
 }
 
+export function item_msg_dd(pojo: any) {
+    return dropdown_msg(pojo['_'], PojoState.MASK_STATUS)
+}
+
 export function item_timeago(pojo: any) {
     return icon_timeago(pojo, 'content right floated timeago')
 }
