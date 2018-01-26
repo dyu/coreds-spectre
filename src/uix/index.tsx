@@ -82,7 +82,7 @@ export function dropdown_msg(hs: HasState, mask: number) {
 // lsearch
 
 export function lsearch_disabled(pager: Pager) {
-    return 0 !== (pager.state & PagerState.LOADING) || (!pager.size && !(pager.state & PagerState.LOCAL_SEARCH))
+    return 0 !== (PagerState.LOADING & pager.state) || (!pager.size && !(PagerState.LOCAL_SEARCH & pager.state))
 }
 
 export function lsearch_input(pager: Pager, placeholder: string, fields: string[],
@@ -137,27 +137,27 @@ export function pager_controls(pager: Pager) {
     return (
 <div class="btn-group links">
   <button class="btn btn-link btn-sm" onClick={sort}
-      disabled={$any(0 !== (pager.state & PagerState.LOADING) || 2 > pager.size)}>
-    <i class={$any((pager.state & PagerState.DESC) ? 'icon desc-yes' : 'icon desc-no')}></i>
+      disabled={$any(0 !== (PagerState.LOADING & pager.state) || 2 > pager.size)}>
+    <i class={$any((PagerState.DESC & pager.state) ? 'icon desc-yes' : 'icon desc-no')}></i>
   </button>
   <button class="btn btn-link btn-sm" onClick={reload}
-      disabled={$any(0 !== (pager.state & PagerState.MASK_RPC_DISABLE) || 0 === pager.size)}>
+      disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state) || 0 === pager.size)}>
     <i class="icon cw"></i>
   </button>
   <button class="btn btn-link btn-sm" onClick={gotoFirst}
-      disabled={$any(0 !== (pager.state & PagerState.LOADING) || 0 === pager.page)}>
+      disabled={$any(0 !== (PagerState.LOADING & pager.state) || 0 === pager.page)}>
     <i class="icon angle-double-left"></i>
   </button>
   <button class="btn btn-link btn-sm" onClick={prevOrLoad}
-      disabled={$any(0 !== (pager.state & PagerState.MASK_RPC_DISABLE))}>
+      disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state))}>
     <i class="icon angle-left"></i>
   </button>
   <button class="btn btn-link btn-sm" onClick={nextOrLoad}
-      disabled={$any(0 !== (pager.state & PagerState.MASK_RPC_DISABLE) || 0 === pager.size)}>
+      disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state) || 0 === pager.size)}>
     <i class="icon angle-right"></i>
   </button>
   <button class="btn btn-link btn-sm" onClick={gotoLast}
-      disabled={$any(0 !== (pager.state & PagerState.LOADING) || 0 === pager.size || pager.page_count === pager.page)}>
+      disabled={$any(0 !== (PagerState.LOADING & pager.state) || 0 === pager.size || pager.page_count === pager.page)}>
     <i class="icon angle-double-right"></i>
   </button>
   <button class={$any(!pager.size ? 'd-none' : 'btn btn-link btn-sm')} disabled>
@@ -246,12 +246,12 @@ export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
         titleOff = `Mark ${name}?`
     }
     return (
-<div class={$any('dropdown icons' + ((obj.state & bit) ? ' active' : ''))}>
+<div class={$any('dropdown icons' + ((bit & obj.state) ? ' active' : ''))}>
   <span class="dropdown-toggle c-hand" onClick={fn}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   </span>
   <ul class="menu transparent">
-    <li class={$any('menu-item' + (!(obj.state & bit) ? ' d-none' : ''))}>
+    <li class={$any('menu-item' + (!(bit & obj.state) ? ' d-none' : ''))}>
       <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
@@ -287,9 +287,9 @@ export function $item<T>(pojo: any, el: T): T {
 
 export function item_class(pojo: any) {
     let pojo_ = pojo['_'] as ItemSO
-    if (!(pojo_.lstate & PojoListState.INCLUDED)) {
+    if (!(PojoListState.INCLUDED & pojo_.lstate)) {
         return 'd-none'
-    } else if (!(pojo_.lstate & PojoListState.SELECTED)) {
+    } else if (!(PojoListState.SELECTED & pojo_.lstate)) {
         return 'item'
     } else {
         return 'item active'
@@ -342,7 +342,7 @@ export function item_detail(pojo: any, detail_id: string) {
         el
     return (
 <div ref={parent}
-    class={$append_if(!!(pojo_.state & PojoState.UPDATE), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
+    class={$append_if(!!(PojoState.UPDATE & pojo_.state), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
 </div>
     )
 }

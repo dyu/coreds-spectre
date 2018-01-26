@@ -23,7 +23,7 @@ function $keydown(this: any, e) {
 
 function msg_class(state: number, msg: string) {
     let flag
-    return !msg || !(flag = (state & PojoState.MASK_STATUS)) ? 'd-none' : ('ui msg status-' + flag)
+    return !msg || !(flag = (PojoState.MASK_STATUS & state)) ? 'd-none' : ('ui msg status-' + flag)
 }
 
 export function msg(pojo: any, update: boolean) {
@@ -62,7 +62,7 @@ export function form(pojo: any, $d: any, fnSubmit: any, ffid: string | null, ffo
     body(pojo, $d, { pojo, ffid, ffobj, flags, update }, body_out)
     
     let el = (
-<form class={$any(class_prefix + (pojo_.state & PojoState.MASK_STATUS) + (toggle32 && !(pojo_.state & 32) && 'd-none' || ''))}>
+<form class={$any(class_prefix + (PojoState.MASK_STATUS & pojo_.state) + (toggle32 && !(32 & pojo_.state) && 'd-none' || ''))}>
   {!bottom && content}
   {body_out}
   {bottom && content}
