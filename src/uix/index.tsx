@@ -275,6 +275,28 @@ export function icon_action(pojo: any, bit: number, icon_class: string,
     )
 }
 
+export function icon_action_dd(pojo: any, bit: number, icon_class: string,
+        cb: Function, name?: string) {
+    if (bit < 32) throw 'Invalid bit: ' + bit
+    let icon = `icon action ${icon_class}`,
+        hs = pojo['_'] as HasState,
+        opts = { hs, bit, cb } as ToggleOpts,
+        fn = $toggle.bind(opts),
+        trigger = $trigger.bind(opts)
+    return (
+<div class={$any('dropdown icons' + ((bit & hs.state) ? ' active' : ''))}>
+  <span class="dropdown-toggle c-hand" onClick={fn}>
+    <i class={icon} title={name}></i>
+  </span>
+  <ul class="menu transparent">
+    <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
+      <button class="btn circle text-right" onClick={trigger}><i class="icon ok"></i></button>
+    </li>
+  </ul>
+</div>
+    )
+}
+
 // ================================================== 
 // item
 
@@ -329,8 +351,21 @@ export function item_action(pojo: any, bit: number, icon_class: string,
     return icon_action(pojo, bit, icon_class, cb, name, 'content right floated')
 }
 
+export function item_action_dd(pojo: any, bit: number, icon_class: string, 
+        cb: Function, name?: string) {
+    return (
+<div class="content right floated">
+  {icon_action_dd(pojo, bit, icon_class, cb, name)}
+</div>
+    )
+}
+
 export function item_remove32(pojo: any, cb: Function) {
-    return icon_action(pojo, 32, 'trash empty', cb, name, 'content right floated')
+    return item_action(pojo, 32, 'trash empty', cb, 'Remove')
+}
+
+export function item_remove32_dd(pojo: any, cb: Function) {
+    return item_action_dd(pojo, 32, 'trash empty', cb, 'Remove')
 }
 
 function $append_if(cond: boolean, el: any, parent: any): boolean {
