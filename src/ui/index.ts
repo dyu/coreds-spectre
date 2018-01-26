@@ -143,20 +143,19 @@ export function icon_toggle_dd(fk: string, bit: number, icon_class: string, name
 `/**/
 }
 
-export function icon_remove(bit: number, icon_class: string,
+export function icon_action(bit: number, icon_class: string,
         name?: string, wrapper_class?: string): string {
     if (bit < 32) throw 'Invalid bit: ' + bit
     let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
+    let suffix = !name ? '' : ` title="${name}"`
     return /**/`
 <div${attrs}>
-  <i class="icon action ${icon_class}" @click.prevent="(pojo._.state ^= ${bit})" title="${name || 'Remove'}?'"></i>
-  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
+  <i class="icon action ${icon_class}" @click.prevent="(pojo._.state ^= ${bit})"${suffix}></i>
+  <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('action', ${bit})"></i>
   <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
 </div>
 `/**/
 }
-
-export const icon_remove_bit32 = icon_remove(32, 'trash empty')
 
 // ================================================== 
 // item
@@ -187,9 +186,11 @@ export function item_toggle_dd(fk: string, bit: number, icon_class: string, name
     `/**/
 }
 
-export function item_remove(bit: number, icon_class: string, name?: string): string {
-    return icon_remove(bit, icon_class, name, 'content right floated')
+export function item_action(bit: number, icon_class: string, name?: string): string {
+    return icon_action(bit, icon_class, name, 'content right floated')
 }
+
+export const item_remove32 = icon_action(32, 'trash empty', 'Remove', 'content right floated')
 
 export const item_timeago = /**/`
 <div class="content right floated timeago">
