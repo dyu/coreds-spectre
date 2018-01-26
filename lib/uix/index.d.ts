@@ -1,5 +1,6 @@
 import { Pager, HasState } from 'coreds/lib/types';
 export { form } from './form';
+export declare function $hide1_on_esc(e: any): void;
 export declare function $toggle0(e: any): void;
 export declare function $toggle1(e: any): void;
 export declare function $toggle2(e: any): void;

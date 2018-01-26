@@ -2,50 +2,58 @@ import * as Surplus from 'surplus';
 Surplus;
 import { prettyDate } from 'coreds/lib/datetime_util';
 import { $any, defp } from 'coreds/lib/util';
-import { toggleClass } from 'coreds-ui/lib/dom_util';
+import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util';
 import { attachOptsTo } from 'coreds-ui/lib/_pager';
 import { parseOpts } from 'coreds-ui/lib/_lsearch';
 import { $apply, msg } from './common';
 export { form } from './form';
 // ================================================== 
+// hide/show
+export function $hide1_on_esc(e) {
+    e.which === 27 && removeClass(e.currentTarget.parentElement, 'active');
+}
+// ================================================== 
 // toggles
+function focus_ff(el, ffid) {
+    (ffid = el.dataset.ffid) && (el = document.getElementById(ffid)) && el.focus();
+}
 export function $toggle0(e) {
-    toggleClass(e.target, 'active');
+    toggleClass(e.currentTarget, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $toggle1(e) {
-    toggleClass(e.target.parentElement, 'active');
+    toggleClass(e.currentTarget.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $toggle2(e) {
-    toggleClass(e.target.parentElement.parentElement, 'active');
+    toggleClass(e.currentTarget.parentElement.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $toggle3(e) {
-    toggleClass(e.target.parentElement.parentElement.parentElement, 'active');
+    toggleClass(e.currentTarget.parentElement.parentElement.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 // ================================================== 
 // icon toggles
 export function $itoggle0(e) {
-    var el = e.target;
-    if ('I' === el.tagName)
-        el = el.parentElement;
-    toggleClass(el, 'active');
+    'I' === e.target.tagName &&
+        toggleClass(e.currentTarget, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $itoggle1(e) {
-    var el = e.target;
-    if ('I' === el.tagName)
-        el = el.parentElement;
-    toggleClass(el.parentElement, 'active');
+    'I' === e.target.tagName &&
+        toggleClass(e.currentTarget.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $itoggle2(e) {
-    var el = e.target;
-    if ('I' === el.tagName)
-        el = el.parentElement;
-    toggleClass(el.parentElement.parentElement, 'active');
+    'I' === e.target.tagName &&
+        toggleClass(e.currentTarget.parentElement.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 export function $itoggle3(e) {
-    var el = e.target;
-    if ('I' === el.tagName)
-        el = el.parentElement;
-    toggleClass(el.parentElement.parentElement.parentElement, 'active');
+    'I' === e.target.tagName &&
+        toggleClass(e.currentTarget.parentElement.parentElement.parentElement, 'active') &&
+        focus_ff(e.currentTarget);
 }
 // ================================================== 
 // dropdown
