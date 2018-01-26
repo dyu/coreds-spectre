@@ -79,9 +79,15 @@ div.list-header {
   }
 }
 
-div.content.right.floated {
+div.content.floated {
+  font-size: 0.9em;
+  i.icon.action {
+    cursor: pointer;
+    margin-right: 0;
+  }
   > i.icon + small {
     margin-left: 0.25em;
+    vertical-align: top;
   }
   /*span {
     white-space: nowrap;
@@ -89,23 +95,25 @@ div.content.right.floated {
   > i.action {
     margin-right: 0;
   }*/
-  > i.ok-circled,
-  > i.cancel-circled {
-    cursor: pointer;
-    margin-left: 0.75em;
-  }
-  small {
-    font-size: 0.9em;
-  }
-  //+ div.content.right.floated {
-  //  margin-right: -0.5em;
-  //}
+}
+div.right.content > i.ok-circled,
+div.right.content > i.cancel-circled {
+  cursor: pointer;
+  margin-left: 0.75em;
+}
+div.left.content > i.icon {
+  margin-left: -0.22em;
+}
+div.content > small.chip {
+  padding: 0.15rem 0.30rem;
+  margin: 0;
+  font-size: 75%;
 }
 
-.page-info {
+/*.page-info {
   margin-left: 0.35em;
   white-space: nowrap;
-}
+}*/
 
 // detail
 
@@ -114,5 +122,5 @@ div.detail > hr {
 }
 
 .content.dd {
-  margin-left: 1.25em;
+  margin-left: 1em;
 }
