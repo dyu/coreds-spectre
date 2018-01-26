@@ -52,7 +52,7 @@ export const suggest_controls = /**/`
     <i class="icon angle-double-right"></i>
   </button>
   <button :class="!pager.size ? 'd-none' : 'btn btn-link btn-sm'" disabled>
-    {{ pager.page_from }}{{ pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ') }}{{ pager.size }}
+    {{ '' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size }}
   </button>
 </div>
 `/**/
@@ -86,8 +86,8 @@ export const pager_controls = /**/`
       @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
     <i class="icon angle-double-right"></i>
   </button>
-  <button class="btn btn-link btn-sm" v-show="pager.size" disabled>
-    {{ pager.page_from }}{{ pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ') }}{{ pager.size }}
+  <button :class="!pager.size ? 'd-none' : 'btn btn-link btn-sm'" disabled>
+    {{ '' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size }}
   </button>
 </div>
 `/**/
