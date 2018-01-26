@@ -337,7 +337,7 @@ function $append_if(cond: boolean, el: any, parent: any): boolean {
 }
 
 export function item_detail(pojo: any, detail_id: string) {
-    let pojo_ = pojo['_'],
+    let pojo_ = pojo['_'] as HasState,
         parent,
         el
     return (
