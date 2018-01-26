@@ -148,7 +148,7 @@ export function icon_remove(bit: number, icon_class: string,
     if (bit < 32) throw 'Invalid bit: ' + bit
     let attrs = !wrapper_class ? '' : ` class="${wrapper_class}"`
     return /**/`
-<div${attrs}">
+<div${attrs}>
   <i class="icon action ${icon_class}" @click.prevent="(pojo._.state ^= ${bit})" title="${name || 'Remove'}?'"></i>
   <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
   <i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
