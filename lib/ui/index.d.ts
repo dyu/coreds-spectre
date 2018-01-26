@@ -15,3 +15,4 @@ export declare const item_msg: string;
 export declare const item_msg_dd: string;
 export declare function item_toggle(fk: string, bit: number, icon_class: string, name?: string): string;
 export declare const item_timeago: string;
+export declare function item_detail(detail_id: string): string;
