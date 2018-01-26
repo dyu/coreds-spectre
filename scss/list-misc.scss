@@ -79,15 +79,33 @@ div.list-header {
   }
 }
 
+i.icon.action {
+  cursor: pointer;
+}
+
+.dd {
+  margin-left: 1em;
+}
+
+small.chip {
+  padding: 0.1rem 0.2rem;
+  font-size: 75%;
+  margin: 0;
+}
+
 div.content.floated {
   font-size: 0.9em;
-  i.icon.action {
-    cursor: pointer;
-    margin-right: 0;
+  i.icon {
+    vertical-align: middle;
+  }
+  small.chip {
+    margin-top: -0.1rem;
   }
   > i.icon + small {
     margin-left: 0.25em;
-    vertical-align: top;
+  }
+  &.main > * {
+    vertical-align: sub;
   }
   /*span {
     white-space: nowrap;
@@ -104,10 +122,12 @@ div.right.content > i.cancel-circled {
 div.left.content > i.icon {
   margin-left: -0.22em;
 }
-div.content > small.chip {
-  padding: 0.15rem 0.30rem;
-  margin: 0;
-  font-size: 75%;
+div.main.content {
+  font-size: 1em;
+}
+
+button.btn.circle > i.icon {
+  vertical-align: baseline;
 }
 
 /*.page-info {
@@ -119,8 +139,4 @@ div.content > small.chip {
 
 div.detail > hr {
   margin: 0.5em 0;
-}
-
-.content.dd {
-  margin-left: 1em;
 }
