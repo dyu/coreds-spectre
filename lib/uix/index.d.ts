@@ -18,7 +18,7 @@ export declare function icon_timeago(pojo: any, wrapper_class?: string): JSX.Ele
 export declare function icon_update_ts(pojo: any, fk: string, wrapper_class?: string): JSX.Element;
 export declare function icon_toggle(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string, wrapper_class?: string): JSX.Element;
 export declare function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
-export declare function icon_remove(pojo: any, fk: string, bit: number, icon_class: string, cb?: Function, name?: string, wrapper_class?: string): JSX.Element;
+export declare function icon_action(pojo: any, bit: number, icon_class: string, cb: Function, name?: string, wrapper_class?: string): JSX.Element;
 export declare function $item<T>(pojo: any, el: T): T;
 export declare function item_class(pojo: any): "d-none" | "item" | "item active";
 export declare function item_msg(pojo: any): JSX.Element;
@@ -27,5 +27,6 @@ export declare function item_timeago(pojo: any): JSX.Element;
 export declare function item_update_ts(pojo: any, fk: string): JSX.Element;
 export declare function item_toggle(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
 export declare function item_toggle_dd(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
-export declare function item_remove(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
+export declare function item_action(pojo: any, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
+export declare function item_remove32(pojo: any, cb: Function): JSX.Element;
 export declare function item_detail(pojo: any, detail_id: string): JSX.Element;
