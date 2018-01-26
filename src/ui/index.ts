@@ -117,8 +117,8 @@ export function icon_toggle(fk: string, bit: number, icon_class: string, name?: 
     let suffix = !name ? '' : ` :title="pojo['${fk}'] ? '${name}' : 'Mark ${name}?'"`
     return /**/`
 <i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')" @click.prevent="(pojo._.state ^= ${bit})"${suffix}></i>
-<i class="icon ok-circled" v-show="(pojo._.state & ${bit})" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"></i>
-<i class="icon cancel-circled" v-show="(pojo._.state & ${bit})" @click.prevent="(pojo._.state ^= ${bit})"></i>
+<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"></i>
+<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
 `/**/
 }
 
@@ -126,8 +126,8 @@ export function icon_remove(bit: number, icon_class?: string, name?: string): st
     if (bit < 32) throw 'Invalid bit: ' + bit
     return /**/`
 <i class="icon action ${icon_class || 'trash empty'}" @click.prevent="(pojo._.state ^= ${bit})" title="${name || 'Remove'}?'"></i>
-<i class="icon ok-circled" v-show="(pojo._.state & ${bit})" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
-<i class="icon cancel-circled" v-show="(pojo._.state & ${bit})" @click.prevent="(pojo._.state ^= ${bit})"></i>
+<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon ok-circled'" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('remove', pojo)"></i>
+<i :class="!(${bit} & pojo._.state) ? 'd-none' : 'icon cancel-circled'" @click.prevent="(pojo._.state ^= ${bit})"></i>
 `/**/
 }
 

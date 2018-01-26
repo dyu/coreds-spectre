@@ -225,8 +225,8 @@ export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: stri
     return (
 <div class={wrapper_class}>
   <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} onClick={fn} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
-  <i class={$any('icon ok-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={trigger}></i>
-  <i class={$any('icon cancel-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={fn}></i>
+  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
+  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>
     )
 }
@@ -271,8 +271,8 @@ export function icon_remove(pojo: any, fk: string, bit: number, icon_class: stri
     return (
 <div class={wrapper_class}>
   <i class={icon} onClick={fn} title={title}></i>
-  <i class={$any('icon ok-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={trigger}></i>
-  <i class={$any('icon cancel-circled' + (!(obj.state & bit) ? ' d-none' : ''))} onClick={fn}></i>
+  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon ok-circled')} onClick={trigger}></i>
+  <i class={$any(!(bit & obj.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>
     )
 }
