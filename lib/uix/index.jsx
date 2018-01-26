@@ -224,11 +224,12 @@ export function item_msg(pojo) {
 export function item_msg_dd(pojo) {
     return dropdown_msg(pojo['_'], 7 /* MASK_STATUS */);
 }
+// icons
 export function item_timeago(pojo) {
     return icon_timeago(pojo, 'content right floated timeago');
 }
 export function item_update_ts(pojo, fk) {
-    return icon_update_ts(pojo, fk, 'content right floated');
+    return icon_update_ts(pojo, fk, 'content right floated timeago');
 }
 export function item_toggle(pojo, fk, bit, icon_class, cb, name) {
     return icon_toggle(pojo, fk, bit, icon_class, cb, name, 'content right floated');
@@ -256,6 +257,7 @@ function $append_if(cond, el, parent) {
     cond && parent.appendChild(el);
     return cond;
 }
+// detail
 export function item_detail(pojo, detail_id) {
     var pojo_ = pojo['_'], parent, el;
     return (<div ref={parent} class={$append_if(!!(16 /* UPDATE */ & pojo_.state), (el || (el = document.getElementById(detail_id))), parent) ? '' : 'd-none'}>
