@@ -108,7 +108,4 @@ export const «name»Update = {
     },
     template: ui.form('pojo', $.$d, null)
 }
-
-
-}, «name»)
 >>
