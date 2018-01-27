@@ -1,0 +1,89 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import * as Surplus from 'surplus'; Surplus;
+import { $any } from 'coreds/lib/util'
+import { bindPrototypeTo, observable } from 'sobx'
+import { PojoStore } from 'coreds/lib/pstore/'
+import { FormFlags } from 'coreds-spectre/lib/util'
+import * as form from 'coreds/lib/form'
+import * as ui from 'coreds-spectre/lib/uix/'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+export class «name»New {
+    $fns = bindPrototypeTo(this, «name»New.prototype)
+    pojo = observable(form.initObservable($.$new0(), $.$d))
+    ff = $any(null)
+    
+    constructor(public pstore?: PojoStore<«module_name».«name»>) {
+        
+    }
+    pojo$$S(data) {
+        let pstore = this.pstore
+        pstore && pstore.addAll(data['1'], true, true)
+        form.$success(this.pojo)
+        this.ff.focus()
+    }
+    pojo$$F(err) {
+        form.$failed(this.pojo, err)
+    }
+    pojo$$() {
+        let pojo = this.pojo,
+            pstore = this.pstore,
+            lastSeen
+        
+        if (!form.$prepare(pojo))
+            return
+        
+        pojo['1'] = pstore && (lastSeen = pstore.getLastSeenObj()) && lastSeen['1']
+        
+        $.ForUser.create(pojo)
+            .then(this.$fns.pojo$$S).then(undefined, this.$fns.pojo$$F)
+    }
+    
+    static V = ({instance}: {instance: «name»New}) => ui.form(
+        instance.pojo, $.$d, instance.$fns.pojo$$, 'ff', instance, FormFlags.PLACEHOLDER)
+}
+
+export class «name»Update {
+    fns = bindPrototypeTo(this, «name»Update.prototype)
+    
+    constructor(public pojo: «module_name».«name», public pstore: PojoStore<«module_name».«name»>) {
+        
+    }
+    
+    pojo$$S(data) {
+        let pstore = this.pstore,
+            pager = pstore.pager,
+            selected = pager.pojo as «module_name».«name»,
+            original = pstore.getOriginal(selected)
+        
+        form.$update_success(this.pojo, pager, original, selected)
+    }
+    pojo$$F(err) {
+        form.$update_failed(this.pojo, this.pstore.pager, err)
+    }
+    pojo$$() {
+        let pstore = this.pstore,
+            pager = pstore.pager,
+            selected = pager.pojo as «module_name».«name»,
+            original = pstore.getOriginal(selected),
+            mc = form.$update(this.pojo, pager, original)
+        
+        if (!mc)
+            return
+        
+        $.ForUser.update(form.$update_req(original['1'] as string, mc))
+            .then(this.fns.pojo$$S).then(undefined, this.fns.pojo$$F)
+    }
+
+    static V = ({instance}: {instance: «name»Update}) => ui.form(
+        instance.pojo, $.$d, instance.fns.pojo$$, null)
+}
+>>
