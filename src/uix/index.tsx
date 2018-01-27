@@ -313,10 +313,11 @@ export function $item<T>(pojo: any, el: T): T {
 }
 
 export function item_class(pojo: any) {
-    let pojo_ = pojo['_'] as ItemSO
-    if (!(PojoListState.INCLUDED & pojo_.lstate)) {
+    let pojo_ = pojo['_'] as ItemSO,
+        lstate = pojo_.lstate
+    if (!(PojoListState.INCLUDED & lstate)) {
         return 'd-none'
-    } else if (!(PojoListState.SELECTED & pojo_.lstate)) {
+    } else if (!(PojoListState.SELECTED & lstate)) {
         return 'item'
     } else {
         return 'item active'
