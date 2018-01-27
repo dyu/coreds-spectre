@@ -215,11 +215,11 @@ export function $item(pojo, el) {
     return el;
 }
 export function item_class(pojo) {
-    var pojo_ = pojo['_'];
-    if (!(1 /* INCLUDED */ & pojo_.lstate)) {
+    var pojo_ = pojo['_'], lstate = pojo_.lstate;
+    if (!(1 /* INCLUDED */ & lstate)) {
         return 'd-none';
     }
-    else if (!(2 /* SELECTED */ & pojo_.lstate)) {
+    else if (!(2 /* SELECTED */ & lstate)) {
         return 'item';
     }
     else {
