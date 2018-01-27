@@ -1,0 +1,114 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { PojoStore } from 'coreds/lib/pstore/'
+import * as form from 'coreds/lib/form'
+import * as ui from 'coreds-spectre/lib/ui'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+export interface «name»NewOpts {
+    pager?: any
+    // provided
+    pojo: «module_name».«name»
+}
+export const «name»New = {
+    name: '«name»New',
+    props: { pager: { type: Object, required: false } },
+    data() {
+        return {
+            pojo: form.initObservable($.$new0(), $.$d)
+        } as «name»NewOpts
+    },
+    methods: {
+        pojo$$S(this: «name»NewOpts, data) {
+            let pager = this.pager,
+                pstore: PojoStore<«module_name».«name»> = pager && pager['store']
+
+            pstore && pstore.addAll(data['1'], true, true)
+            form.$success(this.pojo)
+
+            this['$emit']('success', data)
+
+            this['$refs'].ff.focus()
+        },
+        pojo$$F(this: «name»NewOpts, err) {
+            form.$failed(this.pojo, err)
+
+            this['$emit']('failure', err)
+        },
+        pojo$$(this: «name»NewOpts) {
+            let pojo = this.pojo,
+                pager,
+                pstore: PojoStore<«module_name».«name»>,
+                lastSeen
+            
+            if (!form.$prepare(pojo))
+                return
+            
+            pstore = (pager = this.pager) && pager['store']
+            pojo['1'] = pstore && (lastSeen = pstore.getLastSeenObj()) && lastSeen['1']
+
+            $.ForUser.create(pojo)
+                .then(this['pojo$$S']).then(undefined, this['pojo$$F'])
+        },
+        change: form.$change
+    },
+    template: ui.form('pojo', $.$d, 'ff', 1)
+}
+
+export interface «name»UpdateOps {
+    pager: any
+    pojo: «module_name».«name»
+}
+export const «name»Update = {
+    name: '«name»Update',
+    props: {
+        pager: { type: Object, required: true },
+        pojo: { type: Object, required: true }
+    },
+    data() {
+        return {}
+    },
+    methods: {
+        pojo$$S(this: «name»UpdateOps, data) {
+            let pager = this.pager,
+                pstore: PojoStore<«module_name».«name»> = pager['store'],
+                selected = pager.pojo as «module_name».«name»,
+                original = pstore.getOriginal(selected)
+
+            form.$update_success(this.pojo, pager, original, selected)
+
+            this['$emit']('success', data)
+        },
+        pojo$$F(this: «name»UpdateOps, err) {
+            form.$update_failed(this.pojo, this.pager, err)
+
+            this['$emit']('failure', err)
+        },
+        pojo$$(this: «name»UpdateOps) {
+            let pager = this.pager,
+                pstore: PojoStore<«module_name».«name»> = pager['store'],
+                selected = pager.pojo as «module_name».«name»,
+                original = pstore.getOriginal(selected),
+                mc = form.$update(this.pojo, pager, original)
+            
+            if (!mc)
+                return
+            
+            $.ForUser.update(form.$update_req(original['1'] as string, mc))
+                .then(this['pojo$$S']).then(undefined, this['pojo$$F'])
+        },
+        change: form.$change
+    },
+    template: ui.form('pojo', $.$d, null)
+}
+
+
+}, «name»)
+>>
