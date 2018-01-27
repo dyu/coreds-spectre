@@ -169,8 +169,9 @@ export class «name»Page {
     }
     toggleForm(e) {
         if (toggleClass(e.currentTarget.parentElement, 'active')) {
-            this.fnew.pojo['_'].msg = ''
             this.fnew.ff.focus()
+        } else {
+            this.fnew.pojo['_'].msg = ''
         }
     }
     
