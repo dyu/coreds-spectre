@@ -10,7 +10,7 @@ import * as Surplus from 'surplus'; Surplus;
 import { bindPrototypeTo, observable } from 'sobx'
 import { $any, extractMsg } from 'coreds/lib/util'
 import { toggleClass } from 'coreds-ui/lib/dom_util'
-import { Pager, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
+import { Pager, PagerState, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
 import { PojoStore } from 'coreds/lib/pstore/'
 import { mergeFrom } from 'coreds/lib/diff'
 import { ParamRangeKey } from 'coreds/lib/prk'
@@ -28,6 +28,7 @@ const V = ({instance}: {instance: «name»Page}) => ui.$pager(instance.pager,
   <header class="navbar">
     <section class="navbar-section">
       {ui.lsearch_input(instance.pager, '«name»', [$.$.title])}
+      <span class={$any((PagerState.LOADING & instance.pager.state) && 'loading')}></span>
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right">

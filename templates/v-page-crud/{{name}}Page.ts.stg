@@ -8,7 +8,7 @@ p_block(p, module) ::= <<
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
 import { component } from 'vuets'
 import { $any, defp, extractMsg } from 'coreds/lib/util'
-import { Pager, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
+import { Pager, PagerState, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
 import { PojoStore } from 'coreds/lib/pstore/'
 import { mergeFrom } from 'coreds/lib/diff'
 import { ParamRangeKey } from 'coreds/lib/prk'
@@ -27,6 +27,7 @@ const V = /**/`
   <header class="navbar">
     <section class="navbar-section">
       <input class="underline" type="text" placeholder="«name»" ${ui.lsearch_attrs($.$.title)} />
+      <span :class="(${PagerState.LOADING} & pager.state) && 'loading'"></span>
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right">
