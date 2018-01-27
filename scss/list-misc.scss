@@ -95,14 +95,14 @@ small.chip {
 
 div.content.floated {
   font-size: 0.9em;
-  i.icon {
+  > i.icon {
     vertical-align: middle;
+    + small {
+      margin-left: 0.25em;
+    }
   }
   small.chip {
     margin-top: -0.1rem;
-  }
-  > i.icon + small {
-    margin-left: 0.25em;
   }
   &.main > * {
     vertical-align: sub;
@@ -124,10 +124,6 @@ div.left.content > i.icon {
 }
 div.main.content {
   font-size: 1em;
-}
-
-button.btn.circle > i.icon {
-  vertical-align: baseline;
 }
 
 /*.page-info {
