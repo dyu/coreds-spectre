@@ -1,6 +1,6 @@
 {
   "name": "coreds-spectre",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "spectre-based ui for coreds with vue and surplus backends",
   "author": "dyu",
   "main": "lib/index.js",
