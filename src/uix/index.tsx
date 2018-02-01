@@ -359,6 +359,17 @@ export function icon_action_dd(pojo: any, bit: number, icon_class: string,
 }
 
 // ================================================== 
+// list
+
+export function list_class(pager: Pager) {
+    if ((PagerState.LOADING & pager.state)) {
+        return 'ui small divided selection list loading loading-lg'
+    } else {
+        return 'ui small divided selection list'
+    }
+}
+
+// ================================================== 
 // item
 
 export function $item<T>(pojo: any, el: T): T {

@@ -223,6 +223,13 @@ export function icon_action_dd(bit: number, icon_class: string, name?: string): 
 }
 
 // ================================================== 
+// list
+
+export const list_attrs = /**/`
+:class="'ui small divided selection list' + ((${PagerState.LOADING} & pager.state) ? ' loading loading-lg' : '')"
+`/**/
+
+// ================================================== 
 // item
 
 export const item_attrs = /**/`
