@@ -7,13 +7,12 @@ p_block(p, module) ::= <<
 
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
 import { component } from 'vuets'
-import { $any, defp, extractMsg } from 'coreds/lib/util'
+import { $any, defp } from 'coreds/lib/util'
 import { Pager, PagerState, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
 import { PojoStore } from 'coreds/lib/pstore/'
 import { mergeFrom } from 'coreds/lib/diff'
 import { ParamRangeKey } from 'coreds/lib/prk'
 import * as form from 'coreds/lib/form'
-import * as msg from 'coreds-ui/lib/msg'
 import * as ui from 'coreds-spectre/lib/ui/'
 import { PAGE_SIZE, MULTIPLIER } from '../../src/util'
 import { stores } from '../../src/context'
@@ -27,13 +26,12 @@ const V = /**/`
   <header class="navbar">
     <section class="navbar-section">
       <input class="underline" type="text" placeholder="«name»" ${ui.lsearch_attrs($.$.title)} />
-      <span :class="(${PagerState.LOADING} & pager.state) && 'loading'"></span>
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right">
         <a class="btn btn-link dropdown-toggle" v-toggle:click,1,ff="'1'"><i class="icon plus"></i></a>
         <ul class="menu form">
-          <li class="menu-item">
+          <li :class="'menu-item' + ((${PagerState.LOADING} & pager.state) ? ' has-loading' : '')">
             <«name»New ref="fnew" :pager="pager" />
           </li>
         </ul>
@@ -50,7 +48,7 @@ const V = /**/`
   </header>
   ${ui.pager_controls_nav}
   ${ui.pager_msg}
-  <ul class="ui small divided selection list">
+  <ul ${ui.list_attrs}>
     <ItemV v-for="pojo of pager.array" :pojo="pojo" v-on:toggle="toggle" v-on:action="action" />
   </ul>
   <div style="display:none">
@@ -157,20 +155,30 @@ export class «name»Page {
     }
     
     remove$$S(data) {
+        this.pupdate['_'].state ^= PojoState.LOADING
+        form.$toggle_success(this.pager, null, true, '')
+        
         this.pstore.remove(this.pstore.getStoreIndex(this.pager.pojo))
     }
     remove$$F(err) {
-        msg.$error(this.pager.pojo['_'], extractMsg(err))
+        this.pupdate['_'].state ^= PojoState.LOADING
+        form.$toggle_failed(this.pager, err)
     }
     action(bit: number) {
-        bit === 32 && $.ForUser.del({ '1': this.pager.pojo['1'] })
+        if (bit !== 32)
+            return
+        
+        this.pupdate['_'].state |= PojoState.LOADING
+        $.ForUser.del({ '1': this.pager.pojo['1'] })
             .then(this.remove$$S).then(undefined, this.remove$$F)
     }
     
     toggle$$S(data) {
+        this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_success(this.pager, this.pupdate)
     }
     toggle$$F(err) {
+        this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_failed(this.pager, err)
     }
     toggle(fk: string) {
@@ -178,7 +186,11 @@ export class «name»Page {
             pojo = pager.pojo,
             mc = form.$toggle(pager, fk, pojo)
         
-        mc && $.ForUser.update(form.$update_req(pojo['1'] as string, mc))
+        if (!mc)
+            return
+        
+        this.pupdate['_'].state |= PojoState.LOADING
+        $.ForUser.update(form.$update_req(pojo['1'] as string, mc))
             .then(this.toggle$$S).then(undefined, this.toggle$$F)
     }
 }

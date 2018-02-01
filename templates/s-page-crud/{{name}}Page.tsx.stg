@@ -8,14 +8,13 @@ p_block(p, module) ::= <<
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
 import * as Surplus from 'surplus'; Surplus;
 import { bindPrototypeTo, observable } from 'sobx'
-import { $any, extractMsg } from 'coreds/lib/util'
+import { $any } from 'coreds/lib/util'
 import { toggleClass } from 'coreds-ui/lib/dom_util'
 import { Pager, PagerState, SelectionFlags, PojoSO, PojoState } from 'coreds/lib/types'
 import { PojoStore } from 'coreds/lib/pstore/'
 import { mergeFrom } from 'coreds/lib/diff'
 import { ParamRangeKey } from 'coreds/lib/prk'
 import * as form from 'coreds/lib/form'
-import * as msg from 'coreds-ui/lib/msg'
 import * as ui from 'coreds-spectre/lib/uix/'
 import { PAGE_SIZE, MULTIPLIER } from '../../src/util'
 import { stores } from '../../src/context'
@@ -28,7 +27,6 @@ const V = ({instance}: {instance: «name»Page}) => ui.$pager(instance.pager,
   <header class="navbar">
     <section class="navbar-section">
       {ui.lsearch_input(instance.pager, '«name»', [$.$.title])}
-      <span class={$any((PagerState.LOADING & instance.pager.state) && 'loading')}></span>
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right">
@@ -36,16 +34,16 @@ const V = ({instance}: {instance: «name»Page}) => ui.$pager(instance.pager,
           <i class="icon plus"></i>
         </a>
         <ul class="menu form" data-hide="1" onKeyDown={ui.$hide1_on_esc}>
-          <li class="menu-item">
+          <li class={$any('menu-item' + ((PagerState.LOADING & instance.pager.state) ? ' has-loading' : ''))}>
             <«name»New.V instance={instance.fnew} />
           </li>
         </ul>
       </div>
     </section>
   </header>
-  {ui.pager_controls(instance.pager_nav)}
+  {ui.pager_controls_nav(instance.pager)}
   {ui.pager_msg(instance.pager)}
-  <ul class="ui small divided selection list">
+  <ul class={ui.list_class(instance.pager)}>
     {instance.items.map(pojo => ui.$item(pojo, <ItemV pojo={pojo} instance={instance} />) )}
   </ul>
   <div class="d-none">
@@ -140,20 +138,30 @@ export class «name»Page {
     }
     
     remove$$S(data) {
+        this.pupdate['_'].state ^= PojoState.LOADING
+        form.$toggle_success(this.pager, null, true, '')
+        
         this.pstore.remove(this.pstore.getStoreIndex(this.pager.pojo))
     }
     remove$$F(err) {
-        msg.$error(this.pager.pojo['_'], extractMsg(err))
+        this.pupdate['_'].state ^= PojoState.LOADING
+        form.$toggle_failed(this.pager, err)
     }
     actionRemove() {
+        if (!form.$toggle_prepare(this.pager))
+            return
+        
+        this.pupdate['_'].state |= PojoState.LOADING
         $.ForUser.del({ '1': this.pager.pojo['1'] })
             .then(this.$fns.remove$$S).then(undefined, this.$fns.remove$$F)
     }
     
     toggle$$S(data) {
+        this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_success(this.pager, this.pupdate)
     }
     toggle$$F(err) {
+        this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_failed(this.pager, err)
     }
     toggle(fk: string) {
@@ -161,7 +169,11 @@ export class «name»Page {
             pojo = pager.pojo as «module_name».«name»,
             mc = form.$toggle(pager, fk, pojo)
         
-        mc && $.ForUser.update(form.$update_req(pojo['1'] as string, mc))
+        if (!mc)
+            return
+        
+        this.pupdate['_'].state |= PojoState.LOADING
+        $.ForUser.update(form.$update_req(pojo['1'] as string, mc))
             .then(this.$fns.toggle$$S).then(undefined, this.$fns.toggle$$F)
     }
     toggleCompleted() {
@@ -177,6 +189,5 @@ export class «name»Page {
     
     static V = V
 }
-
 
 >>
