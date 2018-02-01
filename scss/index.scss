@@ -124,6 +124,20 @@ select.underline,
 @import "node_modules/spectre.css/src/layout";
 @import "node_modules/spectre.css/src/navbar";
 
+.navbar-section.links {
+  > button.info {
+    color: $body-copy-color;
+    padding-left: 0;
+    padding-right: 0;
+    //font-size: 0.6rem;
+  }
+  > span {
+    color: $gray-color;
+    font-size: 0.9em;
+    display: inline-block;
+  }
+}
+
 // Components
 //@import "node_modules/spectre.css/src/accordions";
 @import "node_modules/spectre.css/src/autocomplete";
@@ -189,6 +203,27 @@ form.ui > div.ui.msg {
 @import "node_modules/spectre.css/src/utilities";
 .bg-transparent {
   background: transparent;
+}
+
+// item icon
+.item.has-loading > div.timeago > i.icon { @extend .loading; }
+
+// update form
+//.item.has-loading form.ui { @extend .loading; @extend .loading-lg; }
+.item.active.has-loading button[type="submit"] { @extend .loading; }
+
+// new form
+//.has-loading > form > button[type="submit"] { @extend .loading; }
+.has-loading > form { @extend .loading; @extend .loading-lg; }
+
+.status-1 > i.icon {
+  color: $success-color;
+}
+.status-2 > i.icon {
+  color: $error-color;
+}
+.status-4 > i.icon {
+  color: $warning-color;
 }
 
 // custom
