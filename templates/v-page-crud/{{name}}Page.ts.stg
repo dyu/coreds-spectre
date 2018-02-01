@@ -48,7 +48,7 @@ const V = /**/`
       </div>
     </section>
   </header>
-  ${ui.pager_controls}
+  ${ui.pager_controls_nav}
   ${ui.pager_msg}
   <ul class="ui small divided selection list">
     <ItemV v-for="pojo of pager.array" :pojo="pojo" v-on:toggle="toggle" v-on:action="action" />

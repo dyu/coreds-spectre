@@ -43,7 +43,7 @@ const V = ({instance}: {instance: «name»Page}) => ui.$pager(instance.pager,
       </div>
     </section>
   </header>
-  {ui.pager_controls(instance.pager)}
+  {ui.pager_controls(instance.pager_nav)}
   {ui.pager_msg(instance.pager)}
   <ul class="ui small divided selection list">
     {instance.items.map(pojo => ui.$item(pojo, <ItemV pojo={pojo} instance={instance} />) )}
