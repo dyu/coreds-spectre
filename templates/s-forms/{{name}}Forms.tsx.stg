@@ -8,6 +8,7 @@ p_block(p, module) ::= <<
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
 import * as Surplus from 'surplus'; Surplus;
 import { $any } from 'coreds/lib/util'
+import { PojoState, PagerState } from 'coreds/lib/types'
 import { bindPrototypeTo, observable } from 'sobx'
 import { PojoStore } from 'coreds/lib/pstore/'
 import { FormFlags } from 'coreds-spectre/lib/util'
@@ -26,11 +27,19 @@ export class «name»New {
     }
     pojo$$S(data) {
         let pstore = this.pstore
-        pstore && pstore.addAll(data['1'], true, true)
+        if (pstore) {
+            pstore.pager.state ^= PagerState.LOADING
+            pstore.addAll(data['1'], true, true)
+        }
         form.$success(this.pojo)
         this.ff.focus()
     }
     pojo$$F(err) {
+        let pstore = this.pstore
+        if (pstore) {
+            pstore.pager.state ^= PagerState.LOADING
+        }
+        
         form.$failed(this.pojo, err)
     }
     pojo$$() {
@@ -40,6 +49,10 @@ export class «name»New {
         
         if (!form.$prepare(pojo))
             return
+        
+        if (pstore) {
+            pstore.pager.state |= PagerState.LOADING
+        }
         
         pojo['1'] = pstore && (lastSeen = pstore.getLastSeenObj()) && lastSeen['1']
         
@@ -64,10 +77,14 @@ export class «name»Update {
             selected = pager.pojo as «module_name».«name»,
             original = pstore.getOriginal(selected)
         
+        selected['_'].state ^= PojoState.LOADING
         form.$update_success(this.pojo, pager, original, selected)
     }
     pojo$$F(err) {
-        form.$update_failed(this.pojo, this.pstore.pager, err)
+        let pager = this.pstore.pager
+        
+        pager.pojo['_'].state ^= PojoState.LOADING
+        form.$update_failed(this.pojo, pager, err)
     }
     pojo$$() {
         let pstore = this.pstore,
@@ -79,6 +96,7 @@ export class «name»Update {
         if (!mc)
             return
         
+        selected['_'].state |= PojoState.LOADING
         $.ForUser.update(form.$update_req(original['1'] as string, mc))
             .then(this.fns.pojo$$S).then(undefined, this.fns.pojo$$F)
     }
