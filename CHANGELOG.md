@@ -1,3 +1,7 @@
+## 0.5.0 (2018-02-01)
+
+* `pager_controls_nav` center
+
 ## 0.4.0 (2018-02-01)
 
 * Added templates

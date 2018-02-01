@@ -99,7 +99,7 @@ export const pager_controls_nav = /**/`
       {{ '' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size }}
     </button>
   </div>
-  <div class="navbar-section links">
+  <div class="navbar-center links">
     <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 2 > pager.size"
         @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
       <i :class="(${PagerState.DESC} & pager.state) ? 'icon desc-yes' : 'icon desc-no'"></i>
