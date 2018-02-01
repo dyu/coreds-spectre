@@ -47,7 +47,7 @@ export class «name»New {
             pstore = this.pstore,
             lastSeen
         
-        if (!form.$prepare(pojo))
+        if ((pstore && (PagerState.LOADING & pstore.pager.state)) || !form.$prepare(pojo))
             return
         
         if (pstore) {

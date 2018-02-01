@@ -51,20 +51,20 @@ export const «name»New = {
         },
         pojo$$(this: «name»NewOpts) {
             let pojo = this.pojo,
-                pager,
+                pager = this.pager,
                 pstore: PojoStore<«module_name».«name»>,
                 lastSeen
             
-            if (!form.$prepare(pojo))
+            if ((pager && (PagerState.LOADING & pager.state)) || !form.$prepare(pojo))
                 return
             
-            if ((pager = this.pager)) {
+            if (pager) {
                 pager.state |= PagerState.LOADING
             }
             
             pstore = pager && pager['store']
             pojo['1'] = pstore && (lastSeen = pstore.getLastSeenObj()) && lastSeen['1']
-
+            
             $.ForUser.create(pojo)
                 .then(this['pojo$$S']).then(undefined, this['pojo$$F'])
         },
