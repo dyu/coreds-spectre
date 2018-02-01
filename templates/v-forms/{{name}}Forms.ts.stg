@@ -6,6 +6,7 @@ p_block(p, module) ::= <<
 >>
 
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { PojoState, PagerState } from 'coreds/lib/types'
 import { PojoStore } from 'coreds/lib/pstore/'
 import * as form from 'coreds/lib/form'
 import * as ui from 'coreds-spectre/lib/ui'
@@ -29,17 +30,23 @@ export const «name»New = {
         pojo$$S(this: «name»NewOpts, data) {
             let pager = this.pager,
                 pstore: PojoStore<«module_name».«name»> = pager && pager['store']
-
+            
+            if (pager) {
+                pager.state ^= PagerState.LOADING
+            }
+            
             pstore && pstore.addAll(data['1'], true, true)
             form.$success(this.pojo)
-
             this['$emit']('success', data)
-
             this['$refs'].ff.focus()
         },
         pojo$$F(this: «name»NewOpts, err) {
+            let pager = this.pager
+            if (pager) {
+                pager.state ^= PagerState.LOADING
+            }
+            
             form.$failed(this.pojo, err)
-
             this['$emit']('failure', err)
         },
         pojo$$(this: «name»NewOpts) {
@@ -51,7 +58,11 @@ export const «name»New = {
             if (!form.$prepare(pojo))
                 return
             
-            pstore = (pager = this.pager) && pager['store']
+            if ((pager = this.pager)) {
+                pager.state |= PagerState.LOADING
+            }
+            
+            pstore = pager && pager['store']
             pojo['1'] = pstore && (lastSeen = pstore.getLastSeenObj()) && lastSeen['1']
 
             $.ForUser.create(pojo)
@@ -81,14 +92,16 @@ export const «name»Update = {
                 pstore: PojoStore<«module_name».«name»> = pager['store'],
                 selected = pager.pojo as «module_name».«name»,
                 original = pstore.getOriginal(selected)
-
+            
+            selected['_'].state ^= PojoState.LOADING
             form.$update_success(this.pojo, pager, original, selected)
-
             this['$emit']('success', data)
         },
         pojo$$F(this: «name»UpdateOps, err) {
-            form.$update_failed(this.pojo, this.pager, err)
-
+            let pager = this.pager
+            
+            pager.pojo['_'].state ^= PojoState.LOADING
+            form.$update_failed(this.pojo, pager, err)
             this['$emit']('failure', err)
         },
         pojo$$(this: «name»UpdateOps) {
@@ -101,6 +114,7 @@ export const «name»Update = {
             if (!mc)
                 return
             
+            selected['_'].state |= PojoState.LOADING
             $.ForUser.update(form.$update_req(original['1'] as string, mc))
                 .then(this['pojo$$S']).then(undefined, this['pojo$$F'])
         },
