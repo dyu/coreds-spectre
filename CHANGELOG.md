@@ -1,3 +1,7 @@
+## 0.4.0 (2018-02-01)
+
+* Added templates
+
 ## 0.3.0 (2018-01-24)
 
 * Add `lsearch` support
