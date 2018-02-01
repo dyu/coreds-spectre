@@ -14,6 +14,7 @@ export declare function lsearch_disabled(pager: Pager): boolean;
 export declare function lsearch_input(pager: Pager, placeholder: string, fields: string[], fn?: Function, clazz?: string): JSX.Element;
 export declare function $pager<T>(pager: Pager, el: T): T;
 export declare function pager_controls(pager: Pager): JSX.Element;
+export declare function pager_controls_nav(pager: Pager): JSX.Element;
 export declare function pager_msg(pager: Pager): JSX.Element;
 export declare function icon_timeago(pojo: any, wrapper_class?: string): JSX.Element;
 export declare function icon_update_ts(pojo: any, fk: string, wrapper_class?: string): JSX.Element;

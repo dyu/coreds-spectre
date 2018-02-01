@@ -4,6 +4,7 @@ export declare function dropdown_msg(hs: string, mask: number): string;
 export declare function lsearch_attrs(fk: string): string;
 export declare const suggest_controls: string;
 export declare const pager_controls: string;
+export declare const pager_controls_nav: string;
 export declare const pager_msg: string;
 export declare function icon_timeago(wrapper_class?: string): string;
 export declare function icon_update_ts(fk: string, wrapper_class?: string): string;
