@@ -73,7 +73,7 @@ export const «name»New = {
     template: ui.form('pojo', $.$d, 'ff', 1)
 }
 
-export interface «name»UpdateOps {
+export interface «name»UpdateOpts {
     pager: any
     pojo: «module_name».«name»
 }
@@ -87,7 +87,7 @@ export const «name»Update = {
         return {}
     },
     methods: {
-        pojo$$S(this: «name»UpdateOps, data) {
+        pojo$$S(this: «name»UpdateOpts, data) {
             let pager = this.pager,
                 pstore: PojoStore<«module_name».«name»> = pager['store'],
                 selected = pager.pojo as «module_name».«name»,
@@ -97,14 +97,14 @@ export const «name»Update = {
             form.$update_success(this.pojo, pager, original, selected)
             this['$emit']('success', data)
         },
-        pojo$$F(this: «name»UpdateOps, err) {
+        pojo$$F(this: «name»UpdateOpts, err) {
             let pager = this.pager
             
             pager.pojo['_'].state ^= PojoState.LOADING
             form.$update_failed(this.pojo, pager, err)
             this['$emit']('failure', err)
         },
-        pojo$$(this: «name»UpdateOps) {
+        pojo$$(this: «name»UpdateOpts) {
             let pager = this.pager,
                 pstore: PojoStore<«module_name».«name»> = pager['store'],
                 selected = pager.pojo as «module_name».«name»,
