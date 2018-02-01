@@ -92,6 +92,46 @@ export const pager_controls = /**/`
 </div>
 `/**/
 
+export const pager_controls_nav = /**/`
+<div class="navbar">
+  <div class="navbar-section links">
+    <button :class="!pager.size ? 'd-none' : 'btn btn-link btn-sm info'" disabled>
+      {{ '' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size }}
+    </button>
+  </div>
+  <div class="navbar-section links">
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 2 > pager.size"
+        @click.prevent="pager.store.repaint((pager.state ^= ${PagerState.DESC}))">
+      <i :class="(${PagerState.DESC} & pager.state) ? 'icon desc-yes' : 'icon desc-no'"></i>
+    </button>
+    &nbsp;
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state) || 0 === pager.size"
+        @click.prevent="pager.store.reload()">
+      <i class="icon cw"></i>
+    </button>
+  </div>
+  <div class="navbar-section links">
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.page"
+        @click.prevent="pager.store.repaint((pager.page = 0))">
+      <i class="icon angle-double-left"></i>
+    </button>
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state)"
+        @click.prevent="pager.store.pagePrevOrLoad(0)">
+      <b><i class="icon left-open"></i></b>
+    </button>
+    &nbsp;
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.MASK_RPC_DISABLE} & pager.state) || 0 === pager.size"
+        @click.prevent="pager.store.pageNextOrLoad(0)">
+      <b><i class="icon right-open"></i></b>
+    </button>
+    <button class="btn btn-link btn-sm" :disabled="0 !== (${PagerState.LOADING} & pager.state) || 0 === pager.size || pager.page_count === pager.page"
+        @click.prevent="pager.store.repaint((pager.page = pager.page_count))">
+      <i class="icon angle-double-right"></i>
+    </button>
+  </div>
+</div>
+`/**/
+
 export const pager_msg = /**/`
 <div :class="'ui msg status-' + (${PagerState.MASK_STATUS} & pager.state) + (!pager.msg ? ' d-none' : '')">
   <i class="close icon" @click.prevent="pager.msg = null"></i>

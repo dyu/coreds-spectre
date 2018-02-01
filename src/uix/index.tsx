@@ -174,6 +174,60 @@ export function pager_controls(pager: Pager) {
     )
 }
 
+export function pager_controls_nav(pager: Pager) {
+    let sort = $sort.bind(pager),
+        reload = $reload.bind(pager),
+        gotoFirst = $gotoFirst.bind(pager),
+        gotoLast = $gotoLast.bind(pager),
+        prevOrLoad = $prevOrLoad.bind(pager),
+        nextOrLoad = $nextOrLoad.bind(pager)
+    return (
+<div class="navbar">
+  <div class="navbar-section links">
+    <button class={$any(!pager.size ? 'd-none' : 'btn btn-link btn-sm info')} disabled>
+      {$any('' + pager.page_from + (pager.page_from === pager.page_to ? ' of ' : (' - ' + pager.page_to + ' of ')) + pager.size)}
+    </button>
+  </div>
+  <div class="navbar-center links">
+    <button class="btn btn-link btn-sm"
+        onClick={sort}
+        disabled={$any(0 !== (PagerState.LOADING & pager.state) || 2 > pager.size)}>
+      <i class={$any((PagerState.DESC & pager.state) ? 'icon desc-yes' : 'icon desc-no')}></i>
+    </button>
+    &nbsp;
+    <button class="btn btn-link btn-sm"
+        onClick={reload}
+        disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state) || 0 === pager.size)}>
+      <i class="icon cw"></i>
+    </button>
+  </div>
+  <div class="navbar-section links">
+    <button class="btn btn-link btn-sm"
+        onClick={gotoFirst}
+        disabled={$any(0 !== (PagerState.LOADING & pager.state) || 0 === pager.page)}>
+      <i class="icon angle-double-left"></i>
+    </button>
+    <button class="btn btn-link btn-sm"
+        onClick={prevOrLoad}
+        disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state))}>
+      <i class="icon left-open"></i>
+    </button>
+    &nbsp;
+    <button class="btn btn-link btn-sm"
+        onClick={nextOrLoad}
+        disabled={$any(0 !== (PagerState.MASK_RPC_DISABLE & pager.state) || 0 === pager.size)}>
+      <i class="icon right-open"></i>
+    </button>
+    <button class="btn btn-link btn-sm"
+        onClick={gotoLast}
+        disabled={$any(0 !== (PagerState.LOADING & pager.state) || 0 === pager.size || pager.page_count === pager.page)}>
+      <i class="icon angle-double-right"></i>
+    </button>
+  </div>
+</div>
+    )
+}
+
 export function pager_msg(pager: Pager) {
     return msg(pager, PagerState.MASK_STATUS)
 }
