@@ -243,6 +243,16 @@ export function icon_action_dd(pojo, bit, icon_class, cb, name) {
 </div>);
 }
 // ================================================== 
+// list
+export function list_class(pager) {
+    if ((8 /* LOADING */ & pager.state)) {
+        return 'ui small divided selection list loading loading-lg';
+    }
+    else {
+        return 'ui small divided selection list';
+    }
+}
+// ================================================== 
 // item
 export function $item(pojo, el) {
     defp(el, 'pager_item', pojo);

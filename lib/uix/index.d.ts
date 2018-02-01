@@ -22,6 +22,7 @@ export declare function icon_toggle(pojo: any, fk: string, bit: number, icon_cla
 export declare function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
 export declare function icon_action(pojo: any, bit: number, icon_class: string, cb: Function, name?: string, wrapper_class?: string): JSX.Element;
 export declare function icon_action_dd(pojo: any, bit: number, icon_class: string, cb: Function, name?: string): JSX.Element;
+export declare function list_class(pager: Pager): "ui small divided selection list loading loading-lg" | "ui small divided selection list";
 export declare function $item<T>(pojo: any, el: T): T;
 export declare function item_class(pojo: any): "d-none" | "item" | "item active";
 export declare function item_msg(pojo: any): JSX.Element;

@@ -12,6 +12,7 @@ export declare function icon_toggle(fk: string, bit: number, icon_class: string,
 export declare function icon_toggle_dd(fk: string, bit: number, icon_class: string, name?: string): string;
 export declare function icon_action(bit: number, icon_class: string, name?: string, wrapper_class?: string): string;
 export declare function icon_action_dd(bit: number, icon_class: string, name?: string): string;
+export declare const list_attrs: string;
 export declare const item_attrs: string;
 export declare const item_msg: string;
 export declare const item_msg_dd: string;
