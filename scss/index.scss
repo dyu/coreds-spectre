@@ -192,6 +192,23 @@ form.ui > div.ui.msg {
 //@import "node_modules/spectre.css/src/pagination";
 @import "node_modules/spectre.css/src/panels";
 @import "node_modules/spectre.css/src/popovers";
+
+.popover-container.icons {
+  width: 0;
+  padding: 0;
+}
+.popover-top > .popover-container.icons,
+.popover-bottom > .popover-container.icons {
+  > button {
+    margin-left: -1.15em;
+  }
+}
+.popover-left > .popover-container.icons {
+  > button {
+    float: right;
+  }
+}
+
 //@import "node_modules/spectre.css/src/steps";
 @import "node_modules/spectre.css/src/tabs";
 @import "node_modules/spectre.css/src/tiles";
