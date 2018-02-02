@@ -179,6 +179,7 @@ form.ui > div.ui.msg {
 
 @import "node_modules/spectre.css/src/popovers";
 
+.popover-container.w-none,
 .popover-container.icons {
   width: 0;
   padding: 0;
@@ -192,6 +193,23 @@ form.ui > div.ui.msg {
 .popover-left > .popover-container.icons {
   > button {
     float: right;
+  }
+}
+
+.popover-container.w-none > pre {
+  margin: 0.1em 0 0 0.5em;
+  padding: 0.2em;
+  width: 17.75em;
+  white-space: pre-wrap;
+}
+
+.popover-container.w-none.active {
+  display: block;
+  opacity: 1;
+  transform: translate(-50%, -100%) scale(1);
+  > pre {
+    position: absolute;
+    top: 0;
   }
 }
 
