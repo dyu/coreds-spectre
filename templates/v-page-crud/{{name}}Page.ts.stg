@@ -50,13 +50,13 @@ const V = /**/`
   ${ui.pager_msg}
   <ul ${ui.list_attrs}>
     <ItemV v-for="pojo of pager.array" :pojo="pojo" v-on:toggle="toggle" v-on:action="action" />
+    <li class="d-none">
+      <div id="«nameKC»-detail" class="detail">
+        <hr />
+        <«name»Update ref="fupdate" :pager="pager" :pojo="pupdate" />
+      </div>
+    </li>
   </ul>
-  <div style="display:none">
-    <div id="«nameKC»-detail" class="detail">
-      <hr />
-      <«name»Update ref="fupdate" :pager="pager" :pojo="pupdate" />
-    </div>
-  </div>
 </div>
 `/**/
 
