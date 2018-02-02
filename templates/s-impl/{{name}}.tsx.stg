@@ -2,7 +2,7 @@ import "fbsgen/base"
 import "fbsgen/dict"
 
 p_block(p, module) ::= <<
-«p_main_block(p, module, p.("name"), module.w.v.(module.w.k.(p.("name")).kfmt.("(0.*)==")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"), module.w.k.(p.("name")).kfmt.("Page==&&UC&&_==-"))»
+«p_main_block(p, module, p.("name"), module.w.v.(module.w.k.(p.("name")).kfmt.("(0.*)==")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"), module.w.k.(p.("name")).kfmt.("Page==&&UC&&_==-&&0==-"))»
 >>
 
 p_main_block(p, module, filename, name, module_name, nameUC, nameKC, filenameKC) ::= <<
