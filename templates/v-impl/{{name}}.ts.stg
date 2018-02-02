@@ -1,0 +1,77 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, p.("name"), module.w.v.(module.w.k.(p.("name")).kfmt.("(0.*)==")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"), module.w.k.(p.("name")).kfmt.("Page==&&UC&&_==-"))»
+>>
+
+p_main_block(p, module, filename, name, module_name, nameUC, nameKC, filenameKC) ::= <<
+import { component } from 'vuets'
+import { Pager, PagerState } from 'coreds/lib/types'
+import { ParamRangeKey } from 'coreds/lib/prk'
+import { shallowCopyTo } from 'coreds/lib/pstore/'
+import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
+import * as ui from 'coreds-spectre/lib/ui/'
+import { stores } from '../../src/context'
+import { «name»New, «name»NewOpts } from './«name»Forms'
+import { «name»Base } from './«name»Base'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+const V = /**/`
+<div class="column col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-3" v-pager="pager">
+  <header class="navbar">
+    <section class="navbar-section">
+      <input class="underline" type="text" placeholder="«name»" ${ui.lsearch_attrs($.$.title)} />
+    </section>
+    <section class="navbar-section">
+      <div class="dropdown dropdown-right" @keydown="hideForm($event)">
+        <a class="btn btn-link dropdown-toggle" @click="toggleForm($event)"><i class="icon plus"></i></a>
+        <ul class="menu form">
+          <li :class="'menu-item' + ((${PagerState.LOADING} & pager.state) ? ' has-loading' : '')">
+            <«name»New ref="fnew" :pager="pager" />
+          </li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  ${ui.pager_controls_nav}
+  ${ui.pager_msg}
+  ${«name»Base.template}
+</div>
+`/**/
+
+export class «filename» extends «name»Base {
+    constructor() {
+        super('«filenameKC»-detail')
+        stores.«nameUC» = this.pstore
+    }
+    static mounted(self: «filename») {
+        self.pstore.requestNewer()
+    }
+    fetch(prk: ParamRangeKey, pager: Pager) {
+        return $.ForUser.list(prk).then(this.fetch$$S).then(undefined, this.fetch$$F)
+    }
+    hideForm(e) {
+        // escape key
+        e.which === 27 && removeClass(e.currentTarget, 'active')
+    }
+    toggleForm(e) {
+        let fnew = this['$refs'].fnew as «name»NewOpts
+        if (toggleClass(e.currentTarget.parentElement, 'active')) {
+            fnew['$refs'].ff.focus()
+        } else {
+            fnew.pojo['_'].msg = ''
+        }
+    }
+}
+export const «filename»V = component({
+    created(this: «filename») { «name»Base.created(this) },
+    mounted(this: «filename») { «filename».mounted(this) },
+    template: V,
+    components: shallowCopyTo({
+        «name»New
+    }, «name»Base.components as any)
+}, «filename»)
+
+>>
