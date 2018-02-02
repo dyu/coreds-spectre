@@ -222,6 +222,10 @@ form.ui > div.ui.msg {
   background: transparent;
 }
 
+div.timeago, .nowrap {
+  white-space: nowrap;
+}
+
 // item icon
 .item.has-loading > div.timeago > i.icon { @extend .loading; }
 

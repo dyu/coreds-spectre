@@ -7,6 +7,7 @@ li.item > .ui.msg {
   margin: 0.5em 0 0 0;
 }
 
+/*
 li.item.buttons {
   > button {
     padding: 0.15em 0.15em 0.1em 0.3em;
@@ -78,6 +79,7 @@ div.list-header {
     border-top: none;
   }
 }
+*/
 
 i.icon.action {
   cursor: pointer;
@@ -96,7 +98,7 @@ small.chip {
 div.content.floated {
   font-size: 0.9em;
   > i.icon {
-    vertical-align: middle;
+    vertical-align: text-bottom;
     + small {
       margin-left: 0.25em;
     }
