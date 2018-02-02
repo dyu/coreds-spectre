@@ -45,13 +45,13 @@ const V = ({instance}: {instance: «name»Page}) => ui.$pager(instance.pager,
   {ui.pager_msg(instance.pager)}
   <ul class={ui.list_class(instance.pager)}>
     {instance.items.map(pojo => ui.$item(pojo, <ItemV pojo={pojo} instance={instance} />) )}
+    <li class="d-none">
+      <div id="«nameKC»-detail" class="detail">
+        <hr />
+        <«name»Update.V instance={instance.fupdate} />
+      </div>
+    </li>
   </ul>
-  <div class="d-none">
-    <div id="«nameKC»-detail" class="detail">
-      <hr />
-      <«name»Update.V instance={instance.fupdate} />
-    </div>
-  </div>
 </div>
 )
 
