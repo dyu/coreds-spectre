@@ -63,7 +63,7 @@ const ItemV = ({pojo, instance}:{pojo: «module_name».«name», instance: «nam
   <div class="content right floated">
     <small class="chip bg-secondary">{$.Type$$str(pojo[$.$.type]!)}</small>
   </div>
-  {ui.icon_timeago(pojo, 'content left floated')}
+  {ui.icon_timeago(pojo, 'content left floated timeago')}
   <div class="clearfix"></div>
   <div class="content dd">
     <span class={$any(pojo[$.$.completed] ? 'completed' : '')}>{$any(pojo[$.$.title])}</span>

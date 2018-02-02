@@ -68,7 +68,7 @@ const ItemV = /**/`
   <div class="content right floated">
     <small class="chip bg-secondary">{{ pojo.$d['${$.$.type}'].$fn(pojo['${$.$.type}']) }}</small>
   </div>
-  ${ui.icon_timeago('content left floated')}
+  ${ui.icon_timeago('content left floated timeago')}
   <div class="clearfix"></div>
   <div class="content dd">
     <span :class="pojo['${$.$.completed}'] ? 'completed' : ''">{{ pojo['${$.$.title}'] }}</span>
