@@ -139,15 +139,7 @@ select.underline,
 }
 
 // Components
-//@import "node_modules/spectre.css/src/accordions";
-@import "node_modules/spectre.css/src/autocomplete";
-@import "node_modules/spectre.css/src/avatars";
-@import "node_modules/spectre.css/src/badges";
-//@import "node_modules/spectre.css/src/breadcrumbs";
-//@import "node_modules/spectre.css/src/bars";
-@import "node_modules/spectre.css/src/cards";
 @import "node_modules/spectre.css/src/chips";
-//@import "node_modules/spectre.css/src/empty";
 @import "node_modules/spectre.css/src/dropdowns";
 .dropdown.icons {
   margin-left: -0.55em;
@@ -187,10 +179,6 @@ form.ui > div.ui.msg {
   animation: slide-down .15s ease 1;  
 }
 
-@import "node_modules/spectre.css/src/modals";
-@import "node_modules/spectre.css/src/navs";
-//@import "node_modules/spectre.css/src/pagination";
-@import "node_modules/spectre.css/src/panels";
 @import "node_modules/spectre.css/src/popovers";
 
 .popover-container.icons {
@@ -208,12 +196,6 @@ form.ui > div.ui.msg {
     float: right;
   }
 }
-
-//@import "node_modules/spectre.css/src/steps";
-@import "node_modules/spectre.css/src/tabs";
-@import "node_modules/spectre.css/src/tiles";
-@import "node_modules/spectre.css/src/toasts";
-@import "node_modules/spectre.css/src/tooltips";
 
 // Utility classes
 @import "node_modules/spectre.css/src/animations";
@@ -249,3 +231,25 @@ div.timeago, .nowrap {
 
 // custom
 @import "msg";
+
+
+//@import "node_modules/spectre.css/src/accordions";
+//@import "node_modules/spectre.css/src/autocomplete";
+//@import "node_modules/spectre.css/src/avatars";
+//@import "node_modules/spectre.css/src/badges";
+//@import "node_modules/spectre.css/src/breadcrumbs";
+//@import "node_modules/spectre.css/src/bars";
+//@import "node_modules/spectre.css/src/cards";
+//@import "node_modules/spectre.css/src/empty";
+
+//@import "node_modules/spectre.css/src/modals";
+//@import "node_modules/spectre.css/src/navs";
+//@import "node_modules/spectre.css/src/pagination";
+//@import "node_modules/spectre.css/src/panels";
+
+//@import "node_modules/spectre.css/src/steps";
+//@import "node_modules/spectre.css/src/tabs";
+//@import "node_modules/spectre.css/src/tiles";
+//@import "node_modules/spectre.css/src/toasts";
+//@import "node_modules/spectre.css/src/tooltips";
+
