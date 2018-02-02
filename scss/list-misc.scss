@@ -98,9 +98,9 @@ small.chip {
 div.content.floated {
   font-size: 0.9em;
   > i.icon {
-    vertical-align: bottom;
+    vertical-align: text-bottom;
     + small {
-      margin-left: 0.25em;
+      margin-left: 0.1em;
     }
   }
   small.chip {
@@ -122,7 +122,7 @@ div.right.content > i.cancel-circled {
   margin-left: 0.75em;
 }
 div.left.content > i.icon {
-  margin-left: -0.22em;
+  margin-left: -0.2em;
 }
 div.main.content {
   font-size: 1em;

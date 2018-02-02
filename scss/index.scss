@@ -11,7 +11,6 @@
 // Elements
 @import "node_modules/spectre.css/src/typography";
 @import "node_modules/spectre.css/src/asian";
-//@import "node_modules/spectre.css/src/tables";
 @import "node_modules/spectre.css/src/buttons";
 .btn-outlined:hover, .btn-outlined:focus {
   background: $bg-color-light;
@@ -232,7 +231,7 @@ div.timeago, .nowrap {
 // custom
 @import "msg";
 
-
+//@import "node_modules/spectre.css/src/tables";
 //@import "node_modules/spectre.css/src/accordions";
 //@import "node_modules/spectre.css/src/autocomplete";
 //@import "node_modules/spectre.css/src/avatars";
