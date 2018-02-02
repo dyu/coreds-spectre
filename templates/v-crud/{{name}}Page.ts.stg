@@ -49,7 +49,7 @@ const V = /**/`
   ${ui.pager_controls_nav}
   ${ui.pager_msg}
   <ul ${ui.list_attrs}>
-    <ItemV v-for="pojo of pager.array" :pojo="pojo" v-on:toggle="toggle" v-on:action="action" />
+    <ItemV v-for="pojo of pager.array" :pojo="pojo" @toggle="toggle" @action="action" />
     <li class="d-none">
       <div id="«nameKC»-detail" class="detail">
         <hr />
@@ -155,17 +155,19 @@ export class «name»Page {
     }
     
     remove$$S(data) {
-        this.pupdate['_'].state ^= PojoState.LOADING
-        form.$toggle_success(this.pager, null, true, '')
+        let pager = this.pager
         
-        this.pstore.remove(this.pstore.getStoreIndex(this.pager.pojo))
+        this.pupdate['_'].state ^= PojoState.LOADING
+        form.$toggle_success(pager, null, true, '')
+        
+        this.pstore.remove(this.pstore.getStoreIndex(pager.pojo))
     }
     remove$$F(err) {
         this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_failed(this.pager, err)
     }
     action(bit: number) {
-        if (bit !== 32)
+        if (bit !== 32 || !form.$toggle_prepare(this.pager))
             return
         
         this.pupdate['_'].state |= PojoState.LOADING
