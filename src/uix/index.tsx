@@ -12,6 +12,10 @@ export { form } from './form'
 // ================================================== 
 // hide/show
 
+export function $hide0_on_esc(e) {
+    e.which === 27 && removeClass(e.currentTarget, 'active')
+}
+
 export function $hide1_on_esc(e) {
     e.which === 27 && removeClass(e.currentTarget.parentElement, 'active')
 }
