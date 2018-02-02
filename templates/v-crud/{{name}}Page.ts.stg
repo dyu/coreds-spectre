@@ -38,7 +38,7 @@ const V = /**/`
       </div>
       <div class="dropdown dropdown-right">
         <a class="btn btn-link dropdown-toggle" v-toggle:click,1="'1'"><i class="icon filter"></i></a>
-        <ul class="menu transparent">
+        <ul class="menu fitted">
           <li class="menu-item">
             ${ui.qform(qd)}
           </li>

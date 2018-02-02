@@ -155,8 +155,7 @@ div.right > .dropdown.icons {
 }
 
 @import "node_modules/spectre.css/src/menus";
-.menu.transparent {
-  background: transparent;
+.menu.transparent, .menu.fitted {
   border: none;
   box-shadow: none;
   padding: 0;
@@ -199,7 +198,7 @@ form.ui > div.ui.msg {
 // Utility classes
 @import "node_modules/spectre.css/src/animations";
 @import "node_modules/spectre.css/src/utilities";
-.bg-transparent {
+.bg-transparent, .menu.transparent {
   background: transparent;
 }
 
