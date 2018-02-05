@@ -295,6 +295,9 @@ $celledChildItemBorder: none;
   
   > .column:first-child {
     padding-left: 0.35em;
+  }
+  
+  > .column.content {
     padding-bottom: 0.5em;
   }
 }
