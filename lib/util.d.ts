@@ -14,3 +14,4 @@ export declare function valDate(value: any): string;
 export declare function valDateTime(value: any): string;
 export declare function valNumber(value: any): any;
 export declare function getFnVal(flags: number): typeof valNumber;
+export declare function $append_if(cond: boolean, el: any, parent: any): boolean;
