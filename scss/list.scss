@@ -284,3 +284,24 @@ $celledChildItemBorder: none;
 .ui.small.selection.list .item {
   padding: 0.5em 0.35em;
 }
+
+// table-like
+
+.ui.divided.list > .columns {
+  cursor: default;
+  margin-top: 0;
+  padding-top: 0.5em;
+  border-top: $dividedBorder;
+  
+  > .column:first-child {
+    padding-left: 0.35em;
+  }
+}
+.ui.divided.list > .columns:first-child {
+  border-top: none;
+}
+
+.columns.active {
+  background: $list-selection-active-background;
+  color: $list-selection-active-color;
+}
