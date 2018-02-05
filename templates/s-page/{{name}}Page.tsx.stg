@@ -14,6 +14,7 @@ import { ParamRangeKey } from 'coreds/lib/prk'
 import { toggleClass } from 'coreds-ui/lib/dom_util'
 import { PagerState } from 'coreds/lib/types'
 import * as ui from 'coreds-spectre/lib/uix/'
+import { addInstance } from '../../src/util'
 import { stores } from '../../src/context'
 import { «name»New } from './«name»Forms'
 import { «name»Base } from './«name»Base'
@@ -52,6 +53,7 @@ export class «name»Page extends «name»Base {
         super('«nameKC»-detail')
         stores.«nameUC» = this.pstore
         bindPrototypeTo(this, «name»Page.prototype, 1)
+        addInstance(this)
     }
     init() {
         this.pstore.requestNewer()
