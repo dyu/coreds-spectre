@@ -305,7 +305,7 @@ $celledChildItemBorder: none;
   border-top: none;
 }
 
-.columns.active {
+.ui.divided.list > .columns.active {
   background: $list-selection-active-background;
   color: $list-selection-active-color;
 }
