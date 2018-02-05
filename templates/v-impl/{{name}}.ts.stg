@@ -12,6 +12,7 @@ import { ParamRangeKey } from 'coreds/lib/prk'
 import { shallowCopyTo } from 'coreds/lib/pstore/'
 import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
 import * as ui from 'coreds-spectre/lib/ui/'
+import { addInstance } from '../../src/util'
 import { stores } from '../../src/context'
 import { «name»New, «name»NewOpts } from './«name»Forms'
 import { «name»Base } from './«name»Base'
@@ -47,7 +48,10 @@ export class «filename» extends «name»Base {
         stores.«nameUC» = this.pstore
     }
     static mounted(self: «filename») {
-        self.pstore.requestNewer()
+        addInstance(self)
+    }
+    init() {
+        this.pstore.requestNewer()
     }
     fetch(prk: ParamRangeKey, pager: Pager) {
         return $.ForUser.list(prk).then(this.fetch$$S).then(undefined, this.fetch$$F)
