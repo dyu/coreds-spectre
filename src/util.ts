@@ -56,3 +56,11 @@ export function getFnVal(flags: number) {
         default: return valNumber
     }
 }
+
+// ================================================== 
+// el utils
+
+export function $append_if(cond: boolean, el: any, parent: any): boolean {
+    cond && parent.appendChild(el)
+    return cond
+}

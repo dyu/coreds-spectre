@@ -6,6 +6,7 @@ import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
 import { attachOptsTo } from 'coreds-ui/lib/_pager'
 import { parseOpts } from 'coreds-ui/lib/_lsearch'
 import { $apply, msg } from './common'
+import { $append_if } from '../util'
 
 export { form } from './form'
 
@@ -447,10 +448,7 @@ export function item_remove32_dd(pojo: any, cb: Function) {
     return item_action_dd(pojo, 32, 'trash empty', cb, 'Remove')
 }
 
-function $append_if(cond: boolean, el: any, parent: any): boolean {
-    cond && parent.appendChild(el)
-    return cond
-}
+
 
 // detail
 
