@@ -292,6 +292,7 @@ $celledChildItemBorder: none;
   margin-top: 0;
   padding-top: 0.5em;
   border-top: $dividedBorder;
+  background: $list-selection-background;
   > .column.content {
     padding-left: 0.5em;
     padding-bottom: 0.5em;
