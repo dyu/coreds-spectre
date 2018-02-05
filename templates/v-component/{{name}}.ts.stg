@@ -1,0 +1,30 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { component } from 'vuets'
+import { addInstance } from '../../src/util'
+
+const V = /**/`
+<div>
+  TODO
+</div>
+`/**/
+
+export class «name» {
+    static mounted(self: «name») {
+        addInstance(self)
+    }
+    init() {
+        // TODO
+    }
+}
+export const «name»V = component({
+    mounted(this: «name») { «name».mounted(this) },
+    template: V
+}, «name»)
+>>
