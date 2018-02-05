@@ -326,6 +326,10 @@ $celledChildItemBorder: none;
   }
 }
 
+ul.ui.divided.list {
+  margin-top: 0;
+}
+
 li.columns > .column {
   /*> .form-switch {
     margin: 0;
