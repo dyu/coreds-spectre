@@ -310,3 +310,31 @@ $celledChildItemBorder: none;
   background: $list-selection-active-background;
   color: $list-selection-active-color;
 }
+
+li.columns > .column {
+   /*> .form-switch {
+     margin: 0;
+     padding-right: 0;
+   }
+   > .form-switch.right {
+     margin-right: -0.4em;
+   }
+   > small.chip {
+     vertical-align: top;
+     + label {
+       margin-left: 0.5em;
+     }
+   }*/
+   > .dropdown.icons {
+     vertical-align: top;
+   }
+   > .dropdown.icons:not(last-child) {
+     margin-right: 0.15em;
+   }
+}
+
+li.columns > .column.text-right {
+  > small.chip:last-child {
+    margin-right: 0.85em;
+  }
+}
