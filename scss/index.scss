@@ -196,11 +196,20 @@ form.ui > div.ui.msg {
   }
 }
 
-.popover-container.w-none > pre {
-  margin: 0.1em 0 0 0.5em;
-  padding: 0.2em;
-  width: 17.75em;
-  white-space: pre-wrap;
+.popover-container.w-none {
+  // bottom
+  > pre {
+    margin: 0.1em 0 0 0.5em;
+    padding: 0.2em;
+    width: 17.75em;
+    white-space: pre-wrap;
+  }
+  // left/right
+  > span {
+    padding: 0.25em 0;
+    margin: 0 0.25em;
+    white-space: nowrap;
+  }
 }
 
 .popover-container.w-none.active {
