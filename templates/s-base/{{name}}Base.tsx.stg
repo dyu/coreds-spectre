@@ -137,10 +137,10 @@ export abstract class «name»Base {
         this.pupdate['_'].state ^= PojoState.LOADING
         form.$toggle_failed(this.pager, err)
     }
-    toggle(fk: string) {
+    toggle(fk: string, changed?: boolean) {
         let pager = this.pager,
             pojo = pager.pojo as «module_name».«name»,
-            mc = form.$toggle(pager, fk, pojo)
+            mc = form.$toggle(pager, fk, pojo, changed)
         
         if (!mc)
             return
