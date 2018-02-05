@@ -300,41 +300,51 @@ $celledChildItemBorder: none;
     &:first-child {
       padding-left: 0.35em;
     }
+    
+    &.left-icons {
+      position: relative;
+      padding-left: 0.8em !important;
+      
+      > .dropdown {
+        position: absolute;
+        left: -0.2em;
+      }
+    }
   }
-}
-.ui.divided.list > .columns:first-child {
-  border-top: none;
-}
-
-.ui.divided.list > .columns.active {
-  background: $list-selection-active-background;
-  color: $list-selection-active-color;
+  &.header {
+    padding-top: 0;
+  }
+  &.active {
+    background: $list-selection-active-background;
+    color: $list-selection-active-color;
+  }
+  &:first-child {
+    border-top: none;
+  }
 }
 
 li.columns > .column {
-   /*> .form-switch {
-     margin: 0;
-     padding-right: 0;
-   }
-   > .form-switch.right {
-     margin-right: -0.4em;
-   }
-   > small.chip {
-     vertical-align: top;
-     + label {
-       margin-left: 0.5em;
-     }
-   }*/
-   > .dropdown.icons {
-     vertical-align: top;
-   }
-   > .dropdown.icons:not(last-child) {
-     margin-right: 0.15em;
-   }
-}
-
-li.columns > .column.text-right {
-  > small.chip:last-child {
+  /*> .form-switch {
+    margin: 0;
+    padding-right: 0;
+  }
+  > .form-switch.right {
+    margin-right: -0.4em;
+  }
+  > small.chip {
+    vertical-align: top;
+    + label {
+      margin-left: 0.5em;
+    }
+  }*/
+  > .dropdown.icons {
+    vertical-align: top;
+  }
+  > .dropdown.icons:not(last-child) {
+    margin-right: 0.15em;
+  }
+  &.text-right > small.chip:last-child {
     margin-right: 0.85em;
   }
 }
+
