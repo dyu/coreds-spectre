@@ -7,9 +7,9 @@ p_block(p, module) ::= <<
 
 p_main_block(p, module, filename, name, module_name, nameUC, nameKC, filenameKC) ::= <<
 import { component } from 'vuets'
+import { shallowCopyTo } from 'coreds/lib/util'
 import { Pager, PagerState } from 'coreds/lib/types'
 import { ParamRangeKey } from 'coreds/lib/prk'
-import { shallowCopyTo } from 'coreds/lib/pstore/'
 import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
 import * as ui from 'coreds-spectre/lib/ui/'
 import { addInstance } from '../../src/util'
@@ -75,7 +75,7 @@ export const «filename»V = component({
     template: V,
     components: shallowCopyTo({
         «name»New
-    }, «name»Base.components as any)
+    }, «name»Base.components)
 }, «filename»)
 
 >>
