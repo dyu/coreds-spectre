@@ -36,7 +36,7 @@ export class «name»New {
             pstore.addAll(data['1'], true, true)
         }
         form.$success(this.pojo)
-        this.ff.focus()
+        this.focus()
     }
     pojo$$F(err) {
         let pstore = this.pstore

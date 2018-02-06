@@ -42,7 +42,7 @@ export const «name»New = {
             pstore && pstore.addAll(data['1'], true, true)
             form.$success(this.pojo)
             this['$emit']('success', data)
-            this['$refs'].ff.focus()
+            this['focus']()
         },
         pojo$$F(this: «name»NewOpts, err) {
             let pager = this.pager
