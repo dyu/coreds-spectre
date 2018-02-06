@@ -175,15 +175,16 @@ export function icon_toggle(fk: string, bit: number, icon_class: string,
 }
 
 export function icon_toggle_dd(fk: string, bit: number, icon_class: string, name?: string): string {
+    if (bit < 32) throw 'Invalid bit: ' + bit
     let suffix = !name ? '' : ` :title="pojo['${fk}'] ? '${name}' : 'Mark ${name}?'"`
     return /**/`
 <div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabindex="0">
+  <a class="link dropdown-toggle circle" tabindex="0" @focus="(pojo._.state |= ${bit})">
     <i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')"${suffix}></i>
   </a>
-  <ul class="menu transparent hover">
+  <ul :class="'menu transparent' + ((${bit} & pojo._.state) ? ' hover' : '')">
     <li class="menu-item">
-      <button class="btn circle" @click.prevent="$emit('toggle', '${fk}')"><i class="icon ok"></i></button>
+      <button class="btn circle" @click="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
@@ -208,13 +209,13 @@ export function icon_action_dd(bit: number, icon_class: string, name?: string): 
     if (bit < 32) throw 'Invalid bit: ' + bit
     let suffix = !name ? '' : ` title="${name}"`
     return /**/`
-<div :class="'dropdown icons' + ((${bit} & pojo._.state) ? ' active' : '')">
-  <span class="dropdown-toggle c-hand" @click.prevent="(pojo._.state ^= ${bit})">
+<div class="dropdown icons">
+  <a class="link dropdown-toggle circle" tabindex="0" @focus="(pojo._.state |= ${bit})">
     <i class="icon action ${icon_class}"${suffix}></i>
-  </span>
-  <ul class="menu transparent">
-    <li :class="!(${bit} & pojo._.state) ? 'd-none' : 'menu-item'">
-      <button class="btn circle" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('action', ${bit})"><i class="icon ok"></i></button>
+  </a>
+  <ul :class="'menu transparent' + ((${bit} & pojo._.state) ? ' hover' : '')">
+    <li class="menu-item">
+      <button class="btn circle" @click="0 <= (pojo._.state ^= ${bit}) && $emit('action', ${bit})"><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
