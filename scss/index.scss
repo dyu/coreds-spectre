@@ -139,7 +139,8 @@ select.underline,
 
 // Components
 @import "node_modules/spectre.css/src/chips";
-@import "node_modules/spectre.css/src/dropdowns";
+//@import "node_modules/spectre.css/src/dropdowns";
+@import "dropdowns";
 .dropdown.icons {
   margin-left: -0.55em;
   padding-left: 0.55em;
