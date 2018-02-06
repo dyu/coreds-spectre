@@ -175,16 +175,15 @@ export function icon_toggle(fk: string, bit: number, icon_class: string,
 }
 
 export function icon_toggle_dd(fk: string, bit: number, icon_class: string, name?: string): string {
-    if (bit < 32) throw 'Invalid bit: ' + bit
     let suffix = !name ? '' : ` :title="pojo['${fk}'] ? '${name}' : 'Mark ${name}?'"`
     return /**/`
-<div :class="'dropdown icons' + ((${bit} & pojo._.state) ? ' active' : '')">
-  <span class="dropdown-toggle c-hand" @click.prevent="(pojo._.state ^= ${bit})">
+<div class="dropdown icons">
+  <a class="link dropdown-toggle circle" tabindex="0">
     <i :class="'icon action ${icon_class}' + (!pojo['${fk}'] ? ' empty' : '')"${suffix}></i>
-  </span>
-  <ul class="menu transparent">
-    <li :class="!(${bit} & pojo._.state) ? 'd-none' : 'menu-item'">
-      <button class="btn circle" @click.prevent="0 <= (pojo._.state ^= ${bit}) && $emit('toggle', '${fk}')"><i class="icon ok"></i></button>
+  </a>
+  <ul class="menu transparent hover">
+    <li class="menu-item">
+      <button class="btn circle" @click.prevent="$emit('toggle', '${fk}')"><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>

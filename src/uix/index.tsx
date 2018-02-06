@@ -296,14 +296,17 @@ export function icon_toggle(pojo: any, fk: string, bit: number, icon_class: stri
     )
 }
 
+function $cb_only(this: ToggleOpts) {
+    this.cb(this.bit)
+}
+
 export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: string,
         cb: Function, name?: string) {
-    if (bit < 32) throw 'Invalid bit: ' + bit
+    if (bit !== 0 && bit < 32) throw 'Invalid bit: ' + bit
     let icon = `icon action ${icon_class}`,
         hs = pojo['_'] as HasState,
         opts = { hs, bit, cb } as ToggleOpts,
-        fn = $toggle.bind(opts),
-        trigger = $trigger.bind(opts),
+        trigger = $cb_only.bind(opts),
         titleOn,
         titleOff
     if (name) {
@@ -311,12 +314,12 @@ export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
         titleOff = `Mark ${name}?`
     }
     return (
-<div class={$any('dropdown icons' + ((bit & hs.state) ? ' active' : ''))}>
-  <span class="dropdown-toggle c-hand" onClick={fn}>
+<div class="dropdown icons">
+  <a class="link dropdown-toggle circle" tabIndex={0}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
-  </span>
-  <ul class="menu transparent">
-    <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
+  </a>
+  <ul class="menu transparent hover">
+    <li class="menu-item">
       <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
