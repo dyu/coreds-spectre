@@ -23,6 +23,7 @@
   &.active .menu,
   .dropdown-toggle:focus + .menu,
   // added .hover
+  .dropdown-hover:hover + .menu,
   .menu.hover:hover {
     display: block;
   }
