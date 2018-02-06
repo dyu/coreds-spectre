@@ -184,6 +184,9 @@ export function icon_update_ts(pojo, fk, wrapper_class) {
 function $toggle(e) {
     this.hs.state ^= this.bit;
 }
+function $set(e) {
+    this.hs.state |= this.bit;
+}
 function $trigger(e) {
     this.hs.state ^= this.bit;
     this.cb(this.bit);
@@ -202,22 +205,19 @@ export function icon_toggle(pojo, fk, bit, icon_class, cb, name, wrapper_class) 
   <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>);
 }
-function $cb_only() {
-    this.cb(this.bit);
-}
 export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
-    if (bit !== 0 && bit < 32)
+    if (bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, trigger = $cb_only.bind(opts), titleOn, titleOff;
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $set.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
     if (name) {
         titleOn = "" + name;
         titleOff = "Mark " + name + "?";
     }
     return (<div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabIndex={0}>
+  <a class="link dropdown-toggle circle" tabIndex={0} onFocus={fn}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
   </a>
-  <ul class="menu transparent hover">
+  <ul class={$any('menu transparent' + ((bit & hs.state) ? ' hover' : ''))}>
     <li class="menu-item">
       <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
@@ -237,12 +237,12 @@ export function icon_action(pojo, bit, icon_class, cb, name, wrapper_class) {
 export function icon_action_dd(pojo, bit, icon_class, cb, name) {
     if (bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts);
-    return (<div class={$any('dropdown icons' + ((bit & hs.state) ? ' active' : ''))}>
-  <span class="dropdown-toggle c-hand" onClick={fn}>
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $set.bind(opts), trigger = $trigger.bind(opts);
+    return (<div class="dropdown icons">
+  <a class="link dropdown-toggle circle" tabIndex={0} onFocus={fn}>
     <i class={icon} title={name}></i>
-  </span>
-  <ul class="menu transparent">
+  </a>
+  <ul class={$any('menu transparent' + ((bit & hs.state) ? ' hover' : ''))}>
     <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
       <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
