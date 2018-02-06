@@ -25,6 +25,10 @@ export class «name»New {
     constructor(public pstore?: PojoStore<«module_name».«name»>) {
         
     }
+    focus() {
+        let ff = this.ff
+        ff && ff.focus()
+    }
     pojo$$S(data) {
         let pstore = this.pstore
         if (pstore) {

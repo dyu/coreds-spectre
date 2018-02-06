@@ -27,6 +27,10 @@ export const «name»New = {
         } as «name»NewOpts
     },
     methods: {
+        focus(this: «name»NewOpts) {
+            let ff = this['$refs'].ff
+            ff && ff.focus()
+        },
         pojo$$S(this: «name»NewOpts, data) {
             let pager = this.pager,
                 pstore: PojoStore<«module_name».«name»> = pager && pager['store']
