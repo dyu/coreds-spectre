@@ -29,7 +29,7 @@ const V = /**/`
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right">
-        <a class="btn btn-link dropdown-toggle" v-toggle:click,1,ff="'1'"><i class="icon plus"></i></a>
+        <a class="btn btn-link btn-sm" v-toggle:click,1,ff="'1'"><i class="icon plus"></i></a>
         <ul class="menu form">
           <li :class="'menu-item' + ((${PagerState.LOADING} & pager.state) ? ' has-loading' : '')">
             <«name»New ref="fnew" :pager="pager" />
@@ -37,7 +37,7 @@ const V = /**/`
         </ul>
       </div>
       <div class="dropdown dropdown-right">
-        <a class="btn btn-link dropdown-toggle" v-toggle:click,1="'1'"><i class="icon filter"></i></a>
+        <a class="btn btn-link btn-sm" v-toggle:click,1="'1'"><i class="icon filter"></i></a>
         <ul class="menu fitted">
           <li class="menu-item">
             ${ui.qform(qd)}

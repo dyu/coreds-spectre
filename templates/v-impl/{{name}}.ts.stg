@@ -27,7 +27,7 @@ const V = /**/`
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right" @keydown="hideForm($event)">
-        <a class="btn btn-link dropdown-toggle" @click="toggleForm($event)"><i class="icon plus"></i></a>
+        <a class="btn btn-link btn-sm" @click="toggleForm($event)"><i class="icon plus"></i></a>
         <ul class="menu form">
           <li :class="'menu-item' + ((${PagerState.LOADING} & pager.state) ? ' has-loading' : '')">
             <«name»New ref="fnew" :pager="pager" />

@@ -29,7 +29,7 @@ const V = ({instance}: {instance: «filename»}) => ui.$pager(instance.pager,
     </section>
     <section class="navbar-section">
       <div class="dropdown dropdown-right" onKeyDown={ui.$hide0_on_esc}>
-        <a class="btn btn-link dropdown-toggle" onClick={instance.toggleForm}>
+        <a class="btn btn-link btn-sm" onClick={instance.toggleForm}>
           <i class="icon plus"></i>
         </a>
         <ul class="menu form">
