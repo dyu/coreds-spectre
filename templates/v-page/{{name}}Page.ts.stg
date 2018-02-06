@@ -14,7 +14,7 @@ import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
 import * as ui from 'coreds-spectre/lib/ui/'
 import { addInstance } from '../../src/util'
 import { stores } from '../../src/context'
-import { «name»New, «name»NewOpts } from './«name»Forms'
+import { «name»New } from './«name»Forms'
 import { «name»Base } from './«name»Base'
 import { «module_name» } from '../../g/«module_name»/'
 const $ = «module_name».«name»
@@ -61,9 +61,9 @@ export class «name»Page extends «name»Base {
         e.which === 27 && removeClass(e.currentTarget, 'active')
     }
     toggleForm(e) {
-        let fnew = this['$refs'].fnew as «name»NewOpts
+        let fnew = this['$refs'].fnew
         if (toggleClass(e.currentTarget.parentElement, 'active')) {
-            fnew['$refs'].ff.focus()
+            fnew.focus()
         } else {
             fnew.pojo['_'].msg = ''
         }

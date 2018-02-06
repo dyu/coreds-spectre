@@ -63,7 +63,7 @@ export class «filename» extends «name»Base {
     }
     toggleForm(e) {
         if (toggleClass(e.currentTarget.parentElement, 'active')) {
-            this.fnew.ff.focus()
+            this.fnew.focus()
         } else {
             this.fnew.pojo['_'].msg = ''
         }
