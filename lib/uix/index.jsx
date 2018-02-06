@@ -202,20 +202,23 @@ export function icon_toggle(pojo, fk, bit, icon_class, cb, name, wrapper_class) 
   <i class={$any(!(bit & hs.state) ? 'd-none' : 'icon cancel-circled')} onClick={fn}></i>
 </div>);
 }
+function $cb_only() {
+    this.cb(this.bit);
+}
 export function icon_toggle_dd(pojo, fk, bit, icon_class, cb, name) {
-    if (bit < 32)
+    if (bit !== 0 && bit < 32)
         throw 'Invalid bit: ' + bit;
-    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, fn = $toggle.bind(opts), trigger = $trigger.bind(opts), titleOn, titleOff;
+    var icon = "icon action " + icon_class, hs = pojo['_'], opts = { hs: hs, bit: bit, cb: cb }, trigger = $cb_only.bind(opts), titleOn, titleOff;
     if (name) {
         titleOn = "" + name;
         titleOff = "Mark " + name + "?";
     }
-    return (<div class={$any('dropdown icons' + ((bit & hs.state) ? ' active' : ''))}>
-  <span class="dropdown-toggle c-hand" onClick={fn}>
+    return (<div class="dropdown icons">
+  <a class="link dropdown-toggle circle" tabIndex={0}>
     <i class={$any(icon + (!pojo[fk] ? ' empty' : ''))} title={$any(pojo[fk] ? titleOn : titleOff)}></i>
-  </span>
-  <ul class="menu transparent">
-    <li class={$any(!(bit & hs.state) ? 'd-none' : 'menu-item')}>
+  </a>
+  <ul class="menu transparent hover">
+    <li class="menu-item">
       <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
