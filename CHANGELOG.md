@@ -1,3 +1,7 @@
+## 0.6.0 (2018-02-07)
+
+* modified dropdown for optional menu hover
+
 ## 0.5.0 (2018-02-01)
 
 * `pager_controls_nav` center
