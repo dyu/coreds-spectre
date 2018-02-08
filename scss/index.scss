@@ -8,6 +8,13 @@
 @import "node_modules/spectre.css/src/normalize";
 @import "node_modules/spectre.css/src/base";
 
+.shadow { @include control-shadow(); }
+.shadow-gray { @include control-shadow($gray-color); }
+.shadow-dark { @include control-shadow($dark-color); }
+//.shadow-success { @include control-shadow($success-color); }
+//.shadow-error { @include control-shadow($error-color); }
+//.shadow-warning { @include control-shadow($warning-color); }
+
 // Elements
 @import "node_modules/spectre.css/src/typography";
 @import "node_modules/spectre.css/src/asian";

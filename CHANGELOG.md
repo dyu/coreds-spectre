@@ -1,3 +1,7 @@
+## 0.7.0 (2018-02-08)
+
+* Add css class `.shadow`
+
 ## 0.6.0 (2018-02-07)
 
 * modified dropdown for optional menu hover
