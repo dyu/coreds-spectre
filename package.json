@@ -17,9 +17,9 @@
     "ns.b": "node-sass scss/index.scss target/index.css && cleancss --skip-rebase -O2 removeDuplicateRules:on target/index.css > target/index.min.css"
   },
   "dependencies": {
-    "coreds": "^1.0.2",
-    "coreds-ui": "^1.0.2",
-    "spectre.css": "^0.5.0"
+    "coreds": "^1.0.4",
+    "coreds-ui": "^1.0.5",
+    "spectre.css": "^0.5.1"
   },
   "devDependencies": {
     "s-js": "^0.4.7",
