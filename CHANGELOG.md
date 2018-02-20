@@ -1,3 +1,7 @@
+## 0.8.0 (2018-02-20)
+
+* Add calendar css
+
 ## 0.7.0 (2018-02-08)
 
 * Add css class `.shadow`
