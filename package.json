@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "s-js": "^0.4.7",
-    "surplus": "^0.5.0-beta9",
+    "surplus": "^0.5.2",
     "typescript": "2.4.2"
   }
 }
