@@ -73,6 +73,9 @@ export function form(pojo: any, $d: any, fnSubmit: any, ffid: string | null, ffo
 </form>    
 `/**/
     
+    el.addEventListener('focusin', $focusin)
+    el.addEventListener('keydown', keydown)
+    
     return el
 }
 
