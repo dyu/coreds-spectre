@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "s-js": "0.4.7",
+    "sinuous": "0.12.9",
     "surplus": "0.5.2",
     "typescript": "2.4.2"
   }
