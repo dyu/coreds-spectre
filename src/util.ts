@@ -58,6 +58,13 @@ export function getFnVal(flags: number) {
 }
 
 // ================================================== 
+// filter utils
+
+export function $apply(val, filter) {
+    return val && filter(val)
+}
+
+// ================================================== 
 // el utils
 
 export function $append_if(cond: boolean, el: any, parent: any): boolean {

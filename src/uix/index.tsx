@@ -5,75 +5,11 @@ import { $any, defp } from 'coreds/lib/util'
 import { toggleClass, removeClass } from 'coreds-ui/lib/dom_util'
 import { attachOptsTo } from 'coreds-ui/lib/_pager'
 import { parseOpts } from 'coreds-ui/lib/_lsearch'
-import { $apply, msg } from './common'
-import { $append_if } from '../util'
+import { msg } from './common'
+import { $apply, $append_if } from '../util'
 
 export { form } from './form'
-
-// ================================================== 
-// hide/show
-
-export function $hide0_on_esc(e) {
-    e.which === 27 && removeClass(e.currentTarget, 'active')
-}
-
-export function $hide1_on_esc(e) {
-    e.which === 27 && removeClass(e.currentTarget.parentElement, 'active')
-}
-
-// ================================================== 
-// toggles
-
-function focus_ff(el, ffid?) {
-    (ffid = el.dataset.ffid) && (el = document.getElementById(ffid)) && el.focus()
-}
-
-export function $toggle0(e) {
-    toggleClass(e.currentTarget, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $toggle1(e) {
-    toggleClass(e.currentTarget.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $toggle2(e) {
-    toggleClass(e.currentTarget.parentElement.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $toggle3(e) {
-    toggleClass(e.currentTarget.parentElement.parentElement.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-// ================================================== 
-// icon toggles
-
-export function $itoggle0(e) {
-    'I' === e.target.tagName &&
-        toggleClass(e.currentTarget, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $itoggle1(e) {
-    'I' === e.target.tagName &&
-        toggleClass(e.currentTarget.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $itoggle2(e) {
-    'I' === e.target.tagName &&
-        toggleClass(e.currentTarget.parentElement.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
-
-export function $itoggle3(e) {
-    'I' === e.target.tagName &&
-        toggleClass(e.currentTarget.parentElement.parentElement.parentElement, 'active') &&
-        focus_ff(e.currentTarget)
-}
+export * from '../handler'
 
 // ================================================== 
 // dropdown

@@ -3,7 +3,7 @@ import { FormFlags, enum_option, enum_options, getFnVal } from '../util'
 import { FieldType, HasState, PojoState, PojoSO } from 'coreds/lib/types'
 import { $any, defp } from 'coreds/lib/util'
 import { $change } from 'coreds/lib/form'
-import { $clearMsg } from './common'
+import { $clearMsg } from '../handler'
 
 import * as keymage from 'coreds-ui/lib/keymage'
 import { getPopup, hidePopup } from 'coreds-ui/lib/dom_util'

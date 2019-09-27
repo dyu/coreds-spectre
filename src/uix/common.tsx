@@ -1,15 +1,7 @@
 import * as Surplus from 'surplus'; Surplus;
 import { HasState } from 'coreds/lib/types'
 import { $any } from 'coreds/lib/util'
-
-export function $apply(val, filter) {
-    return val && filter(val)
-}
-
-export function $clearMsg(this: any, e) {
-    e.preventDefault()
-    this.msg = null
-}
+import { $clearMsg } from '../handler'
 
 export function msg(hs: HasState, mask: number) {
     let fn = $clearMsg.bind(hs)
