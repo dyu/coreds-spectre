@@ -3,7 +3,7 @@ Surplus;
 import { enum_option, enum_options, getFnVal } from '../util';
 import { $any } from 'coreds/lib/util';
 import { $change } from 'coreds/lib/form';
-import { $clearMsg } from './common';
+import { $clearMsg } from '../handler';
 import * as keymage from 'coreds-ui/lib/keymage';
 import { getPopup, hidePopup } from 'coreds-ui/lib/dom_util';
 function $focusin(e) {
