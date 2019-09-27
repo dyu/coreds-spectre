@@ -22,8 +22,8 @@
     "spectre.css": "^0.5.1"
   },
   "devDependencies": {
-    "s-js": "^0.4.7",
-    "surplus": "^0.5.2",
+    "s-js": "0.4.7",
+    "surplus": "0.5.2",
     "typescript": "2.4.2"
   }
 }
