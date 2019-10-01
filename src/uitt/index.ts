@@ -252,7 +252,7 @@ export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
     }
     return html/**/`
 <div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabindex="0" onfocus=${fn}>
+  <a class="link dropdown-toggle circle" tabIndex="0" onfocus=${fn}>
     <i class=${() => (icon + (!pojo[fk] ? ' empty' : ''))} title=${() => (pojo[fk] ? titleOn : titleOff)}></i>
   </a>
   <ul class=${() => ('menu transparent' + ((bit & hs.state) ? ' hover' : ''))}>
@@ -291,7 +291,7 @@ export function icon_action_dd(pojo: any, bit: number, icon_class: string,
         trigger = $trigger.bind(opts)
     return html/**/`
 <div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabindex="0" onfocus=${fn}>
+  <a class="link dropdown-toggle circle" tabIndex="0" onfocus=${fn}>
     <i class=${icon} title=${name}></i>
   </a>
   <ul class=${() => ('menu transparent' + ((bit & hs.state) ? ' hover' : ''))}>
@@ -361,7 +361,7 @@ export function item_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
         cb: Function, name?: string) {
     return html/**/`
 <div class="content right floated">
-  ${() => icon_toggle_dd(pojo, fk, bit, icon_class, cb, name)}
+  ${icon_toggle_dd(pojo, fk, bit, icon_class, cb, name)}
 </div>
 `/**/
 }
@@ -375,7 +375,7 @@ export function item_action_dd(pojo: any, bit: number, icon_class: string,
         cb: Function, name?: string) {
     return html/**/`
 <div class="content right floated">
-  ${() => icon_action_dd(pojo, bit, icon_class, cb, name)}
+  ${icon_action_dd(pojo, bit, icon_class, cb, name)}
 </div>
 `/**/
 }
