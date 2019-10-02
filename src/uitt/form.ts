@@ -120,15 +120,13 @@ function body(pojo: any, $d: any, root: FormRoot, out: any[]) {
 
 function field_class(pojo: any, fd: any, fk: string): string {
     var buf = '',
-        pojo_: PojoSO
+        pojo_: PojoSO = pojo['_']
     
     buf += 'form-group'
     if (fd.m === 2) {
         buf += ' required'
     }
-    if (fd.t !== FieldType.BOOL && fd.t !== FieldType.ENUM &&
-            0 !== ((1 << (fd._ - 1)) & (pojo_ = pojo['_']).vfbs) &&
-            pojo_[fk]) {
+    if (pojo_[fk] && 0 !== ((1 << (fd._ - 1)) & pojo_.vfbs)) {
         buf += ' has-error'
     }
     
@@ -169,8 +167,9 @@ function setFF(el: any, ffid: any, ffobj: any) {
 
 function field_bool(pojo: any, fd: any, fk: string, root: FormRoot,
         ffid: any) {
+    let cls = fd.m === 2 ? 'form-group required' : 'form-group'
     let el = html/**/`
-<div class=${() => field_class(pojo, fd, fk)}>
+<div class=${cls}>
   <label class="form-switch">
     <input type="checkbox" checked=${() => !!pojo[fk]} onchange=${e => $change(e, fk, pojo, root.update, root.pojo)} />
     <i class="form-icon"></i>${fd.$n}
@@ -189,8 +188,9 @@ function select_val(val) {
 
 function field_enum(pojo: any, fd: any, fk: string, root: FormRoot, 
         ffid: any, label: any) {
+    let cls = fd.m === 2 ? 'form-group required' : 'form-group'
     let el = html/**/`
-<div class=${() => field_class(pojo, fd, fk)}>
+<div class=${cls}>
   ${label}
   <select class=${() => !root.update && !pojo[fk] ? 'empty' : ''} value=${select_val(pojo[fk])} onchange=${e => $change(e, fk, pojo, root.update, root.pojo)}></select>
 </div>
