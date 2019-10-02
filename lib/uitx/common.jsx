@@ -1,5 +1,3 @@
-import * as Surplus from 'surplus';
-Surplus;
 import { $clearMsg } from '../handler';
 export function msg(hs, mask) {
     var fn = $clearMsg.bind(hs);

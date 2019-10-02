@@ -1,4 +1,3 @@
-import * as Surplus from 'surplus'; Surplus;
 import { FormFlags, enum_option, enum_options, getFnVal } from '../util'
 import { FieldType, HasState, PojoState, PojoSO } from 'coreds/lib/types'
 import { defp } from 'coreds/lib/util'

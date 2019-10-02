@@ -1,5 +1,3 @@
-import * as Surplus from 'surplus';
-Surplus;
 import { enum_option, enum_options, getFnVal } from '../util';
 import { $change } from 'coreds/lib/form';
 import { $clearMsg } from '../handler';

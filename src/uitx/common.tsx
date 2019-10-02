@@ -1,4 +1,3 @@
-import * as Surplus from 'surplus'; Surplus;
 import { HasState } from 'coreds/lib/types'
 import { $clearMsg } from '../handler'
 
