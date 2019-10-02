@@ -19,6 +19,7 @@
   "dependencies": {
     "coreds": "^1.0.4",
     "coreds-ui": "^1.0.5",
+    "solid-js": "0.10.11",
     "spectre.css": "^0.5.1"
   },
   "devDependencies": {
