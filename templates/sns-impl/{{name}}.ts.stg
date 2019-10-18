@@ -1,0 +1,74 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, p.("name"), module.w.v.(module.w.k.(p.("name")).kfmt.("(0.*)==")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"), module.w.k.(p.("name")).kfmt.("Page==&&UC&&_==-&&0==-"))»
+>>
+
+p_main_block(p, module, filename, name, module_name, nameUC, nameKC, filenameKC) ::= <<
+import { html, h } from 'sinuous';h;
+import { bindPrototypeTo } from 'coreds/lib/proxy'
+import { Pager } from 'coreds/lib/types'
+import { ParamRangeKey } from 'coreds/lib/prk'
+import { toggleClass } from 'coreds-ui/lib/dom_util'
+import { PagerState } from 'coreds/lib/types'
+import * as ui from 'coreds-spectre/lib/uitt/'
+import { addInstance } from '../../src/util'
+import { stores } from '../../src/context'
+import { «name»New } from './«name»Forms'
+import { «name»Base } from './«name»Base'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+const V = (instance: «filename») => ui.$pager(instance.pager, html/**/`
+<div class="column col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-3">
+  <header class="navbar">
+    <section class="navbar-section">
+      ${ui.lsearch_input(instance.pager, '«name»', [$.$.title])}
+    </section>
+    <section class="navbar-section">
+      <div class="dropdown dropdown-right" onkeydown=${ui.$hide0_on_esc}>
+        <a class="btn btn-link btn-sm" onclick=${instance.toggleForm}>
+          <i class="icon plus"></i>
+        </a>
+        <ul class="menu form">
+          <li class=${() => 'menu-item' + ((PagerState.LOADING & instance.pager.state) ? ' has-loading' : '')}>
+            ${ «name»New.V(instance.fnew) }
+          </li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  ${ui.pager_controls_nav(instance.pager)}
+  ${ui.pager_msg(instance.pager)}
+  ${ «name»Base.V(instance) }
+</div>
+`/**/)
+
+export class «filename» extends «name»Base {
+    fnew = new «name»New(this.pstore)
+    
+    constructor() {
+        super('«filenameKC»-detail')
+        stores.«nameUC» = this.pstore
+        bindPrototypeTo(this, «filename».prototype, 1)
+        addInstance(this)
+    }
+    init() {
+        this.pstore.requestNewer()
+    }
+    fetch(prk: ParamRangeKey, pager: Pager) {
+        return $.ForUser.list(prk).then(this.fetch$$S).then(undefined, this.fetch$$F)
+    }
+    toggleForm(e) {
+        let fnew = this.fnew
+        if (toggleClass(e.currentTarget.parentElement, 'active')) {
+            fnew.focus()
+        } else {
+            fnew.pojo['_'].msg = ''
+        }
+    }
+    
+    static V = V
+}
+>>
