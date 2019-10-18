@@ -6,8 +6,6 @@ p_block(p, module) ::= <<
 >>
 
 p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
-import * as Surplus from 'surplus'; Surplus;
-import { $any } from 'coreds/lib/util'
 import { PojoState, PagerState } from 'coreds/lib/types'
 import { bindPrototypeTo, observable } from 'sobx'
 import { PojoStore } from 'coreds/lib/pstore/'
@@ -20,7 +18,7 @@ const $ = «module_name».«name»
 export class «name»New {
     $fns = bindPrototypeTo(this, «name»New.prototype)
     pojo = observable(form.initObservable($.$new0(), $.$d))
-    ff = $any(null)
+    ff = null as any
     
     constructor(public pstore?: PojoStore<«module_name».«name»>) {
         
