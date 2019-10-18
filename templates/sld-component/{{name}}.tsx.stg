@@ -1,0 +1,29 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { bindPrototypeTo } from 'coreds/lib/proxy'
+import { addInstance } from '../../src/util'
+
+const V = (instance: «name») =>
+<div>
+  TODO
+</div>
+
+export class «name» {
+    $fns = bindPrototypeTo(this, «name».prototype, 1)
+    
+    constructor() {
+        addInstance(this)
+    }
+    init() {
+        // TODO
+    }
+    
+    static V = V
+}
+>>
