@@ -5,14 +5,17 @@
 "@types/hammerjs@^2.0.32":
   version "2.0.35"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.35.tgz#7b7c950c7d54593e23bffc8d2b4feba9866a7277"
+  integrity sha512-4mUIMSZ2U4UOWq1b+iV7XUTE4w+Kr3x+Zb/Qz5ROO6BTZLw2c8/ftjq0aRgluguLs4KRuBnrOy/s389HVn1/zA==
 
 "@types/numeral@0.0.16":
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@types/numeral/-/numeral-0.0.16.tgz#a1c225b1266f64e4a3cdbe515a266f01b6e89df1"
+  integrity sha1-ocIlsSZvZOSjzb5RWiZvAbbonfE=
 
 coreds-ui@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/coreds-ui/-/coreds-ui-1.1.1.tgz#b836217d1c7a0797c28ca82297551ad1e22d5e52"
+  integrity sha512-MwtpJD5NqnF3ltXmIYCkK5TyH++DkeeZRgDhMvGPaTUj3GAC/Q/EysL7CD4tvn9vvemGIZ9q3TgGmiD9Q+g+7A==
   dependencies:
     "@types/hammerjs" "^2.0.32"
     coreds "^1.1.0"
@@ -21,6 +24,15 @@ coreds-ui@^1.1.1:
 coreds@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/coreds/-/coreds-1.1.0.tgz#41698f73c4700ca051ee7d5114d648d27f159b39"
+  integrity sha512-zOX8BDdvCRaoFK6Tupajz499OC+VsROrCBapHE+ip2+8xLXvRXukkXI6bdOpI03dBQwF/ioh0z3EjMMUD2Vwpg==
+  dependencies:
+    "@types/numeral" "0.0.16"
+    numeral "^1.5.6"
+
+coreds@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/coreds/-/coreds-1.1.2.tgz#7cf780f800ae21c86d77c205329bdaf83c159964"
+  integrity sha512-CfXIDMv1QaDJpb0CkYEKGn4nZKatbe+gaZobM10QbdU5+CmIHHxRrCVDYQgVvUxp0lMkJqVYTrcWCtQcPhqfvg==
   dependencies:
     "@types/numeral" "0.0.16"
     numeral "^1.5.6"
@@ -28,27 +40,34 @@ coreds@^1.1.0:
 hammerjs@^2.0.8:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
 
 numeral@^1.5.6:
   version "1.5.6"
   resolved "https://registry.yarnpkg.com/numeral/-/numeral-1.5.6.tgz#3831db968451b9cf6aff9bf95925f1ef8e37b33f"
+  integrity sha1-ODHbloRRuc9q/5v5WSXx7443sz8=
 
 s-js@0.4.7:
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/s-js/-/s-js-0.4.7.tgz#985d961e8a9a340c30b9fb66712222b09cb3074b"
+  integrity sha512-cHBwPiaQv06MvdCa9PRSBp8gaslpm3YXoP9gsm/u32Z96dN2kO9Gjx6LmLeDmY99+rhgN18t+e6OQZgiVkTvUQ==
 
 sinuous@0.12.9:
   version "0.12.9"
   resolved "https://registry.yarnpkg.com/sinuous/-/sinuous-0.12.9.tgz#b9b7462846d793bc016df4aa3b62407adc59e9f4"
+  integrity sha512-gxSmINUtvzXZDbiMGO7RnF6sfojIqdDdXQ8T7s//lr0H2nfiasui/UnF1jU39y/LmiH0wkDJP0BWCH0h4/OFpw==
 
 spectre.css@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/spectre.css/-/spectre.css-0.5.1.tgz#bd60345584bd88143f7d0930119c8f4bbd2822c7"
+  integrity sha1-vWA0VYS9iBQ/fQkwEZyPS70oIsc=
 
 surplus@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/surplus/-/surplus-0.5.2.tgz#a8186fb429e5a2271c9566f23432946455127748"
+  integrity sha512-UF0+KUCAUhlAxxDe3RtCP7JvuFidbRMOBWBsG6tSesxo6PmKpkL8LdUirBwUl8fx8U7t41H2zy9yApwTbUjqlg==
 
 typescript@2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
+  integrity sha1-+DlfhdRZJ2BnyYiqQYN6j4KHCEQ=
