@@ -1,0 +1,73 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { bindPrototypeTo } from 'coreds/lib/proxy'
+import { Pager } from 'coreds/lib/types'
+import { ParamRangeKey } from 'coreds/lib/prk'
+import { toggleClass } from 'coreds-ui/lib/dom_util'
+import { PagerState } from 'coreds/lib/types'
+import * as ui from 'coreds-spectre/lib/uitx/'
+import { addInstance } from '../../src/util'
+import { stores } from '../../src/context'
+import { «name»New } from './«name»Forms'
+import { «name»Base } from './«name»Base'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+const V = (instance: «name»Page) => ui.$pager(instance.pager, 
+<div class="column col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-3">
+  <header class="navbar">
+    <section class="navbar-section">
+      {ui.lsearch_input(instance.pager, '«name»', [$.$.title])}
+    </section>
+    <section class="navbar-section">
+      <div class="dropdown dropdown-right" onKeyDown={ui.$hide0_on_esc}>
+        <a class="btn btn-link btn-sm" onClick={instance.toggleForm}>
+          <i class="icon plus"></i>
+        </a>
+        <ul class="menu form">
+          <li class={( 'menu-item' + ((PagerState.LOADING & instance.pager.state) ? ' has-loading' : '') )}>
+            { «name»New.V(instance.fnew) }
+          </li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  {ui.pager_controls_nav(instance.pager)}
+  {ui.pager_msg(instance.pager)}
+  { «name»Base.V(instance) }
+</div>
+)
+
+export class «name»Page extends «name»Base {
+    fnew = new «name»New(this.pstore)
+    
+    constructor() {
+        super('«nameKC»-detail')
+        stores.«nameUC» = this.pstore
+        bindPrototypeTo(this, «name»Page.prototype, 1)
+        addInstance(this)
+    }
+    init() {
+        this.pstore.requestNewer()
+    }
+    fetch(prk: ParamRangeKey, pager: Pager) {
+        return $.ForUser.list(prk).then(this.fetch$$S).then(undefined, this.fetch$$F)
+    }
+    toggleForm(e) {
+        let fnew = this.fnew
+        if (toggleClass(e.currentTarget.parentElement, 'active')) {
+            fnew.focus()
+        } else {
+            fnew.pojo['_'].msg = ''
+        }
+    }
+    
+    static V = V
+}
+>>
