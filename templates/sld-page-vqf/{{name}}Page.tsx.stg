@@ -1,0 +1,94 @@
+import "fbsgen/base"
+import "fbsgen/dict"
+
+p_block(p, module) ::= <<
+«p_main_block(p, module, module.w.v.(p.("name")).val, p.("dir_name"), module.w.vfmt.("UC"), module.w.vfmt.("UC&&_==-"))»
+>>
+
+p_main_block(p, module, name, module_name, nameUC, nameKC) ::= <<
+import { bindPrototypeTo, proxy } from 'coreds/lib/proxy'
+import { Pager } from 'coreds/lib/types'
+import { ParamRangeKey } from 'coreds/lib/prk'
+import { toggleClass } from 'coreds-ui/lib/dom_util'
+import { PagerState } from 'coreds/lib/types'
+import * as ui from 'coreds-spectre/lib/uitx/'
+import { addInstance } from '../../src/util'
+import { VM, mountVueTo } from '../../src/vue-util'
+import { stores } from '../../src/context'
+import { QForm, qd } from '../../g/user/«name»QForm'
+import { «name»New } from './«name»Forms'
+import { «name»Base } from './«name»Base'
+import { «module_name» } from '../../g/«module_name»/'
+const $ = «module_name».«name»
+
+const V = (instance: «name»Page) => ui.$pager(instance.pager, 
+<div class="column col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-3">
+  <header class="navbar">
+    <section class="navbar-section">
+      {ui.lsearch_input(instance.pager, '«name»', [$.$.title])}
+    </section>
+    <section class="navbar-section">
+      <div class="dropdown dropdown-right" onKeyDown={ui.$hide0_on_esc}>
+        <a class="btn btn-link btn-sm" onClick={instance.toggleForm}>
+          <i class="icon plus"></i>
+        </a>
+        <ul class="menu form">
+          <li class={( 'menu-item' + ((PagerState.LOADING & instance.pager.state) ? ' has-loading' : '') )}>
+            { «name»New.V(instance.fnew) }
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown dropdown-right" onKeyDown={ui.$hide0_on_esc}>
+        <a class="btn btn-link btn-sm" onClick={ui.$toggle1}><i class={( instance.state.qf_num === 0 ? 'icon filter' : 'icon filter text-gray' )}></i></a>
+        <ul class="menu fitted">
+          <li ref={instance.el_qf} class="menu-item"></li>
+        </ul>
+      </div>
+    </section>
+  </header>
+  {ui.pager_controls_nav(instance.pager)}
+  {ui.pager_msg(instance.pager)}
+  { «name»Base.V(instance) }
+</div>
+)
+
+export class «name»Page extends «name»Base {
+    fnew = new «name»New(this.pstore)
+    
+    qform = new QForm()
+    el_qf = null as any
+    state = proxy({ qf_num: 0 })
+    
+    constructor() {
+        super('«nameKC»-detail')
+        stores.«nameUC» = this.pstore
+        bindPrototypeTo(this, «name»Page.prototype, 1)
+        addInstance(this)
+        
+        QForm.init(this.qform, VM, {
+            pager: this.pager, 
+            cbSuccess: this.fetch$$S, 
+            cbFailed: this.fetch$$F,
+            list: $.ForUser.list
+        })
+    }
+    init() {
+        mountVueTo(this.el_qf, this.qform, qd, undefined, newVal => this.state.qf_num = newVal)
+        
+        this.pstore.requestNewer()
+    }
+    fetch(prk: ParamRangeKey, pager: Pager) {
+        return this.qform.send(prk)
+    }
+    toggleForm(e) {
+        let fnew = this.fnew
+        if (toggleClass(e.currentTarget.parentElement, 'active')) {
+            fnew.focus()
+        } else {
+            fnew.pojo['_'].msg = ''
+        }
+    }
+    
+    static V = V
+}
+>>
