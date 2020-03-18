@@ -251,12 +251,12 @@ export function icon_toggle_dd(pojo: any, fk: string, bit: number, icon_class: s
     }
     return (
 <div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabIndex={0} onFocus={fn}>
+  <a class="link dropdown-toggle s-circle" tabIndex={0} onFocus={fn}>
     <i class={( icon + (!pojo[fk] ? ' empty' : '') )} title={( pojo[fk] ? titleOn : titleOff )}></i>
   </a>
   <ul class={( 'menu transparent' + ((bit & hs.state) ? ' hover' : '') )}>
     <li class="menu-item">
-      <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
+      <button class="btn s-circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
@@ -290,12 +290,12 @@ export function icon_action_dd(pojo: any, bit: number, icon_class: string,
         trigger = $trigger.bind(opts)
     return (
 <div class="dropdown icons">
-  <a class="link dropdown-toggle circle" tabIndex={0} onFocus={fn}>
+  <a class="link dropdown-toggle s-circle" tabIndex={0} onFocus={fn}>
     <i class={icon} title={name}></i>
   </a>
   <ul class={( 'menu transparent' + ((bit & hs.state) ? ' hover' : '') )}>
     <li class={( !(bit & hs.state) ? 'd-none' : 'menu-item' )}>
-      <button class="btn circle" onClick={trigger}><i class="icon ok"></i></button>
+      <button class="btn s-circle" onClick={trigger}><i class="icon ok"></i></button>
     </li>
   </ul>
 </div>
