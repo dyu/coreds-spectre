@@ -5,6 +5,7 @@
   "author": "dyu",
   "main": "lib/index.js",
   "typings": "lib/index",
+  "types": "types/index.d.ts",
   "license": "Apache-2.0",
   "README": "README.md",
   "repository": {
