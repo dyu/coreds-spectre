@@ -1,4 +1,5 @@
-import { enum_option, enum_options, getFnVal } from '../util';
+import { enum_option, enum_options } from '../util';
+import { formatDate, formatTime, formatDateTime } from 'coreds/lib/datetime_util';
 import { $change } from 'coreds/lib/form';
 import { $clearMsg } from '../handler';
 import * as keymage from 'coreds-ui/lib/keymage';
@@ -115,14 +116,15 @@ function field_bool(pojo, fd, fk, root, ffid) {
     ffid && setFF(input, ffid, root.ffobj);
     return el;
 }
-function select_val(val) {
-    return val ? val.toString() : '';
+function select_val(el, key, val) {
+    if (val !== undefined)
+        el[key] = val ? val.toString() : '';
 }
 function field_enum(pojo, fd, fk, root, ffid, label) {
     var cls = fd.m === 2 ? 'form-group required' : 'form-group', select;
     var el = (<div class={cls}>
   {label}
-  <select ref={select} class={(!root.update && !pojo[fk] ? 'empty' : '')} value={(select_val(pojo[fk]))} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}></select>
+  <select ref={select} class={(!root.update && !pojo[fk] ? 'empty' : '')} $value={select_val} value={(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}></select>
 </div>);
     var buf = '';
     if (!root.update && 0 !== (root.flags & 1 /* PLACEHOLDER */)) {
@@ -139,11 +141,36 @@ function placeholder(fd) {
 function help_text(str) {
     return <p class="form-input-hint">{str}</p>;
 }
+// ================================================== 
+export function valTime(el, key, value) {
+    if (value !== undefined)
+        el[key] = !value ? '' : formatTime(value);
+}
+export function valDate(el, key, value) {
+    if (value !== undefined)
+        el[key] = !value ? '' : formatDate(value);
+}
+export function valDateTime(el, key, value) {
+    if (value !== undefined)
+        el[key] = !value ? '' : formatDateTime(value);
+}
+export function valNumber(el, key, value) {
+    if (value !== undefined)
+        el[key] = value || value === 0 ? value.toString() : '';
+}
+export function getFnVal(flags) {
+    switch (flags) {
+        case 1: return valTime;
+        case 2: return valDate;
+        case 4: return valDateTime;
+        default: return valNumber;
+    }
+}
 function field_num(pojo, fd, fk, root, ffid, label) {
     var ph = !(root.flags & 1 /* PLACEHOLDER */) ? '' : placeholder(fd), pojo_ = pojo['_'], flag = 1 << (fd._ - 1), hint = fd.$h && help_text(fd.$h), fnVal = getFnVal(fd.o), input;
     var el = (<div class={(field_class(pojo, fd, fk))}>
   {label}
-  <input ref={input} type="text" placeholder={ph} value={(fnVal(pojo[fk]))} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}/>
+  <input ref={input} type="text" placeholder={ph} $value={fnVal} value={(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}/>
   <div class="form-input-hint">{(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
 </div>);
@@ -154,7 +181,7 @@ function field_textarea(pojo, fd, fk, root, ffid, label) {
     var ph = !(root.flags & 1 /* PLACEHOLDER */) ? '' : placeholder(fd), pojo_ = pojo['_'], flag = 1 << (fd._ - 1), hint = fd.$h && help_text(fd.$h), ta;
     var el = (<div class={(field_class(pojo, fd, fk))}>
   {label}
-  <textarea ref={ta} placeholder={ph} value={(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}>
+  <textarea ref={ta} placeholder={ph} value={(pojo[fk] || '')} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}>
   </textarea>
   <div class="form-input-hint">{(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
@@ -166,7 +193,7 @@ function field_default(pojo, fd, fk, root, ffid, label) {
     var ph = !(root.flags & 1 /* PLACEHOLDER */) ? '' : placeholder(fd), pojo_ = pojo['_'], flag = 1 << (fd._ - 1), typ = fd.pw ? 'password' : 'text', hint = fd.$h && help_text(fd.$h), input;
     var el = (<div class={(field_class(pojo, fd, fk))}>
   {label}
-  <input ref={input} type={typ} placeholder={ph} value={(pojo[fk])} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}/>
+  <input ref={input} type={typ} placeholder={ph} value={(pojo[fk] || '')} onChange={function (e) { return $change(e, fk, pojo, root.update, root.pojo); }}/>
   <div class="form-input-hint">{(!(flag & pojo_.vfbs) ? '' : pojo_[fk])}</div>
   {hint}
 </div>);
