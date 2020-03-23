@@ -18,14 +18,14 @@
     "ns.b": "node-sass scss/index.scss target/index.css && cleancss --skip-rebase -O2 removeDuplicateRules:on target/index.css > target/index.min.css"
   },
   "dependencies": {
-    "coreds": "^1.2.1",
-    "coreds-ui": "^1.2.1",
+    "coreds": "^1.3.0",
+    "coreds-ui": "^1.3.0",
     "spectre.css": "0.5.8"
   },
   "devDependencies": {
     "s-js": "0.4.7",
     "sinuous": "0.12.9",
     "surplus": "0.5.2",
-    "typescript": "2.6.2"
+    "typescript": "2.9.2"
   }
 }
