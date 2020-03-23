@@ -3,7 +3,7 @@ export declare const enum FormFlags {
     REF_AND_ID = 2,
     HORIZONTAL = 4,
     SLOT_BOTTOM = 8,
-    TOGGLE_FLAG32 = 32,
+    TOGGLE_FLAG32 = 32
 }
 export declare const option_empty = "<option value=\"\"></option>";
 export declare function options(arrayValue: any[], arrayDisplay: any[]): string;
